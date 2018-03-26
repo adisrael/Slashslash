@@ -1,5 +1,5 @@
 # Repositorio Proyecto Ingeniería de Software
 
-### Integrantes: Alfredo Degoyeneche, Alexander Israel, Yoav Navon
+### Integrantes: Alfredo De Goyeneche, Alexander Israel, Yoav Navon
 
-Link Heroku: 
+Link Heroku:
