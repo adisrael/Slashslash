@@ -1687,3 +1687,99 @@ Processing by PublicationsController#index as HTML
 Completed 200 OK in 391ms (Views: 365.5ms | ActiveRecord: 1.9ms)
 
 
+Started GET "/publications" for 172.21.0.1 at 2018-04-18 21:49:50 +0000
+Cannot render console from 172.21.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PublicationsController#index as HTML
+  Rendering publications/index.html.erb within layouts/application
+  [1m[36mPublication Load (1.5ms)[0m  [1m[34mSELECT "publications".* FROM "publications"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mForum Load (0.6ms)[0m  [1m[34mSELECT  "forums".* FROM "forums" WHERE "forums"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mForum Load (0.4ms)[0m  [1m[34mSELECT  "forums".* FROM "forums" WHERE "forums"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered publications/index.html.erb within layouts/application (167.3ms)
+Completed 200 OK in 1221ms (Views: 1131.1ms | ActiveRecord: 15.9ms)
+
+
+Started GET "/publications" for 172.21.0.1 at 2018-04-18 21:49:57 +0000
+Cannot render console from 172.21.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PublicationsController#index as HTML
+  Rendering publications/index.html.erb within layouts/application
+  [1m[36mPublication Load (1.1ms)[0m  [1m[34mSELECT "publications".* FROM "publications"[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mForum Load (0.5ms)[0m  [1m[34mSELECT  "forums".* FROM "forums" WHERE "forums"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Forum Load (0.0ms)[0m  [1m[34mSELECT  "forums".* FROM "forums" WHERE "forums"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered publications/index.html.erb within layouts/application (32.4ms)
+Completed 200 OK in 403ms (Views: 374.5ms | ActiveRecord: 8.8ms)
+
+
+Started GET "/publications/1" for 172.21.0.1 at 2018-04-18 21:50:06 +0000
+Cannot render console from 172.21.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PublicationsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPublication Load (0.7ms)[0m  [1m[34mSELECT  "publications".* FROM "publications" WHERE "publications"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering publications/show.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mForum Load (0.9ms)[0m  [1m[34mSELECT  "forums".* FROM "forums" WHERE "forums"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered publications/show.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 419ms (Views: 381.2ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/users/1" for 172.21.0.1 at 2018-04-18 21:50:09 +0000
+Cannot render console from 172.21.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 326ms (Views: 305.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/forums/1" for 172.21.0.1 at 2018-04-18 21:50:12 +0000
+Cannot render console from 172.21.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ForumsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mForum Load (0.5ms)[0m  [1m[34mSELECT  "forums".* FROM "forums" WHERE "forums"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering forums/show.html.erb within layouts/application
+  [1m[36mPublication Load (0.8ms)[0m  [1m[34mSELECT "publications".* FROM "publications" WHERE "publications"."forum_id" = $1[0m  [["forum_id", 1]]
+  Rendered forums/show.html.erb within layouts/application (47.1ms)
+Completed 200 OK in 420ms (Views: 394.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/forums" for 172.21.0.1 at 2018-04-18 21:50:41 +0000
+Cannot render console from 172.21.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ForumsController#index as HTML
+  Rendering forums/index.html.erb within layouts/application
+  [1m[36mForum Load (0.5ms)[0m  [1m[34mSELECT "forums".* FROM "forums"[0m
+  Rendered forums/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 267ms (Views: 244.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/publications" for 172.21.0.1 at 2018-04-18 21:51:18 +0000
+Cannot render console from 172.21.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PublicationsController#index as HTML
+  Rendering publications/index.html.erb within layouts/application
+  [1m[36mPublication Load (1.1ms)[0m  [1m[34mSELECT "publications".* FROM "publications"[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mForum Load (0.6ms)[0m  [1m[34mSELECT  "forums".* FROM "forums" WHERE "forums"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Forum Load (0.0ms)[0m  [1m[34mSELECT  "forums".* FROM "forums" WHERE "forums"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered publications/index.html.erb within layouts/application (13.9ms)
+Completed 200 OK in 249ms (Views: 229.3ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/publications" for 172.21.0.1 at 2018-04-18 21:53:31 +0000
+Cannot render console from 172.21.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PublicationsController#index as HTML
+  Rendering publications/index.html.erb within layouts/application
+  [1m[36mPublication Load (0.9ms)[0m  [1m[34mSELECT "publications".* FROM "publications"[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mForum Load (0.8ms)[0m  [1m[34mSELECT  "forums".* FROM "forums" WHERE "forums"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mForum Load (0.4ms)[0m  [1m[34mSELECT  "forums".* FROM "forums" WHERE "forums"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered publications/index.html.erb within layouts/application (134.9ms)
+Completed 200 OK in 1232ms (Views: 1154.8ms | ActiveRecord: 13.8ms)
+
+

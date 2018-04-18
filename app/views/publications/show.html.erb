@@ -11,13 +11,14 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @publication.user %>
+  <strong>Published by::</strong>
+  <%=  link_to @publication.user.userName, @publication.user %>
+
 </p>
 
 <p>
   <strong>Forum:</strong>
-  <%= @publication.forum %>
+  <%=  link_to @publication.forum.title, @publication.forum %>
 </p>
 
 <%= link_to 'Edit', edit_publication_path(@publication) %> |
