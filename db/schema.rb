@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20180418200443) do
   end
 
   create_table "publications", force: :cascade do |t|
+    t.integer "numero"
     t.string "title"
     t.text "content"
     t.bigint "user_id"
