@@ -10,10 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413131435) do
+ActiveRecord::Schema.define(version: 20180418200443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.string "content"
+    t.bigint "user_id"
+    t.bigint "publication_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["publication_id"], name: "index_comments_on_publication_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "forums", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "publications", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.bigint "user_id"
+    t.bigint "forum_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["forum_id"], name: "index_publications_on_forum_id"
+    t.index ["user_id"], name: "index_publications_on_user_id"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.bigint "forum_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["forum_id"], name: "index_subscriptions_on_forum_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "userName"
@@ -24,4 +61,10 @@ ActiveRecord::Schema.define(version: 20180413131435) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "publications"
+  add_foreign_key "comments", "users"
+  add_foreign_key "publications", "forums"
+  add_foreign_key "publications", "users"
+  add_foreign_key "subscriptions", "forums"
+  add_foreign_key "subscriptions", "users"
 end
