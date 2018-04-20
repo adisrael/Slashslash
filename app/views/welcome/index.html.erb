@@ -18,24 +18,26 @@
         <li><a href="#band">BAND</a></li>
         <li><a href="#tour">TOUR</a></li>
         <li><a href="#contact">CONTACT</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>-->
+        <li><a href="home">Guest</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Log In
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Merchandise</a></li>
+          	<li><input type="text" name="user[userName]" placeholder="Username"></li>
+          	<li><input type="text" name="user[password]" placeholder="Password"></li>
+            <!--<li><a href="#">Merchandise</a></li>
             <li><a href="#">Extras</a></li>
-            <li><a href="#">Media</a></li> 
+            <li><a href="#">Media</a></li>-->
           </ul>
         </li>
-        <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>-->
-        <li><a href="">Guest</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
 <!-- Container WELCOME -->
-<div id="band" class="container text-center">
+<div class="container text-center">
   <h3>WELCOME - //slashslash</h3>
   <h4><RP>SIGN UP</RP></h4>
   <p>Upon registration you will be able to create new content and actively participate in the communities you want!</p>
@@ -49,7 +51,7 @@
   <form action="/users" accept-charset="UTF-8"" method="POST">
   	  <% form_authenticity_token %>
   	  <input type="hidden" name="authenticity_token" value="authenticity_token" >
-  	  <input type="hidden" id="user_role" name="user[role]" value="0">
+  	  <input type="hidden" id="user_role" name="user[role]" value="1">
 
   	  <table style="margin: 0px auto;">
 		<tr><th>First Name</th><th>Last Name</th><th>Username</th><th>Password</th></tr>
