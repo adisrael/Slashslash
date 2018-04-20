@@ -14,7 +14,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#myPage">HOME</a></li>
+        <!-- <li><a href="#myPage">HOME</a></li>
         <li><a href="#band">BAND</a></li>
         <li><a href="#tour">TOUR</a></li>
         <li><a href="#contact">CONTACT</a></li>
@@ -27,7 +27,8 @@
             <li><a href="#">Media</a></li> 
           </ul>
         </li>
-        <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>-->
+        <li><a href="">Guest</a></li>
       </ul>
     </div>
   </div>
@@ -44,17 +45,26 @@
 </div>
 <div style="text-align: center;">
 
-  <form action="/users/new" accept-charset="UTF-8"" method="POST">
+
+  <form action="/users" accept-charset="UTF-8"" method="POST">
+  	  <% form_authenticity_token %>
+  	  <input type="hidden" name="authenticity_token" value="authenticity_token" >
+  	  <input type="hidden" id="user_role" name="user[role]" value="0">
 
   	  <table style="margin: 0px auto;">
 		<tr><th>First Name</th><th>Last Name</th><th>Username</th><th>Password</th></tr>
 
-		<tr><td><input type="text" name="firstName" value="" placeholder="First Name" ></td><td><input type="text" name="lastName" value="" placeholder="Last Name"></td><td><input type="text" name="userName" value="" placeholder="Username"></td><td><input type="text" name="password" value="" placeholder="Password"></td></tr>
+		<tr>
+			<td><input type="text" id="user_firstName" name="user[firstName]" placeholder="First Name" ></td>
+			<td><input type="text" id="user_lastName" name="user[lastName]" placeholder="Last Name"></td>
+			<td><input type="text" id="user_userName" name="user[userName]" placeholder="Username"></td>
+			<td><input type="text" id="user_password" name="user[password]" placeholder="Password"></td>
+		</tr>
 
 	  </table>
 	  
 		<br>
-	  <input type="submit" value="Submit">
+	  <input type="submit" name="commit" value="Create User" data-disable-with="Create User" />
   </form> 
 </div>
 <br>
