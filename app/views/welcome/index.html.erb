@@ -5,41 +5,19 @@
 
 
 <!-- Container WELCOME -->
-<div class="container text-center">
+<div class="text-center">
   <h3>WELCOME - //slashslash</h3>
+  <%= link_to(new_user_registration_path) do%>
   <h4><RP>SIGN UP</RP></h4>
+  <% end %>
+  <%= link_to(new_user_session_path) do%>
+  <h4><RP>LOG IN</RP></h4>
+  <% end %>
   <p>Upon registration you will be able to create new content and actively participate in the communities you want!</p>
   <p>Don't miss your chance to be a part of something good!</p>
   <br>
-
-</div>
-<div style="text-align: center;">
-
-
-  <form action="/users" accept-charset="UTF-8" method="POST">
-  	  <% form_authenticity_token %>
-  	  <input type="hidden" name="authenticity_token" value="authenticity_token" >
-  	  <input type="hidden" id="user_role" name="user[role]" value="1">
-
-  	  <table style="margin: 0px auto;">
-		<tr><th>First Name</th><th>Last Name</th><th>Username</th><th>Password</th></tr>
-
-		<tr>
-			<td><input type="text" id="user_firstName" name="user[firstName]" placeholder="First Name" ></td>
-			<td><input type="text" id="user_lastName" name="user[lastName]" placeholder="Last Name"></td>
-			<td><input type="text" id="user_userName" name="user[userName]" placeholder="Username"></td>
-			<td><input type="text" id="user_password" name="user[password]" placeholder="Password"></td>
-		</tr>
-
-	  </table>
-
-		<br>
-	  <input type="submit" name="commit" value="Create User" data-disable-with="Create User" />
-  </form>
 </div>
 <br>
-
-
 
 <!-- Footer -->
 <footer class="text-center">
