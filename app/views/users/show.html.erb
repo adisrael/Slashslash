@@ -20,5 +20,30 @@
   <%= @user.role %>
 </p>
 
+<p>
+<strong>Publications:</strong><br>
+</p>
+<p style="margin-left: 30px">
+  <% @user.publications.each do | publication | %>
+  <%= publication.id %>. <%= link_to publication.title, publication %><br>
+  <% end %>
+  <% if @user.publications.size == 0 %>
+  	<em> The user has no publications </em>
+  <% end %>
+</p>
+
+<p>
+<strong>Subscriptions:</strong><br>
+</p>
+<p style="margin-left: 30px">
+  <% @user.subscriptions.each do | subscription | %>
+  <%= subscription.forum.id %>. <%= link_to subscription.forum.title, subscription.forum %><br>
+  <% end %>
+  <% if @user.subscriptions.size == 0 %>
+  	<em> The user has no subscriptions </em>
+  <% end %>
+</p>
+
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

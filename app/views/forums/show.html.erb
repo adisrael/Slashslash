@@ -17,6 +17,9 @@
   <% @forum.publications.each do | publication | %>
   <%= publication.id %>. <%= link_to publication.title, publication %><br>
   <% end %>
+   <% if @forum.publications.size == 0 %>
+  	<em> This forum has no publications </em>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_forum_path(@forum) %> |
