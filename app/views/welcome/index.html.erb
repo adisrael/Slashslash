@@ -5,25 +5,34 @@
 
 
 <!-- Container WELCOME -->
-<div class="text-center">
-  <h3>WELCOME - //slashslash</h3>
-  <%= link_to(new_user_registration_path) do%>
-  <h4 class="welcome-link">SIGN UP</h4>
-  <% end %>
-  <%= link_to(new_user_session_path) do%>
-  <h4 class="welcome-link">LOG IN</h4>
-  <% end %>
-  <p>Upon registration you will be able to create new content and actively participate in the communities you want!</p>
-  <p>Don't miss your chance to be a part of something good!</p>
-  <br>
+<div class="row text-center welcome">
+    <h3>WELCOME - //slashslash</h3>
+    <div class="welcome-link">
+      <%= link_to(new_user_registration_path) do%>
+      <h4>SIGN UP</h4>
+      <% end %>
+    </div>
+    <div class="welcome-link">
+      <%= link_to(new_user_session_path) do%>
+      <h4>LOG IN</h4>
+      <% end %>
+    </div>
+    <div class="welcome-link">
+      <%= link_to(new_user_session_path) do%>
+      <h4>GUEST</h4>
+      <% end %>
+    </div>
+    <p>Upon registration you will be able to create new content and actively participate in the communities you want!</p>
+    <p>Don't miss your chance to be a part of something great!</p>
 </div>
-<br>
 
 <!-- Footer -->
-<footer class="text-center">
-  <p>Created by: Alfredo Degoyeneche, Yoav Navon, Alexander Israel</p>
-  <p>IIC2143 - Ingenieria de Software - 2018-1 - Pontificia Universidad Católica de Chile (PUC)</p>
-</footer>
+<div class="row">
+  <footer class="text-center">
+    <p>Created by: Alfredo Degoyeneche, Yoav Navon, Alexander Israel</p>
+    <p>IIC2143 - Ingenieria de Software - 2018-1 - Pontificia Universidad Católica de Chile (PUC)</p>
+  </footer>
+</div>
 
 
 
