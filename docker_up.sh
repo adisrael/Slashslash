@@ -1,3 +1,4 @@
 docker-compose run web rails db:create
 docker-compose run web rails db:migrate
-docker-compose up
+docker-compose run web rails db:seed
+docker-compose up --detach
