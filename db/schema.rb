@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20180421155023) do
 
   create_table "users", force: :cascade do |t|
     t.string "userName"
+    t.string "password"
     t.string "firstName"
     t.string "lastName"
     t.integer "role"
