@@ -2,11 +2,12 @@
 
 <h1>Forums</h1>
 
-<table>
+<table style="width:80%">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
+      <th> Id </th>
+      <th> Title </th>
+      <th> Description </th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,11 +15,12 @@
   <tbody>
     <% @forums.each do |forum| %>
       <tr>
-        <td><%= forum.title %></td>
-        <td><%= forum.description %></td>
-        <td><%= link_to 'Show', forum %></td>
-        <td><%= link_to 'Edit', edit_forum_path(forum) %></td>
-        <td><%= link_to 'Destroy', forum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>  <%= forum.id %></td>
+        <td>  <%= forum.title %></td>
+        <td>  <%= forum.description %></td>
+        <td>  <%= link_to '  Show', forum %></td>
+        <td>  <%= link_to '  Edit', edit_forum_path(forum) %></td>
+        <td>  <%= link_to '  Destroy', forum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

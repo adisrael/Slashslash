@@ -9,10 +9,13 @@
   <strong>Description:</strong>
   <%= @forum.description %>
 </p>
-
+ 
 <p>
+<strong>Publications:</strong><br>
+</p>
+<p style="margin-left: 30px">
   <% @forum.publications.each do | publication | %>
-  <%= link_to publication.title, publication %><br>
+  <%= publication.id %>. <%= link_to publication.title, publication %><br>
   <% end %>
 </p>
 
