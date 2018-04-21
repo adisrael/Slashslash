@@ -1,10 +1,6 @@
 <% provide(:title, "Home") %>
 
-<h1>HOME</h1>
-
-<% result = ActiveRecord::Base.connection.exec_query('SELECT * FROM forums') %>
-
-<%= result.to_hash %>
+<h1>FORUMS</h1>
 
 <table>
 	<tr>
@@ -12,11 +8,11 @@
 		<th>TITLE</th>
 		<th>DESCRIPTION</th>
 	</tr>
-	<% result.each do |row| %>
-	<tr <% link_to row %>>
-		<td><%= row['id'] %></td>
-		<td><%= row['title'] %></td>
-		<td><%= row['description'] %></td>
+	<% @forums.each do |forum| %>
+	<tr <% link_to forum.title, forum %>>
+		<td><%= forum.id %></td>
+		<td><%= forum.title %>></td>
+		<td><%= forum.description %></td>
 	</tr>
 	<% end %>
 </table>
