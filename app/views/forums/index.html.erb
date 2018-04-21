@@ -15,10 +15,9 @@
   <tbody>
     <% @forums.each do |forum| %>
       <tr>
-        <td>  <%= forum.id %></td>
-        <td>  <%= forum.title %></td>
+        <td>  <%= link_to forum.id, forum %></td>
+        <td>  <%= link_to forum.title, forum %></td>
         <td>  <%= forum.description %></td>
-        <td>  <%= link_to '  Show', forum %></td>
         <td>  <%= link_to '  Edit', edit_forum_path(forum) %></td>
         <td>  <%= link_to '  Destroy', forum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

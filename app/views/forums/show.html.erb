@@ -23,4 +23,5 @@
 </p>
 
 <%= link_to 'Edit', edit_forum_path(@forum) %> |
+<%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', forums_path %>
