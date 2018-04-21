@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+        sessions: 'users/sessions'
+      }
   resources :publications
   resources :comments
   resources :subscriptions
   resources :forums
-  resources :users
+  #resources :users
   get 'welcome/index'
   root 'welcome#index'
 

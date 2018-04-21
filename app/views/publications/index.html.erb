@@ -18,8 +18,8 @@
       <tr>
         <td><%= publication.title %></td>
         <td><%= publication.content %></td>
-        <td><%= publication.user %></td>
-        <td><%= publication.forum %></td>
+        <td><%= link_to publication.user.userName, publication.user  %></td>
+        <td><%= link_to publication.forum.title, publication.forum  %></td>
         <td><%= link_to 'Show', publication %></td>
         <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
         <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
