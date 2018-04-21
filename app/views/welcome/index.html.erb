@@ -2,39 +2,7 @@
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
 
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#myPage">//slashslash</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <!-- <li><a href="#myPage">HOME</a></li>
-        <li><a href="#band">BAND</a></li>
-        <li><a href="#tour">TOUR</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>-->
-        <li><a href="home">Guest</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Log In
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-          	<li><input type="text" name="user[userName]" placeholder="Username"></li>
-          	<li><input type="text" name="user[password]" placeholder="Password"></li>
-            <!--<li><a href="#">Merchandise</a></li>
-            <li><a href="#">Extras</a></li>
-            <li><a href="#">Media</a></li>-->
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+
 
 <!-- Container WELCOME -->
 <div class="container text-center">
@@ -48,7 +16,7 @@
 <div style="text-align: center;">
 
 
-  <form action="/users" accept-charset="UTF-8"" method="POST">
+  <form action="/users" accept-charset="UTF-8" method="POST">
   	  <% form_authenticity_token %>
   	  <input type="hidden" name="authenticity_token" value="authenticity_token" >
   	  <input type="hidden" id="user_role" name="user[role]" value="1">
@@ -64,18 +32,18 @@
 		</tr>
 
 	  </table>
-	  
+
 		<br>
 	  <input type="submit" name="commit" value="Create User" data-disable-with="Create User" />
-  </form> 
+  </form>
 </div>
 <br>
 
-  
+
 
 <!-- Footer -->
 <footer class="text-center">
-  <p>Created by: Alfredo Degoyeneche, Yoav Navon, Alexander Israel</p> 
+  <p>Created by: Alfredo Degoyeneche, Yoav Navon, Alexander Israel</p>
   <p>IIC2143 - Ingenieria de Software - 2018-1 - Pontificia Universidad Católica de Chile (PUC)</p>
 </footer>
 
