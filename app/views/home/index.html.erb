@@ -1,0 +1,18 @@
+<% provide(:title, "Home") %>
+
+<h1>FORUMS</h1>
+
+<table>
+	<tr>
+		<th>ID</th>
+		<th>TITLE</th>
+		<th>DESCRIPTION</th>
+	</tr>
+	<% @forums.each do |forum| %>
+	<tr <% link_to forum.title, forum %>>
+		<td><%= forum.id %></td>
+		<td><%= forum.title %>></td>
+		<td><%= forum.description %></td>
+	</tr>
+	<% end %>
+</table>
