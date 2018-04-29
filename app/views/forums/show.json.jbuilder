@@ -1,1 +1,1 @@
-json.partial! "forums/forum", forum: @forum
+json.partial! 'forums/forum', forum: @forum

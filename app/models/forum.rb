@@ -1,4 +1,4 @@
 class Forum < ApplicationRecord
-  has_many :publications
-  has_many :subscriptions
+  has_many :publications, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 end

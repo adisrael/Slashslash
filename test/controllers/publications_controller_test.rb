@@ -5,40 +5,50 @@ class PublicationsControllerTest < ActionDispatch::IntegrationTest
     @publication = publications(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get publications_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_publication_url
     assert_response :success
   end
 
-  test "should create publication" do
+  test 'should create publication' do
     assert_difference('Publication.count') do
-      post publications_url, params: { publication: { content: @publication.content, forum_id: @publication.forum_id, title: @publication.title, user_id: @publication.user_id } }
+      post publications_url, params: { publication: {
+        content: @publication.content,
+        forum_id: @publication.forum_id,
+        title: @publication.title,
+        user_id: @publication.user_id
+      } }
     end
 
     assert_redirected_to publication_url(Publication.last)
   end
 
-  test "should show publication" do
+  test 'should show publication' do
     get publication_url(@publication)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_publication_url(@publication)
     assert_response :success
   end
 
-  test "should update publication" do
-    patch publication_url(@publication), params: { publication: { content: @publication.content, forum_id: @publication.forum_id, title: @publication.title, user_id: @publication.user_id } }
+  test 'should update publication' do
+    patch publication_url(@publication), params: { publication: {
+      content: @publication.content,
+      forum_id: @publication.forum_id,
+      title: @publication.title,
+      user_id: @publication.user_id
+    } }
     assert_redirected_to publication_url(@publication)
   end
 
-  test "should destroy publication" do
+  test 'should destroy publication' do
     assert_difference('Publication.count', -1) do
       delete publication_url(@publication)
     end
