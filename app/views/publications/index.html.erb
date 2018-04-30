@@ -17,6 +17,7 @@
       <tr>
         <td><%= link_to publication.title, publication %></td>
         <td><%= publication.content %></td>
+        <%puts(publication) %>
         <td><%= link_to publication.user.userName, publication.user  %></td>
         <td><%= link_to publication.forum.title, publication.forum  %></td>
       </tr>
