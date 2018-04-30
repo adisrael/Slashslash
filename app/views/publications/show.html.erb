@@ -20,6 +20,17 @@
   <strong>Forum:</strong>
   <%=  link_to @publication.forum.title, @publication.forum %>
 </p>
+<% @publication.comments.each do |comment| %>
+<p>Usuario: <%= comment.user.userName %> </p>
+<p>Content: <%= comment.content %> </p>
+<% end %>
+<%= form_for @comment do |f| %>
+<%= f.label :content %>
+<%= f.text_field :content  %>
+<%= f.hidden_field :user_id, value: current_user.id  %>
+<%= f.hidden_field :publication_id, value: @publication.id  %>
+<%= f.submit %>
+<% end %>
 
 <%= link_to 'Edit', edit_publication_path(@publication) %> |
 <%= link_to 'Destroy', @publication, method: :delete, data: { confirm: 'Are you sure?' } %> |
