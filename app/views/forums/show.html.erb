@@ -9,7 +9,7 @@
   <strong>Description:</strong>
   <%= @forum.description %>
 </p>
- 
+
 <p>
 <strong>Publications:</strong><br>
 </p>
@@ -21,7 +21,7 @@
   	<em> This forum has no publications </em>
   <% end %>
 </p>
-
+<%= link_to 'New Publication', new_forum_publication_path %> |
 <%= link_to 'Edit', edit_forum_path(@forum) %> |
 <%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', forums_path %>
