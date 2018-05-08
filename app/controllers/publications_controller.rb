@@ -26,6 +26,7 @@ class PublicationsController < ApplicationController
   # POST /publications
   # POST /publications.json
   def create
+    publication_params[:votes] = 0
     @publication = Publication.new(publication_params)
 
     respond_to do |format|
