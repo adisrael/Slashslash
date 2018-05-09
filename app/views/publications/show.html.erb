@@ -23,6 +23,13 @@
 <p>
   Votes: <%= @publication.votes %>
 </p>
+<% if (user_signed_in?) %>
+  <%= form_for @vote do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id  %>
+  <%= f.hidden_field :publication_id, value: @publication.id  %>
+  <%= f.submit value: "UpVote" %>
+  <% end %>
+<% end %>
 <% @publication.comments.each do |comment| %>
 <p>Usuario: <%= comment.user.userName %> </p>
 <p>Content: <%= comment.content %> </p>
