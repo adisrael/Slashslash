@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'vote/create'
+  post 'vote/create', as: 'votes'
 
   devise_for :users, controllers: {
         sessions: 'users/sessions',

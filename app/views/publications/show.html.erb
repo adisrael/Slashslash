@@ -21,7 +21,7 @@
   <%=  link_to @publication.forum.title, @publication.forum %>
 </p>
 <p>
-  Votes: <%= @publication.votes %>
+  Votes: <%= @publication.votos %>
 </p>
 <% if (user_signed_in?) %>
   <%= form_for @vote do |f| %>
