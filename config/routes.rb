@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'vote_comment/create'
+
   post 'vote/create', as: 'votes'
 
   devise_for :users, controllers: {
