@@ -20,15 +20,8 @@
     <%= form.text_area :content, id: :publication_content %>
   </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :publication_user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :forum_id %>
-    <%= form.text_field :forum_id, id: :publication_forum_id, value: @forum_id %>
-  </div>
+    <%= form.hidden_field :user_id, id: :publication_user_id, value: current_user.id %>
+    <%= form.hidden_field :forum_id, id: :publication_forum_id, value: @forum_id %>
 
   <div class="actions">
     <%= form.submit %>
