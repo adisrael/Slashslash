@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20180421155023) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
+    t.integer "votes"
     t.bigint "user_id"
     t.bigint "publication_id"
     t.datetime "created_at", null: false
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 20180421155023) do
 
   create_table "publications", force: :cascade do |t|
     t.integer "numero"
+    t.integer "votes"
     t.string "title"
     t.text "content"
     t.bigint "user_id"
