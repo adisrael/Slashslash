@@ -25,6 +25,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
+    @comment.votos = 0
     publication = Publication.find(comment_params['publication_id'])
 
     respond_to do |format|
