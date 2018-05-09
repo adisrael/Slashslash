@@ -20,6 +20,9 @@
   <strong>Forum:</strong>
   <%=  link_to @publication.forum.title, @publication.forum %>
 </p>
+<p>
+  Votes: <%= @publication.votes %>
+</p>
 <% @publication.comments.each do |comment| %>
 <p>Usuario: <%= comment.user.userName %> </p>
 <p>Content: <%= comment.content %> </p>
