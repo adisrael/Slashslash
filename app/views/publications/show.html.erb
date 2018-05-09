@@ -27,12 +27,14 @@
 <p>Usuario: <%= comment.user.userName %> </p>
 <p>Content: <%= comment.content %> </p>
 <% end %>
-<%= form_for @comment do |f| %>
-<%= f.label :content %>
-<%= f.text_field :content  %>
-<%= f.hidden_field :user_id, value: current_user.id  %>
-<%= f.hidden_field :publication_id, value: @publication.id  %>
-<%= f.submit %>
+<% if (user_signed_in?) %>
+  <%= form_for @comment do |f| %>
+  <%= f.label :content %>
+  <%= f.text_field :content  %>
+  <%= f.hidden_field :user_id, value: current_user.id  %>
+  <%= f.hidden_field :publication_id, value: @publication.id  %>
+  <%= f.submit %>
+  <% end %>
 <% end %>
 
 <%= link_to 'Edit', edit_publication_path(@publication) %> |
