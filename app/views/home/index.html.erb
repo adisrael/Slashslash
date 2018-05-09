@@ -2,13 +2,15 @@
 
 <h1>Forums</h1>
 
+<%= link_to 'New Forum', new_forum_path %>
+
 <table>
 	<tr>
 		<th>Id</th>
 		<th>Title</th>
 		<th>Description</th>
 	</tr>
-	<% @forums.each do |forum| %>
+	<% @forums.order(:id).each do |forum| %>
 	<tr>
         <td>  <%= link_to forum.id, forum %></td>
         <td>  <%= link_to forum.title, forum %></td>

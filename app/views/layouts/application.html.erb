@@ -16,14 +16,14 @@
   </head>
 
   <body>
-		<% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
     <div class="container-fluid">
       <%= render 'layouts/navbar' %>
+      <% if notice %>
+        <p class="ex1 alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="ex1 alert alert-danger"><%= alert %></p>
+      <% end %>
       <div class="content">
         <%= yield %>
       </div>
