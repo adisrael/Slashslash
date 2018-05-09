@@ -1,27 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @forum.title %>
-</p>
+<h1> <%= @forum.title %> </h1>
 
 <p>
-  <strong>Description:</strong>
   <%= @forum.description %>
 </p>
+
+<%= link_to 'New Publication', new_forum_publication_path %> |
+<%= link_to 'Edit', edit_forum_path(@forum) %> |
+<%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', '/home' %>
 
 <p>
 <strong>Publications:</strong><br>
 </p>
 <p style="margin-left: 30px">
-  <% @forum.publications.each do | publication | %>
-  <%= publication.id %>. <%= link_to publication.title, publication %><br>
+  <% @forum.publications.order(:id).each do | publication | %>
+  <% if publication.votos >= 0 %>
+  <strong>+<%=publication.votos%></strong>
+  <% else %>
+  <strong>-%=publication.votos%></strong>
+  <% end %>
+  <%= link_to publication.title, publication %> - <%= publication.content%> <br>
   <% end %>
    <% if @forum.publications.size == 0 %>
   	<em> This forum has no publications </em>
   <% end %>
 </p>
-<%= link_to 'New Publication', new_forum_publication_path %> |
-<%= link_to 'Edit', edit_forum_path(@forum) %> |
-<%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back', forums_path %>
