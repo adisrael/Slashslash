@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180509131537) do
+ActiveRecord::Schema.define(version: 20180509184110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
-    t.integer "votes"
+    t.integer "votos"
     t.bigint "user_id"
     t.bigint "publication_id"
     t.datetime "created_at", null: false
@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(version: 20180509131537) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vote_comments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_vote_comments_on_comment_id"
+    t.index ["user_id"], name: "index_vote_comments_on_user_id"
+  end
+
   create_table "votes", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "publication_id"
@@ -91,6 +100,8 @@ ActiveRecord::Schema.define(version: 20180509131537) do
   add_foreign_key "publications", "users"
   add_foreign_key "subscriptions", "forums"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "vote_comments", "comments"
+  add_foreign_key "vote_comments", "users"
   add_foreign_key "votes", "publications"
   add_foreign_key "votes", "users"
 end

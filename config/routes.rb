@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-  
-  post 'vote_comment/create', as: 'vote_comment'
+  post 'vote_comment/create', as: 'vote_comments'
   post 'vote/create', as: 'votes'
 
   devise_for :users, controllers: {
-        sessions: 'users/sessions',
-        registrations: 'registrations'
-      }
+    sessions: 'users/sessions',
+    registrations: 'registrations'
+  }
   resources :publications
   resources :comments
   resources :subscriptions
@@ -15,7 +14,7 @@ Rails.application.routes.draw do
   resources :users
   get 'welcome/index'
   root 'welcome#index'
-  #get '/users/:id', :to => 'users#show', :as => :user
+  # get '/users/:id', :to => 'users#show', :as => :user
 
   get '/home', to: 'home#index', as: :home
 

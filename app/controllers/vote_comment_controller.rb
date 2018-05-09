@@ -3,9 +3,12 @@ class VoteCommentController < ApplicationController
     data = vote_params #  user_id, comment_id
     result = VoteComment.where(user_id: data[:user_id],\
                                comment_id: data[:comment_id]).to_a
+
     comment = Comment.find(data[:comment_id])
+    publication = Publication.find(data[:publication_id])
     respond_to do |format|
       if result.empty?
+        data.delete(:publication_id)
         @vote_comment = VoteComment.new(data)
         comment.votos += 1
         if @vote_comment.save && comment.save
@@ -28,6 +31,6 @@ class VoteCommentController < ApplicationController
   private
 
   def vote_params
-    params.require(:vote).permit(:user_id, :comment_id)
+    params.require(:vote_comment).permit(:user_id, :comment_id, :publication_id)
   end
 end
