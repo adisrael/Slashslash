@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :subscriptions
   resources :forums
+  get '/forums/:id/new_publication', to: 'forums#new_publication', as: 'new_forum_publication'
   resources :users
   get 'welcome/index'
   root 'welcome#index'

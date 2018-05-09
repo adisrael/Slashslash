@@ -71,6 +71,14 @@ class ForumsController < ApplicationController
     end
   end
 
+  def new_publication
+    @publication = Publication.new
+    @forum_id = params[:id]
+    puts 'here'
+    puts params
+    render 'publications/new'
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -82,4 +90,7 @@ class ForumsController < ApplicationController
   def forum_params
     params.require(:forum).permit(:title, :description)
   end
+
+  # GET forums/1/new_publication
+
 end
