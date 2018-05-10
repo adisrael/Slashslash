@@ -29,15 +29,16 @@
   <hr>
   <% @publication.comments.each do |comment| %>
   <p><strong><%=comment.user.userName %>:</strong> <%= comment.content %> </p>
+  <p>Votes: <%= comment.votos %> </p>
+  <% if (user_signed_in?) %>
+  <%= form_for @vote_comment do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id  %>
+  <%= f.hidden_field :comment_id, value: comment.id  %>
+  <%= f.hidden_field :publication_id, value: @publication.id  %>
+  <%= f.submit value: "UpVote Comment" %>
+  <% end %>
+  <% end %>
   <hr>
-    <% if (user_signed_in?) %>
-      <%= form_for @vote_comment do |f| %>
-      <%= f.hidden_field :user_id, value: current_user.id  %>
-      <%= f.hidden_field :comment_id, value: comment.id  %>
-      <%= f.hidden_field :publication_id, value: @publication.id  %>
-      <%= f.submit value: "UpVote Comment" %>
-      <% end %>
-    <% end %>
   <% end %>
   <% if (user_signed_in?) %>
     <%= form_for @comment do |f| %>
