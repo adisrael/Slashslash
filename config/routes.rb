@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   resources :subscriptions
   resources :forums
   get '/forums/:id/new_publication', to: 'forums#new_publication', as: 'new_forum_publication'
-  get '/home/search', to: 'home#search', as: 'search'
+  get '/home/search/forums', to: 'home#search_forum', as: 'search_forum'
+  get '/home/search/publications', to: 'home#search_publication', as: 'search_publication'
   resources :users
   get 'welcome/index'
   root 'welcome#index'
