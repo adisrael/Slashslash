@@ -21,11 +21,15 @@
 <p>
   <strong>By:</strong>
   <%=  link_to @publication.user.userName, @publication.user %>
+  <strong>Created at:</strong>
+  <%= @publication.created_at %>
 </p>
 
 <div class="container">
+  <hr>
   <% @publication.comments.each do |comment| %>
   <p><strong><%=comment.user.userName %>:</strong> <%= comment.content %> </p>
+  <hr>
   <% end %>
   <% if (user_signed_in?) %>
     <%= form_for @comment do |f| %>
