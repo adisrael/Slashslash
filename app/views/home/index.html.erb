@@ -1,28 +1,66 @@
-<h1>Forums</h1>
+<% if @publications.nil?%>
+  <h1>Search Forums</h1>
+  <%= form_tag(search_forum_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search_forum, params[:search_forum], placeholder: "Search Forums" %>
+      <%= submit_tag "Search", :name => nil %>
+  <% end %>
+<% end %>
 
-<%= link_to 'New Forum', new_forum_path %>
+<% unless @forums.nil?%>
+  <table>
+  	<tr>
+  		<th>Id</th>
+  		<th>Title</th>
+  		<th>Description</th>
+  		<th>Votes</th>
+  	</tr>
+  	<% @forums.order(:id).each do |forum| %>
+  	<tr>
+          <td>  <%= link_to forum.id, forum %></td>
+          <td>  <%= link_to forum.title, forum %></td>
+          <td>  <%= forum.description %></td>
+  				<% votos = 0 %>
+  				<% forum.publications.each do |publication|%>
+  				<% votos += publication.votos%>
+  				<% end %>
+  				<% if votos >= 0 %>
+  				<td> +<%=votos %> </td>
+  				<% else %>
+  				<td> -<%=votos %> </td>
+  				<% end %>
+  	</tr>
+  	<% end %>
+  </table>
+<% end %>
 
-<table>
-	<tr>
-		<th>Id</th>
-		<th>Title</th>
-		<th>Description</th>
-		<th>Votes</th>
-	</tr>
-	<% @forums.order(:id).each do |forum| %>
-	<tr>
-        <td>  <%= link_to forum.id, forum %></td>
-        <td>  <%= link_to forum.title, forum %></td>
-        <td>  <%= forum.description %></td>
-				<% votos = 0 %>
-				<% forum.publications.each do |publication|%>
-				<% votos += publication.votos%>
-				<% end %>
-				<% if votos >= 0 %>
-				<td> +<%=votos %> </td>
-				<% else %>
-				<td> -<%=votos %> </td>
-				<% end %>
-	</tr>
-	<% end %>
-</table>
+<% if @forums.nil? %>
+  <h1>Search Publications</h1>
+  <%= form_tag(search_publication_path, :method => "get", id: "search-publication") do %>
+      <%= text_field_tag :search_publication, params[:search_publication], placeholder: "Search Publication" %>
+      <%= submit_tag "Search", :name => nil %>
+  <% end %>
+<% end %>
+<% unless @publications.nil?%>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>User</th>
+        <th>Forum</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <% @publications.each do |publication| %>
+          <tr>
+            <td><%= link_to publication.title, publication %></td>
+            <td><%= publication.content %></td>
+            <%puts(publication) %>
+            <td><%= link_to publication.user.userName, publication.user  %></td>
+            <td><%= link_to publication.forum.title, publication.forum  %></td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+<% end %>
