@@ -51,4 +51,7 @@
 </p>
 
 
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', :home %>
+<% if user_signed_in? and current_user.role == 0 %>
+<%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
