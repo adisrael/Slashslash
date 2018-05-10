@@ -1,29 +1,38 @@
-<p id="notice"><%= notice %></p>
+<% if user_signed_in? and current_user.role == 0 %>
 
-<h1>Users</h1>
+  <p id="notice"><%= notice %></p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Username</th>
-      <th>Firstname</th>
-      <th>Lastname</th>
-    </tr>
-  </thead>
+  <h1>Users</h1>
 
-  <tbody>
-    <% @users.each do |user| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= link_to user.id, user %></td>
-        <td><%= link_to user.userName, user %></td>
-        <td><%= link_to user.firstName, user %></td>
-        <td><%= link_to user.lastName, user %></td>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to user.id, user %></td>
+          <td><%= link_to user.userName, user %></td>
+          <td><%= link_to user.firstName, user %></td>
+          <td><%= link_to user.lastName, user %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%-# <%= link_to 'New User', new_user_path %> 
+  <br>
+
+<% else %>
+<h1><strong> Sorry! </strong></h1>
+<p style="font-size:110%;"> You don't have permission to access this site! </p>
+<p style="font-size:110%;"> For more information please contact us!</p>
+
+<% end %>
+
+<%-# <%= link_to 'New User', new_user_path %>
