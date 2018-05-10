@@ -1,11 +1,10 @@
-<h1>Search</h1>
+<h1>Search Forums</h1>
 <%= form_tag(search_path, :method => "get", id: "search-form") do %>
     <%= text_field_tag :search, params[:search], placeholder: "Search Forums" %>
     <%= submit_tag "Search", :name => nil %>
 <% end %>
 
 <%= link_to 'New Forum', new_forum_path %>
-
 <table>
 	<tr>
 		<th>Id</th>
@@ -30,3 +29,9 @@
 	</tr>
 	<% end %>
 </table>
+
+<h1>Search Publications</h1>
+<%= form_tag(search_publication_path, :method => "get", id: "search-publication") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Publication" %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
