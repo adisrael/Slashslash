@@ -1,4 +1,9 @@
-<h1>Forums</h1>
+<h1>Search Forums</h1>
+<%= form_tag(home_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
+
 
 <table style="width:100%">
   <thead>
@@ -19,7 +24,6 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
 
 <%= link_to 'New Forum', new_forum_path %>
