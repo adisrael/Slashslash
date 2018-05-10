@@ -17,7 +17,13 @@
 
 <p>
   <strong>Role:</strong>
-  <%= @user.role %>
+  <%if @user.role == 0 %>
+  admin
+  <% elsif @user.role == 1 %>
+  moderator
+  <% else %>
+  user
+  <% end %>
 </p>
 
 <p>
