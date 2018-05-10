@@ -1,6 +1,10 @@
 <h1>Forums</h1>
 
-<%= link_to 'New Forum', new_forum_path %>
+<% if user_signed_in? %>
+	<% if current_user.role == 0%>
+		<%= link_to 'New Forum', new_forum_path %>
+	<% end %>
+<% end %>
 
 <table>
 	<tr>
