@@ -14,6 +14,7 @@ class PublicationsController < ApplicationController
   def show
     @comment = Comment.new
     @vote = Vote.new
+    @vote_comment = VoteComment.new
   end
 
   # GET /publications/new

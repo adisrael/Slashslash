@@ -30,6 +30,14 @@
   <% @publication.comments.each do |comment| %>
   <p><strong><%=comment.user.userName %>:</strong> <%= comment.content %> </p>
   <hr>
+    <% if (user_signed_in?) %>
+      <%= form_for @vote_comment do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id  %>
+      <%= f.hidden_field :comment_id, value: comment.id  %>
+      <%= f.hidden_field :publication_id, value: @publication.id  %>
+      <%= f.submit value: "UpVote Comment" %>
+      <% end %>
+    <% end %>
   <% end %>
   <% if (user_signed_in?) %>
     <%= form_for @comment do |f| %>
@@ -48,6 +56,7 @@
   <%= f.submit value: "UpVote" %>
   <% end %>
 <% end %>
+
 
 <%= link_to 'Edit', edit_publication_path(@publication) %> |
 <%= link_to 'Destroy', @publication, method: :delete, data: { confirm: 'Are you sure?' } %> |
