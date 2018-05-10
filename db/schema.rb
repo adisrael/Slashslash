@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20180509184110) do
     t.string "firstName"
     t.string "lastName"
     t.integer "role"
+    t.integer "reputation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
