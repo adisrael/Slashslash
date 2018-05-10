@@ -6,9 +6,11 @@
   <%= @forum.description %>
 </p>
 
+<% if user_signed_in? %>
 <%= link_to 'New Publication', new_forum_publication_path %> |
 <%= link_to 'Edit', edit_forum_path(@forum) %> |
 <%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
 <%= link_to 'Back', '/home' %>
 
 <p>
