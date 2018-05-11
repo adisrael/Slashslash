@@ -6,10 +6,14 @@
   <%= @forum.description %>
 </p>
 
+<% if user_signed_in? %>
 <%= link_to 'New Publication', new_forum_publication_path %> |
 <%= link_to 'Edit', edit_forum_path(@forum) %> |
 <%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back', '/home' %>
+<% else %>
+<p><strong> Sign in to create new publications! </strong></p>
+<% end %>
+<%= link_to 'Back', search_forum_path %>
 
 <p>
 <strong>Publications:</strong><br>

@@ -26,10 +26,14 @@
     <%= form.text_field :lastName, id: :user_lastName %>
   </div>
 
+  <% if user_signed_in? %>
+  <% if current_user.role.zero? %>
   <div class="field">
     <%= form.label :role %>
     <%= form.number_field :role, id: :user_role %>
   </div>
+  <% end %>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

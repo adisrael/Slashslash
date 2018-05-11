@@ -1,6 +1,16 @@
-<h1>Editing User</h1>
+<% if user_signed_in? && (current_user == @user || current_user.role.zero?) %>
+
+<h1>Edit User</h1>
 
 <%= render 'form', user: @user %>
 
 <%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+
+<% else %>
+
+<h2><strong> We're Sorry! </strong></h2>
+<p style="font-size:20px"> You don't have permission to access this page. </p>
+
+<% end %>
+
+<%= link_to 'Back to Home', :home %>

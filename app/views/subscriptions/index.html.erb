@@ -1,3 +1,5 @@
+<% if user_signed_in? && current_user.role.zero? %>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Subscriptions</h1>
@@ -14,8 +16,8 @@
   <tbody>
     <% @subscriptions.each do |subscription| %>
       <tr>
-        <td><%= subscription.forum %></td>
-        <td><%= subscription.user %></td>
+        <td><%= link_to subscription.forum.title, subscription.forum %></td>
+        <td><%= link_to subscription.user.userName, subscription.user %></td>
         <td><%= link_to 'Show', subscription %></td>
         <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
         <td><%= link_to 'Destroy', subscription, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,3 +29,12 @@
 <br>
 
 <%= link_to 'New Subscription', new_subscription_path %>
+
+<% else %>
+
+<h2><strong> We're Sorry! </strong></h2>
+<p style="font-size:20px"> You don't have permission to access this page. </p>
+
+<% end %>
+
+<%= link_to 'Back to Home', :home %>

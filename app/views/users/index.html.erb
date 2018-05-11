@@ -1,3 +1,5 @@
+<% if user_signed_in? && current_user.role.zero? %>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Users</h1>
@@ -9,21 +11,31 @@
       <th>Username</th>
       <th>Firstname</th>
       <th>Lastname</th>
+      <th>Action</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
+    <% @users.order(:id).each do |user| %>
       <tr>
         <td><%= link_to user.id, user %></td>
         <td><%= link_to user.userName, user %></td>
         <td><%= link_to user.firstName, user %></td>
         <td><%= link_to user.lastName, user %></td>
-      </tr>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%-# <%= link_to 'New User', new_user_path %> 
+<%-# <%= link_to 'New User', new_user_path %>
+
+<% else %>
+
+<h2><strong> We're Sorry! </strong></h2>
+<p style="font-size:20px"> You don't have permission to access this page. </p>
+
+<% end %>
+
+<%= link_to 'Back to Home', :home %>
