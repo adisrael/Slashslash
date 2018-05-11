@@ -1,14 +1,23 @@
+<% if user_signed_in? && current_user.role.zero? %>
 <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Forum:</strong>
-  <%= @subscription.forum %>
+  <%= link_to @subscription.forum.title, @subscription.forum %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @subscription.user %>
+  <%= link_to @subscription.user.userName, @subscription.user %>
 </p>
 
 <%= link_to 'Edit', edit_subscription_path(@subscription) %> |
-<%= link_to 'Back', subscriptions_path %>
+
+<% else %>
+
+<h2><strong> We're Sorry! </strong></h2>
+<p style="font-size:20px"> You don't have permission to access this page. </p>
+
+<% end %>
+
+<%= link_to 'Back to Home', :home %>
