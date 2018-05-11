@@ -1,40 +1,29 @@
-<% if user_signed_in? and current_user.role == 0 %>
+<p id="notice"><%= notice %></p>
 
-  <p id="notice"><%= notice %></p>
+<h1>Users</h1>
 
-  <h1>Users</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Username</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+    </tr>
+  </thead>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Username</th>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @users.order(:id).each do |user| %>
+  <tbody>
+    <% @users.each do |user| %>
         <tr>
           <td><%= link_to user.id, user %></td>
           <td><%= link_to user.userName, user %></td>
           <td><%= link_to user.firstName, user %></td>
           <td><%= link_to user.lastName, user %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
   <br>
-
-<% else %>
-<h1><strong> Sorry! </strong></h1>
-<p style="font-size:110%;"> You don't have permission to access this site! </p>
-<p style="font-size:110%;"> For more information please contact us!</p>
-
-<% end %>
 
 <%-# <%= link_to 'New User', new_user_path %>

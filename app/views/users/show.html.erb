@@ -17,13 +17,7 @@
 
 <p>
   <strong>Role:</strong>
-  <%if @user.role == 0 %>
-  admin
-  <% elsif @user.role == 1 %>
-  moderator
-  <% else %>
-  user
-  <% end %>
+  <% @user.role %>
 </p>
 
 <p>
@@ -51,7 +45,4 @@
 </p>
 
 
-<%= link_to 'Back', :home %>
-<% if user_signed_in? and current_user.role == 0 %>
-<%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+<%= link_to 'Back', user_path %>
