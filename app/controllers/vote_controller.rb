@@ -8,7 +8,8 @@ class VoteController < ApplicationController
       if result.empty?
         @vote = Vote.new(data)
         publication.votos += 1
-        if @vote.save && publication.save
+        publication.user.reputation += 1
+        if @vote.save && publication.save && publication.user.save
           format.html do
             redirect_to publication, notice: 'UpVoted.'
           end
@@ -31,3 +32,4 @@ class VoteController < ApplicationController
     params.require(:vote).permit(:user_id, :publication_id)
   end
 end
+ 

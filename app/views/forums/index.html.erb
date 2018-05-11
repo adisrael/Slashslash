@@ -1,11 +1,14 @@
 <h1>Forums</h1>
 
+<%= link_to 'New Forum', new_forum_path %>
+
 <table style="width:100%">
   <thead>
     <tr>
       <th> Id </th>
       <th> Title </th>
       <th> Description </th>
+      <th>Votes</th>
     </tr>
   </thead>
 
@@ -15,11 +18,18 @@
         <td>  <%= link_to forum.id, forum %></td>
         <td>  <%= link_to forum.title, forum %></td>
         <td>  <%= forum.description %></td>
+                <% votos = 0 %>
+                <% forum.publications.each do |publication|%>
+                <% votos += publication.votos%>
+                <% end %>
+                <% if votos >= 0 %>
+                <td> +<%=votos %> </td>
+                <% else %>
+                <td> -<%=votos %> </td>
+                <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
 
-<%= link_to 'New Forum', new_forum_path %>

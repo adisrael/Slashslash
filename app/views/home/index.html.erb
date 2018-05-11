@@ -1,32 +1,54 @@
-<h1>Forums</h1>
-
-<% if user_signed_in? %>
-	<% if current_user.role == 0%>
-		<%= link_to 'New Forum', new_forum_path %>
-	<% end %>
+<% unless @forums.nil? && @publications.nil?%>
+  <%= link_to 'Back', home_path %>
+<% end %>
+<% if @publications.nil?%>
+  <div class="row search">
+    <div class="search-form well">
+      <h1>Search Forums</h1>
+      <%= form_tag(search_forum_path, :method => "get", id: "search-forum") do %>
+      <%= text_field_tag :search_forum, params[:search_forum], placeholder: "Search Forums" %>
+      <%= submit_tag "Search", name: nil, class: 'btn-primary' %>
+      <% end %>
+    </div>
+  </div>
 <% end %>
 
-<table>
-	<tr>
-		<th>Id</th>
-		<th>Title</th>
-		<th>Description</th>
-		<th>Votes</th>
-	</tr>
-	<% @forums.order(:id).each do |forum| %>
-	<tr>
-        <td>  <%= link_to forum.id, forum %></td>
-        <td>  <%= link_to forum.title, forum %></td>
-        <td>  <%= forum.description %></td>
-				<% votos = 0 %>
-				<% forum.publications.each do |publication|%>
-				<% votos += publication.votos%>
-				<% end %>
-				<% if votos >= 0 %>
-				<td> +<%=votos %> </td>
-				<% else %>
-				<td> -<%=votos %> </td>
-				<% end %>
-	</tr>
-	<% end %>
-</table>
+<% if @forums.nil? %>
+  <div class="row search">
+    <div class="search-form well">
+      <h1>Search Publications</h1>
+      <%= form_tag(search_publication_path, :method => "get", id: "search-publication") do %>
+      <%= text_field_tag :search_publication, params[:search_publication], placeholder: "Search Publication" %>
+      <%= submit_tag "Search", name: nil, class: 'btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% unless @forums.nil?%>
+  	<% @forums.each do |forum| %>
+    <div class="row search">
+      <div class="search-result well">
+        <h3><%= link_to forum.title, forum %></h3>
+        <% pos = forum.total_votes>=0 %>
+        <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= forum.total_votes%>)</h3>
+        <h3>| <%= forum.description %></h3>
+      </div>
+    </div>
+  	<% end %>
+<% end %>
+
+<% unless @publications.nil?%>
+  <% @publications.each do |publication| %>
+    <div class="row search">
+      <div class="search-result well">
+        <h3><%= link_to publication.title, publication %></h3>
+        <% pos = publication.votos>=0 %>
+        <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= publication.votos%>)</h3>
+        <h3> - <%= link_to publication.forum.title, publication.forum  %></h3>
+        <h3> - <%= link_to publication.user.userName, publication.user  %></h3>
+      </div>
+    </div>
+
+  <% end %>
+<% end %>

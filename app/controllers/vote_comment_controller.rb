@@ -11,7 +11,8 @@ class VoteCommentController < ApplicationController
         data.delete(:publication_id)
         @vote_comment = VoteComment.new(data)
         comment.votos += 1
-        if @vote_comment.save && comment.save
+        comment.user.reputation += 1
+        if @vote_comment.save && comment.save && comment.user.save
           format.html do
             redirect_to publication, notice: 'UpVoted.'
           end
