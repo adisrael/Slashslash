@@ -1,6 +1,8 @@
 <h1>Forums</h1>
 
+<% if user_signed_in? && current_user.role.zero? %>
 <%= link_to 'New Forum', new_forum_path %>
+<% end %>
 
 <table style="width:100%">
   <thead>
@@ -32,4 +34,3 @@
   </tbody>
 </table>
 <br>
-
