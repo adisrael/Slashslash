@@ -14,16 +14,16 @@
 
   <tbody>
     <% @users.each do |user| %>
-        <tr>
-          <td><%= link_to user.id, user %></td>
-          <td><%= link_to user.userName, user %></td>
-          <td><%= link_to user.firstName, user %></td>
-          <td><%= link_to user.lastName, user %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+      <tr>
+        <td><%= link_to user.id, user %></td>
+        <td><%= link_to user.userName, user %></td>
+        <td><%= link_to user.firstName, user %></td>
+        <td><%= link_to user.lastName, user %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
   <br>
 
-<%-# <%= link_to 'New User', new_user_path %>
+<%-# <%= link_to 'New User', new_user_path %> 
