@@ -1,23 +1,21 @@
 <% provide(:title, @forum.title) %>
 
-<h1> <%= @forum.title %> </h1>
-
-<p>
-  <%= @forum.description %>
-</p>
-
-<% if user_signed_in? %>
-<%= link_to 'New Publication', new_forum_publication_path %> |
-<%= link_to 'Edit', edit_forum_path(@forum) %> |
-<%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<% else %>
-<p><strong> Sign in to create new publications! </strong></p>
-<% end %>
 <%= link_to 'Back', search_forum_path %>
+<div class="row search">
+  <div class="search-result well">
+    <h1> <%= @forum.title %> </h1>
+    <p><%= @forum.description %></p>
+    <% if user_signed_in? %>
+    <%= link_to 'New Publication', new_forum_publication_path %> |
+    <%= link_to 'Edit', edit_forum_path(@forum) %> |
+    <%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <% else %>
+    <p><strong> Sign in to create new publications! </strong></p>
+    <% end %>
+  </div>
+</div>
 
-<p>
-<strong>Publications:</strong><br>
-</p>
+
 <p style="margin-left: 30px">
   <% @forum.publications.order(:id).each do | publication | %>
     <div class="row search">
@@ -25,7 +23,6 @@
         <h3><%= link_to publication.title, publication %></h3>
         <% pos = publication.votos>=0 %>
         <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= publication.votos%>)</h3>
-        <h3> - <%= link_to publication.forum.title, publication.forum  %></h3>
         <h3> - <%= link_to publication.user.userName, publication.user  %></h3>
       </div>
     </div>
