@@ -24,11 +24,7 @@ class HomeController < ApplicationController
   def search_publication
     @home = false
     @publications = Publication.all
-    @publications = if params[:search_publication]
-                      Publication.search(params[:search_publication]).order('created_at DESC')
-                    else
-                      Publication.all.order('created_at DESC')
-                    end
+    @publications = Publication.search(params[:search_publication])
     respond_to do |format|
       format.html do
         render 'index'
