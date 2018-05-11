@@ -1,5 +1,10 @@
 <% unless @forums.nil? && @publications.nil?%>
-  <%= link_to 'Back', home_path %>
+  <%= link_to 'Back to Home', home_path %>
+
+  <% if user_signed_in? && current_user.role.zero? %>
+    <%= link_to 'New Forum', new_forum_path %>
+  <% end %>
+
 <% end %>
 <% if @publications.nil?%>
   <div class="row search">
