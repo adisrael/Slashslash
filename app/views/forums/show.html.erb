@@ -20,12 +20,16 @@
 </p>
 <p style="margin-left: 30px">
   <% @forum.publications.order(:id).each do | publication | %>
-  <% if publication.votos >= 0 %>
-  <strong>+<%=publication.votos%></strong>
-  <% else %>
-  <strong>-%=publication.votos%></strong>
-  <% end %>
-  <%= link_to publication.title, publication %> - <%= publication.content%> <br>
+    <div class="row search">
+      <div class="search-result well">
+        <h3><%= link_to publication.title, publication %></h3>
+        <% pos = publication.votos>=0 %>
+        <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= publication.votos%>)</h3>
+        <h3> - <%= link_to publication.forum.title, publication.forum  %></h3>
+        <h3> - <%= link_to publication.user.userName, publication.user  %></h3>
+      </div>
+    </div>
+
   <% end %>
    <% if @forum.publications.size == 0 %>
   	<em> This forum has no publications </em>
