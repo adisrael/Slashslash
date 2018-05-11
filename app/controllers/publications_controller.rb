@@ -32,7 +32,8 @@ class PublicationsController < ApplicationController
     @publication.votos = 0
 
     respond_to do |format|
-      if @publication.save
+    current_user.reputation += 1
+      if @publication.save && current_user.save
         format.html do
           redirect_to @publication, \
                       notice: 'Publication was successfully created.'
