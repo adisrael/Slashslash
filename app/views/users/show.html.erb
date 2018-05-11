@@ -1,5 +1,3 @@
-<% if user_signed_in? && current_user == @user %>
-
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -51,12 +49,5 @@
   	<em> The user has no subscriptions </em>
   <% end %>
 </p>
-
-<% else %>
-
-<h2><strong> We're Sorry! </strong></h2>
-<p style="font-size:20px"> You don't have permission to access this page. </p>
-
-<% end %>
 
 <%= link_to 'Back to Home', :home %>
