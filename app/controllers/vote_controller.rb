@@ -34,6 +34,8 @@ class VoteController < ApplicationController
     publication.forum.votos -= 1
     publication.user.reputation -= 1
     publication.save
+    publication.user.save
+    publication.forum.save
     vote.destroy
     redirect_to publication, notice: 'DownVoted'
   end
