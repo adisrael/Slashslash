@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   post 'vote_comment/create', as: 'vote_comments'
   post 'vote/create', as: 'votes'
-  post 'moderate', to: 'forums#moderate'
+  post 'moderate/apply', to: 'forums#moderate_apply'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

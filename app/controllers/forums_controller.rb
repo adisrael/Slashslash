@@ -77,7 +77,7 @@ class ForumsController < ApplicationController
     render 'publications/new'
   end
 
-  def moderate
+  def moderate_apply
     forum = Forum.find(params[:forum_id])
     user = User.find(params[:user_id])
     moderator = Moderator.new(user: user, forum: forum)

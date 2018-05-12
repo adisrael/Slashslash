@@ -10,7 +10,7 @@
       <%= link_to 'Edit', edit_forum_path(@forum) %> |
       <%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
       <% unless current_user.moderated_forums.include? @forum%>
-        <%= form_tag '/moderate' do %>
+        <%= form_tag '/moderate/apply' do %>
           <%= hidden_field_tag :forum_id, @forum.id  %>
           <%= hidden_field_tag :user_id, current_user.id  %>
           <%= submit_tag 'Apply as Moderator' %>
