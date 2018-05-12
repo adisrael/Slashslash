@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
     publication.votos += 1
     publication.forum.votos += 1
     respond_to do |format|
-      if @comment.save && current_user.save && publication.save && publication.forum
+      if @comment.save && current_user.save && publication.save && publication.forum.save
         format.html do
           redirect_to publication, notice: 'Comment was successfully created.'
         end
