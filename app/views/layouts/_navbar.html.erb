@@ -12,6 +12,8 @@
       <a class="navbar-brand" href="/">//slashslash</a>
       <% end %>
     </div>
+    <% unless current_page?(root_path) %>
+
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to 'Home', home_path %> </li>
@@ -34,5 +36,6 @@
         <% end %>
       </ul>
     </div>
+    <% end %>
   </div>
 </nav>
