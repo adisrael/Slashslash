@@ -20,5 +20,6 @@ class User < ApplicationRecord
     moderators.each do |m|
       return m.approved if m.forum_id == forum_id
     end
+    false
   end
 end
