@@ -74,9 +74,18 @@ class ForumsController < ApplicationController
   def new_publication
     @publication = Publication.new
     @forum_id = params[:id]
-    puts 'here'
-    puts params
     render 'publications/new'
+  end
+
+  def moderate
+    forum = Forum.find(params[:forum_id])
+    user = User.find(params[:user_id])
+    moderator = Moderator.new(user: user, forum: forum)
+    if moderator.save
+      respond_to do |format|
+        format.html { redirect_to forum }
+      end
+    end
   end
 
   private
