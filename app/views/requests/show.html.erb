@@ -1,6 +1,8 @@
 <% @requests.each do |request| %>
   <p>
-  <%= link_to 'Forum', request.forum %>
-  <%= link_to 'User', request.user %>
+  <%= link_to request.forum.title, request.forum %>
+  <%= link_to request.user.userName, request.user %>
+  <%= link_to 'Approve', "/moderate/request/#{request.id}" , method: :patch  %>
+  <%= link_to 'Reject', "/moderate/request/#{request.id}", method: :delete  %>
   </p>
 <% end %>
