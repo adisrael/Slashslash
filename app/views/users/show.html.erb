@@ -47,10 +47,10 @@
 <p style="margin-left: 30px">
   <% count = 0 %>
   <% @user.moderated_forums.each do | forum | %>
-    <!-- <%# if @user.accepted(forum.id)? %> -->
+    <% if @user.accepted(forum.id) %>
       <%= forum.id %>. <%= link_to forum.title, forum %>
       <% count += 1 %>
-    <!-- <%# end %> -->
+    <% end %>
   <% end %>
   <% if count.zero? %>
   	<em> The user doesn't moderate any forums. </em>
@@ -62,10 +62,10 @@
 <p style="margin-left: 30px">
   <% count = 0 %>
   <% @user.moderated_forums.each do | forum | %>
-    <!-- <%# unless @user.accepted(forum.id)? %> -->
+    <% unless @user.accepted(forum.id) %>
       <%= forum.id %>. <%= link_to forum.title, forum %>
       <% count += 1 %>
-    <!-- <%# end %> -->
+    <% end %>
   <% end %>
   <% if count.zero? %>
   	<em> The user haven't requested to moderate any forums. </em>
