@@ -14,6 +14,12 @@ class RequestsController < ApplicationController
     @requests = Moderator.where(approved: false)
   end
 
+  def resign
+    moderator = Moderator.where(user_id: params[:user_id], forum_id: params[:forum_id]).take
+    Moderator.destroy(moderator.id)
+    redirect_to forum_path(params[:forum_id])
+  end
+
   def apply
     forum = Forum.find(params[:forum_id])
     user = User.find(params[:user_id])
