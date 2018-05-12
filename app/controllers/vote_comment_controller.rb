@@ -11,9 +11,6 @@ class VoteCommentController < ApplicationController
         data.delete(:publication_id)
         @vote_comment = VoteComment.new(data)
         comment.votos += 1
-        if not comment.user.reputation
-          comment.user.reputation = 0
-        end
         comment.user.reputation += 1
         if @vote_comment.save && comment.save && comment.user.save
           format.html do
@@ -26,7 +23,7 @@ class VoteCommentController < ApplicationController
         end
       else
         format.html do
-          redirect_to publication, notice: 'Already voted this comment'
+          redirect_to publication, notice: 'Already voted this commentary'
         end
       end
     end
