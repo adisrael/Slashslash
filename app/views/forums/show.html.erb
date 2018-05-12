@@ -1,6 +1,5 @@
 <% provide(:title, @forum.title) %>
 
-<%= link_to 'Back', search_forum_path %>
 <div class="row search">
   <div class="search-result well">
     <h1 style="display:inline;"> <%= @forum.title %> </h1>  
@@ -9,9 +8,11 @@
     <p></p>
     <p><%= @forum.description %></p>
     <% if user_signed_in? %>
-      <%= link_to 'New Publication', new_forum_publication_path %> |
-      <%= link_to 'Edit', edit_forum_path(@forum) %> |
-      <%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
+      <%= link_to 'New Publication', new_forum_publication_path %> 
+      <% if current_user.role.zero? %>
+        | <%= link_to 'Edit', edit_forum_path(@forum) %> |
+        <%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
+      <% end %>
       <% if !current_user.moderated_forums.include? @forum%>
         <%= form_tag '/moderate/request' do %>
           <%= hidden_field_tag :forum_id, @forum.id  %>

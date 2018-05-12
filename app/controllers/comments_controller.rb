@@ -28,8 +28,10 @@ class CommentsController < ApplicationController
     @comment.votos = 0
     publication = Publication.find(comment_params['publication_id'])
     current_user.reputation += 1
+    publication.votos += 1
+    publication.forum.votos += 1
     respond_to do |format| 
-      if @comment.save && current_user.save
+      if @comment.save && current_user.save && publication.save &&  publication.forum
         format.html do
           redirect_to publication, notice: 'Comment was successfully created.'
         end
