@@ -1,10 +1,22 @@
-<% @requests.each do |request| %>
-  <p>
-  <% if current_user.role.zero?||(current_user.moderated_forums.include?(request.forum)&&current_user.accepted(request.forum_id)) %>
-    <%= link_to request.forum.title, request.forum %>
-    <%= link_to request.user.userName, request.user %>
-    <%= link_to 'Approve', "/moderate/request/#{request.id}" , method: :patch  %>
-    <%= link_to 'Reject', "/moderate/request/#{request.id}", method: :delete  %>
+<div class="requests">
+  <% if @requests.empty? %>
+  <div class="row well">
+    <h3>No pending requests.</h3>
+
+  </div>
+  <% else %>
+    <% @requests.each do |request| %>
+      <% if current_user.role.zero?||(current_user.moderated_forums.include?(request.forum)&&current_user.accepted(request.forum_id)) %>
+      <div class="row well">
+        <div class="col-xs-9">
+          <h3><%= link_to request.user.userName, request.user %> - wants to moderate - <%= link_to request.forum.title, request.forum %></h3>
+        </div>
+        <div class="col-xs-3 button">
+          <%= link_to 'Approve', "/moderate/request/#{request.id}" , method: :patch, class: 'btn btn-success'  %>
+          <%= link_to 'Reject', "/moderate/request/#{request.id}", method: :delete, class: 'btn btn-danger'  %>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
   <% end %>
-  </p>
-<% end %>
+</div>
