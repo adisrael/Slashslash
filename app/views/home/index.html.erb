@@ -30,6 +30,36 @@
   </div>
 <% end %>
 
+<% unless @top_forums.nil?%>
+  <h1>Top Forums</h1>
+  <% @top_forums.each do |forum| %>
+    <div class="row search">
+      <div class="search-result well">
+        <h3><%= link_to forum.title, forum %></h3>
+        <% pos = forum.votos>=0 %>
+        <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= forum.votos%>)</h3>
+        <h3>| <%= forum.description %></h3>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+
+<% unless @top_publications.nil?%>
+  <h1>Top Publications</h1>
+  <% @top_publications.each do |publication| %>
+    <div class="row search">
+      <div class="search-result well">
+        <h3><%= link_to publication.title, publication %></h3>
+        <% pos = publication.votos>=0 %>
+        <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= publication.votos%>)</h3>
+        <h3>| <%= publication.content %></h3>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+
 <% if not @users.nil? %>
   <div class="row search">
     <div class="search-form well">
