@@ -17,5 +17,3 @@ Publication.create({numero: 3, title:'Hollywood',content:'Which is the best movi
 Publication.create({numero: 4, title:'DIY experiments',content:'Mentos on Coke', user:user2, forum:science, votos:0})
 Publication.create({numero: 5, title:'Theory of General Relativity',content:'¿Anyone understands it?', user:user2, forum:science, votos:0})
 Publication.create({numero: 6, title:'Ruby on Rails',content:'Can we use the forum gem?', user:user3, forum:science, votos:0})
-Moderator.create({user: user1, forum: sports})
-Moderator.create({user: user1, forum: movies})
