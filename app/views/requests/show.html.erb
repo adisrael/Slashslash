@@ -1,0 +1,10 @@
+<% @requests.each do |request| %>
+  <p>
+  <% if current_user.role.zero?||(current_user.moderated_forums.include?(request.forum)&&current_user.accepted(request.forum_id)) %>
+    <%= link_to request.forum.title, request.forum %>
+    <%= link_to request.user.userName, request.user %>
+    <%= link_to 'Approve', "/moderate/request/#{request.id}" , method: :patch  %>
+    <%= link_to 'Reject', "/moderate/request/#{request.id}", method: :delete  %>
+  <% end %>
+  </p>
+<% end %>

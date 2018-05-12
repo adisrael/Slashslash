@@ -17,6 +17,14 @@ class User < ApplicationRecord
   def default_role
     self.role ||= 2
   end
+
+  def accepted(forum_id)
+    moderators.each do |m|
+      return m.approved if m.forum_id == forum_id
+    end
+    false
+  end
+
   
   def default_reputation
     self.reputation ||= 0
