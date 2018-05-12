@@ -1,9 +1,5 @@
 <% provide(:title, @publication.title) %>
 
-<h5>
-  <strong>Forum:</strong>
-  <%=  link_to @publication.forum.title, @publication.forum %>
-</h5>
 
 <h1>
   <% if @publication.votos >= 0 %>
@@ -21,9 +17,26 @@
 <p>
   <strong>By:</strong>
   <%= link_to @publication.user.userName, @publication.user %>
+</p>
+<p>
+  <strong>Forum:</strong>
+  <%=  link_to @publication.forum.title, @publication.forum %>
+</p>
+<p>
   <strong>Created at:</strong>
   <%= @publication.created_at %>
 </p>
+
+
+
+</p>
+<% if (user_signed_in?) %>
+  <%= form_for @vote do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id  %>
+  <%= f.hidden_field :publication_id, value: @publication.id  %>
+  <%= f.submit value: "UpVote" %>
+  <% end %>
+<% end %>
 
 <div class="container">
   <hr>
@@ -50,14 +63,6 @@
   <% end %>
 </div>
 
-</p>
-<% if (user_signed_in?) %>
-  <%= form_for @vote do |f| %>
-  <%= f.hidden_field :user_id, value: current_user.id  %>
-  <%= f.hidden_field :publication_id, value: @publication.id  %>
-  <%= f.submit value: "UpVote" %>
-  <% end %>
-<% end %>
 
 </p>
 <% if user_signed_in? %>
