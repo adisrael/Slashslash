@@ -31,6 +31,8 @@ class VoteController < ApplicationController
     vote = Vote.find(params[:vote][:vote_id])
     publication = vote.publication
     publication.votos -= 1
+    publication.forum.votos -= 1
+    publication.user.reputation -= 1
     publication.save
     vote.destroy
     redirect_to publication, notice: 'DownVoted'

@@ -1,8 +1,3 @@
-<% unless @forums.nil? && @publications.nil? && @users.nil? %>
-  <% if user_signed_in? && current_user.role.zero? %>
-    <%= link_to 'New Forum', new_forum_path %>
-  <% end %>
-<% end %>
 
 
 <% if @publications.nil?%>
@@ -12,6 +7,11 @@
       <%= form_tag(search_forum_path, :method => "get", id: "search-forum") do %>
       <%= text_field_tag :search_forum, params[:search_forum], placeholder: "Search Forums" %>
       <%= submit_tag "Search", name: nil, class: 'btn-primary' %>
+      <% end %>
+      <% unless @forums.nil?  && @users.nil? %>
+        <% if user_signed_in? && current_user.role.zero? %>
+          <%= link_to 'New Forum', new_forum_path %>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -45,6 +45,8 @@
   <% end %>
 </div>
 <% end %>
+
+
 
 <% unless @top_publications.nil?%>
 <div class="col-xs-6">
