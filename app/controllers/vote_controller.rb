@@ -29,7 +29,12 @@ class VoteController < ApplicationController
   end
 
   def destroy
-    @vote.destroy
+    vote = Vote.find(params[:vote][:vote_id])
+    publication = vote.publication
+    publication.votos -= 1
+    publication.save
+    vote.destroy
+    redirect_to publication, notice: 'DownVoted'
   end
 
   private
@@ -38,4 +43,3 @@ class VoteController < ApplicationController
     params.require(:vote).permit(:user_id, :publication_id)
   end
 end
- 

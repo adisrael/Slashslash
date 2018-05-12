@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   post 'vote_comment/create', as: 'vote_comments'
-  post 'vote/create', as: 'votes'
+  post 'vote', as: 'votes', to: 'vote#create'
+  delete 'vote', to: 'vote#destroy'
   post 'moderate/request', to: 'requests#apply'
   patch 'moderate/request/:id', to: 'requests#accept'
   delete 'moderate/request/:id', to: 'requests#reject'
