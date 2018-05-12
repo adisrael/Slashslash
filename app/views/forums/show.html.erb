@@ -15,6 +15,8 @@
           <%= hidden_field_tag :user_id, current_user.id  %>
           <%= submit_tag 'Apply as Moderator' %>
         <% end %>
+      <% elsif !current_user.accepted(@forum.id)%>
+        <p>Pending moderator request.</p>
       <% else %>
         <p>You are Moderator in this forum</p>
         <%= form_tag '/moderate/', method: :delete do %>
