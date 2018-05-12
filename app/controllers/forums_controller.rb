@@ -76,18 +76,7 @@ class ForumsController < ApplicationController
     @forum_id = params[:id]
     render 'publications/new'
   end
-
-  def moderate_apply
-    forum = Forum.find(params[:forum_id])
-    user = User.find(params[:user_id])
-    moderator = Moderator.new(user: user, forum: forum)
-    if moderator.save
-      respond_to do |format|
-        format.html { redirect_to forum }
-      end
-    end
-  end
-
+  
   private
 
   # Use callbacks to share common setup or constraints between actions.

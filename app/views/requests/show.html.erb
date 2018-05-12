@@ -1,0 +1,6 @@
+<% @requests.each do |request| %>
+  <p>
+  <%= link_to 'Forum', request.forum %>
+  <%= link_to 'User', request.user %>
+  </p>
+<% end %>

@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20180511222933) do
   end
 
   create_table "moderators", force: :cascade do |t|
+    t.boolean "approved"
     t.bigint "user_id"
     t.bigint "forum_id"
     t.datetime "created_at", null: false

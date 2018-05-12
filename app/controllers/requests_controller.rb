@@ -10,10 +10,11 @@ class RequestsController < ApplicationController
     end
   end
 
-  def accept
-  end
+  def accept; end
 
-  def reject
-  end
+  def reject; end
 
+  def show
+    @requests = Moderator.where(approved: false)
+  end
 end
