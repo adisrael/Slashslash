@@ -8,6 +8,9 @@ class VoteController < ApplicationController
       if result.empty?
         @vote = Vote.new(data)
         publication.votos += 1
+        if not publication.user.reputation
+          publication.user.reputation = 0
+        end
         publication.user.reputation += 1
         if @vote.save && publication.save && publication.user.save
           format.html do
@@ -20,10 +23,14 @@ class VoteController < ApplicationController
         end
       else
         format.html do
-          redirect_to publication, notice: 'Already voted this publication'
+          redirect_to publication, notice: 'Already UpVoted this publication'
         end
       end
     end
+  end
+
+  def destroy
+    @vote.destroy
   end
 
   private
