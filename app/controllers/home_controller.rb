@@ -7,13 +7,6 @@ class HomeController < ApplicationController
     @home = false
     @forums = Forum.all
     @forums = Forum.search(params[:search_forum]).order('created_at DESC')
-    @forums.each do |forum|
-      votos = 0
-      forum.publications.each do |publication|
-        votos += publication.votos
-      end
-      forum.total_votes = votos
-    end
     respond_to do |format|
       format.html do
         render 'index'

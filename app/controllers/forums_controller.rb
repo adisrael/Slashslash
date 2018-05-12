@@ -25,7 +25,7 @@ class ForumsController < ApplicationController
   # POST /forums.json
   def create
     @forum = Forum.new(forum_params)
-
+    @forum.votos = 0
     respond_to do |format|
       if @forum.save
         format.html do
