@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :moderated_forums, through: :moderators, source: :forum
 
   before_create :default_role
+  before_create :default_reputation
+  
   def default_role
     self.role ||= 2
   end
@@ -22,4 +24,10 @@ class User < ApplicationRecord
     end
     false
   end
+
+  
+  def default_reputation
+    self.reputation ||= 0
+  end
+  
 end

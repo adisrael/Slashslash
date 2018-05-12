@@ -30,11 +30,7 @@ class PublicationsController < ApplicationController
   def create
     @publication = Publication.new(publication_params)
     @publication.votos = 0
-
     respond_to do |format|
-    if not current_user.reputation
-      current_user.reputation = 0
-    end
     current_user.reputation += 1
       if @publication.save && current_user.save
         format.html do
