@@ -8,9 +8,6 @@ class VoteController < ApplicationController
       if result.empty?
         @vote = Vote.new(data)
         publication.votos += 1
-        if not publication.user.reputation
-          publication.user.reputation = 0
-        end
         publication.user.reputation += 1
         if @vote.save && publication.save && publication.user.save
           format.html do
