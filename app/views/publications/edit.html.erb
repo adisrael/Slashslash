@@ -1,6 +1,16 @@
+<% if user_signed_in? %>
+
 <h1>Editing Publication</h1>
 
 <%= render 'form', publication: @publication %>
 
 <%= link_to 'Show', @publication %> |
+
+<% else %>
+
+<h2><strong> We're Sorry! </strong></h2>
+<p style="font-size:20px"> You don't have permission to access this page. </p>
+
+<% end %>
+
 <%= link_to 'Back', @publication %>

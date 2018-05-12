@@ -1,5 +1,13 @@
+<% if user_signed_in? && current_user.role.zero? %>
 <h1>New Comment</h1>
 
 <%= render 'form', comment: @comment %>
 
-<%= link_to 'Back', comments_path %>
+<% else %>
+
+<h2><strong> We're Sorry! </strong></h2>
+<p style="font-size:20px"> You don't have permission to access this page. </p>
+
+<% end %>
+
+<%= link_to 'Back to Home', :home %>

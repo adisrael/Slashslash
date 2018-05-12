@@ -1,6 +1,14 @@
+<% if user_signed_in? && current_user.role.zero? %>
 <h1>Editing Subscription</h1>
 
 <%= render 'form', subscription: @subscription %>
 
 <%= link_to 'Show', @subscription %> |
-<%= link_to 'Back', subscriptions_path %>
+<% else %>
+
+<h2><strong> We're Sorry! </strong></h2>
+<p style="font-size:20px"> You don't have permission to access this page. </p>
+
+<% end %>
+
+<%= link_to 'Back to Home', :home %>

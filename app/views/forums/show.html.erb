@@ -1,27 +1,39 @@
 <% provide(:title, @forum.title) %>
 
-<h1> <%= @forum.title %> </h1>
+<%= link_to 'Back', search_forum_path %>
+<div class="row search">
+  <div class="search-result well">
+    <h1> <%= @forum.title %> </h1>
+    <p><%= @forum.description %></p>
+    <% if user_signed_in? %>
+      <%= link_to 'New Publication', new_forum_publication_path %> |
+      <%= link_to 'Edit', edit_forum_path(@forum) %> |
+      <%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
+      <% unless current_user.moderated_forums.include? @forum%>
+        <%= form_tag '/moderate' do %>
+          <%= hidden_field_tag :forum_id, @forum.id  %>
+          <%= hidden_field_tag :user_id, current_user.id  %>
+          <%= submit_tag 'Apply as Moderator' %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p><strong> Sign in to create new publications! </strong></p>
+    <% end %>
+  </div>
+</div>
 
-<p>
-  <%= @forum.description %>
-</p>
 
-<%= link_to 'New Publication', new_forum_publication_path %> |
-<%= link_to 'Edit', edit_forum_path(@forum) %> |
-<%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back', '/home' %>
-
-<p>
-<strong>Publications:</strong><br>
-</p>
 <p style="margin-left: 30px">
   <% @forum.publications.order(:id).each do | publication | %>
-  <% if publication.votos >= 0 %>
-  <strong>+<%=publication.votos%></strong>
-  <% else %>
-  <strong>-%=publication.votos%></strong>
-  <% end %>
-  <%= link_to publication.title, publication %> - <%= publication.content%> <br>
+    <div class="row search">
+      <div class="search-result well">
+        <h3><%= link_to publication.title, publication %></h3>
+        <% pos = publication.votos>=0 %>
+        <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= publication.votos%>)</h3>
+        <h3> - <%= link_to publication.user.userName, publication.user  %></h3>
+      </div>
+    </div>
+
   <% end %>
    <% if @forum.publications.size == 0 %>
   	<em> This forum has no publications </em>

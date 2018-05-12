@@ -14,10 +14,10 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
         <li><%= link_to 'Home', home_path %> </li>
-        <li><%= link_to 'Forums', forums_path %> </li>
-        <li><%= link_to 'Publications', publications_path %> </li>
+        <li><%= link_to 'Forums', search_forum_path %> </li>
+        <li><%= link_to 'Publications', search_publication_path %> </li>
+        <% if user_signed_in? %>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.userName %>
             <span class="caret"></span></a>
@@ -27,6 +27,9 @@
               <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
             </ul>
           </li>
+        <% else %>
+        <li><%= link_to 'SIGN UP', new_user_registration_path %> </li>
+        <li><%= link_to 'LOG IN', new_user_session_path %> </li>
         <% end %>
       </ul>
     </div>
