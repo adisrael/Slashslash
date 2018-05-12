@@ -1,5 +1,11 @@
 <% provide(:title, @forum.title) %>
 
+<% if user_signed_in? %>
+  <% current_user.moderated_forums.each do |f| %>
+  <h1><%= f.title %> </h1>
+  <% end %>
+<% end %>
+
 <%= link_to 'Back', search_forum_path %>
 <div class="row search">
   <div class="search-result well">
@@ -9,6 +15,11 @@
     <%= link_to 'New Publication', new_forum_publication_path %> |
     <%= link_to 'Edit', edit_forum_path(@forum) %> |
     <%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <%= form_tag '/moderate' do %>
+      <%= hidden_field_tag :forum_id, @forum.id  %>
+      <%= hidden_field_tag :user_id, current_user.id  %>
+      <%= submit_tag 'Apply as Moderator' %>
+    <% end %>
     <% else %>
     <p><strong> Sign in to create new publications! </strong></p>
     <% end %>
