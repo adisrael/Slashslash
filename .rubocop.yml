@@ -13,6 +13,8 @@ AllCops:
     - 'config/**/*'
     - 'vendor/**/*'
     - 'bin/**/*'
+    - 'app/controllers/users/*'
+    - 'test/test_helper.rb'
 
 
 Rails:
@@ -29,18 +31,23 @@ Metrics/MethodLength:
 
 Metrics/LineLength:
   IgnoredPatterns: ['\A\s*#']
+  Max: 100
 
 Metrics/CyclomaticComplexity:
-  Max: 11
+  Max: 15
 
 Metrics/ModuleLength:
   Max: 150
 
 Metrics/PerceivedComplexity:
-  Max: 7
+  Max: 10
   
 Documentation:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+  
 Style/FrozenStringLiteralComment:
   Enabled: false
+
