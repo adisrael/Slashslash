@@ -1,30 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.userName %>
-</p>
+<h1>
+  <% pos = @user.reputation>=0 %>
+  <span class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= @user.reputation%>)</span>
+  <span><strong><%= @user.userName %></strong></span>
 
-<p>
-  <strong>Firstname:</strong>
+  <% if user_signed_in? && current_user == @user %>
+  -
   <%= @user.firstName %>
-</p>
-
-<p>
-  <strong>Lastname:</strong>
   <%= @user.lastName %>
-</p>
+  <% end %>
 
-<p>
-  <strong>Role:</strong>
-  <%= @user.role %>
-</p>
+  <% if @user.role.zero? %>
+  <i style="font-size:20px">(admin)</i>
+  <% end %>
 
-<p>
-  <strong>Reputation:</strong>
-  <%= @user.reputation %>
-</p>
-
+</h1>
 
 <p>
 <strong>Publications:</strong><br>
@@ -47,6 +38,37 @@
   <% end %>
   <% if @user.subscriptions.size == 0 %>
   	<em> The user has no subscriptions </em>
+  <% end %>
+</p>
+
+<p>
+<strong>Moderating Forums:</strong><br>
+</p>
+<p style="margin-left: 30px">
+  <% count = 0 %>
+  <% @user.moderated_forums.each do | forum | %>
+    <!-- <%# if @user.accepted(forum.id)? %> -->
+      <%= forum.id %>. <%= link_to forum.title, forum %>
+      <% count += 1 %>
+    <!-- <%# end %> -->
+  <% end %>
+  <% if count.zero? %>
+  	<em> The user doesn't moderate any forums. </em>
+  <% end %>
+</p>
+<p>
+  <strong>Moderating Requests:</strong><br>
+</p>
+<p style="margin-left: 30px">
+  <% count = 0 %>
+  <% @user.moderated_forums.each do | forum | %>
+    <!-- <%# unless @user.accepted(forum.id)? %> -->
+      <%= forum.id %>. <%= link_to forum.title, forum %>
+      <% count += 1 %>
+    <!-- <%# end %> -->
+  <% end %>
+  <% if count.zero? %>
+  	<em> The user haven't requested to moderate any forums. </em>
   <% end %>
 </p>
 
