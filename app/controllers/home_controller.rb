@@ -3,6 +3,7 @@
 class HomeController < ApplicationController
   def index
     @top_forums = Forum.order(:votos).reverse_order.take(3)
+    @top_publications = Publication.order(:votos).reverse_order.take(3)
   end
 
   def search_forum
