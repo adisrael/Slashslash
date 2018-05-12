@@ -15,8 +15,8 @@ class RequestsController < ApplicationController
   end
 
   def resign
-    moderator = Moderator.where(user_id: params[:user_id], 
-      forum_id: params[:forum_id]).take
+    moderator = Moderator.where(user_id: params[:user_id],
+                                forum_id: params[:forum_id]).take
     Moderator.destroy(moderator.id)
     redirect_to forum_path(params[:forum_id])
   end

@@ -32,7 +32,7 @@ class PublicationsController < ApplicationController
     @publication.votos = 0
     @publication.forum.votos += 1
     respond_to do |format|
-    current_user.reputation += 1
+      current_user.reputation += 1
       if @publication.save && current_user.save && @publication.forum.save
         format.html do
           redirect_to @publication, \

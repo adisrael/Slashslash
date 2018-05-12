@@ -10,8 +10,7 @@ class VoteController < ApplicationController
         publication.votos += 1
         publication.forum.votos += 1
         publication.user.reputation += 1
-        if @vote.save && publication.save 
-          && publication.user.save && publication.forum.save
+        if @vote.save && publication.save && publication.user.save && publication.forum.save
           format.html do
             redirect_to publication, notice: 'UpVoted.'
           end

@@ -76,7 +76,7 @@ class ForumsController < ApplicationController
     @forum_id = params[:id]
     render 'publications/new'
   end
-  
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -90,5 +90,4 @@ class ForumsController < ApplicationController
   end
 
   # GET forums/1/new_publication
-
 end
