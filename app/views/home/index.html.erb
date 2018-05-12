@@ -1,6 +1,4 @@
 <% unless @forums.nil? && @publications.nil? && @users.nil? %>
-  <%= link_to 'Back to Home', home_path %>
-
   <% if user_signed_in? && current_user.role.zero? %>
     <%= link_to 'New Forum', new_forum_path %>
   <% end %>
