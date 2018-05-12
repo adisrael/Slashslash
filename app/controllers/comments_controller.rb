@@ -27,10 +27,8 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.votos = 0
     publication = Publication.find(comment_params['publication_id'])
-    if not current_user.reputation
-      current_user.reputation = 0
-    end
     current_user.reputation += 1
+
     respond_to do |format| 
       if @comment.save && current_user.save
         format.html do
