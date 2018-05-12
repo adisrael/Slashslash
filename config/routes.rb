@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'registrations'
   }
+
   resources :publications
   resources :comments
   resources :subscriptions
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   get '/forums/:id/new_publication', to: 'forums#new_publication', as: 'new_forum_publication'
   get '/home/search/forums', to: 'home#search_forum', as: 'search_forum'
   get '/home/search/publications', to: 'home#search_publication', as: 'search_publication'
+  get '/home/search/users', to: 'home#search_user', as: 'search_user'
   resources :users
   get 'welcome/index'
   root 'welcome#index'

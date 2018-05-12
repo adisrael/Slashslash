@@ -1,11 +1,12 @@
-<% unless @forums.nil? && @publications.nil?%>
+<% unless @forums.nil? && @publications.nil? && @users.nil? %>
   <%= link_to 'Back to Home', home_path %>
 
   <% if user_signed_in? && current_user.role.zero? %>
     <%= link_to 'New Forum', new_forum_path %>
   <% end %>
-
 <% end %>
+
+
 <% if @publications.nil?%>
   <div class="row search">
     <div class="search-form well">
@@ -30,17 +31,64 @@
   </div>
 <% end %>
 
+<div class="row top">
+<% unless @top_forums.nil?%>
+<div class="col-xs-6">
+  <h2>Top 3 Forums</h2>
+  <% @top_forums.each do |forum| %>
+    <div class=" top-results">
+      <div class="search-result well">
+        <h4><%= link_to forum.title, forum %></h4>
+        <% pos = forum.votos>=0 %>
+        <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= forum.votos%>)</h4>
+        <h4>| <%= forum.description %></h4>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% end %>
+
+<% unless @top_publications.nil?%>
+<div class="col-xs-6">
+  <h2>Top 3 Publications</h2>
+  <% @top_publications.each do |publication| %>
+    <div class=" top-results">
+      <div class="search-result well">
+        <h4><%= link_to publication.title, publication %></h4>
+        <% pos = publication.votos>=0 %>
+        <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= publication.votos%>)</h4>
+        <h4>| <%= publication.content %></h4>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% end %>
+</div>
+
+
+<% if not @users.nil? %>
+  <div class="row search">
+    <div class="search-form well">
+      <h1>Search Users</h1>
+      <%= form_tag(search_user_path, :method => "get", id: "search-user") do %>
+      <%= text_field_tag :search_user, params[:search_user], placeholder: "Search User" %>
+      <%= submit_tag "Search", name: nil, class: 'btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 <% unless @forums.nil?%>
   	<% @forums.each do |forum| %>
     <div class="row search">
       <div class="search-result well">
         <h3><%= link_to forum.title, forum %></h3>
-        <% pos = forum.total_votes>=0 %>
-        <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= forum.total_votes%>)</h3>
+        <% pos = forum.votos>=0 %>
+        <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= forum.votos%>)</h3>
         <h3>| <%= forum.description %></h3>
       </div>
     </div>
-  	<% end %>
+  <% end %>
 <% end %>
 
 <% unless @publications.nil?%>
@@ -54,6 +102,17 @@
         <h3> - <%= link_to publication.user.userName, publication.user  %></h3>
       </div>
     </div>
+  <% end %>  
+<% end %>
 
+<% unless @users.nil?%>
+  <% @users.each do |user| %>
+    <div class="row search">
+      <div class="search-result well">
+        <h3><%= link_to user.userName, user %></h3>
+        <% pos = user.reputation>=0 %>
+        <h3 class="reputation-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= user.reputation%>)</h3>
+      </div>
+    </div>
   <% end %>
 <% end %>
