@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post 'moderate/request', to: 'requests#apply'
   patch 'moderate/request/:id', to: 'requests#accept'
   delete 'moderate/request/:id', to: 'requests#reject'
-  get 'moderate/request', to: 'requests#show'
+  get 'moderate/request', to: 'requests#show', as: 'requests'
   delete 'moderate', to: 'requests#resign'
 
   devise_for :users, controllers: {
