@@ -24,4 +24,16 @@ class HomeController < ApplicationController
       end
     end
   end
+
+  def search_user
+    @home = false
+    @users = User.all
+    @users = User.search(params[:search_user])
+    respond_to do |format|
+      format.html do
+        render 'index'
+      end
+    end
+  end
+
 end

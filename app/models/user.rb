@@ -13,7 +13,11 @@ class User < ApplicationRecord
 
   before_create :default_role
   before_create :default_reputation
-  
+    
+  def self.search(search)
+    where('userName ILIKE ? OR lastName ILIKE ? OR firstName ILIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
+  end
+
   def default_role
     self.role ||= 2
   end

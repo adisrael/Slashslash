@@ -1,11 +1,11 @@
-<% unless @forums.nil? && @publications.nil?%>
+<% unless @forums.nil? && @publications.nil? && @users.nil? %>
   <%= link_to 'Back to Home', home_path %>
 
   <% if user_signed_in? && current_user.role.zero? %>
     <%= link_to 'New Forum', new_forum_path %>
   <% end %>
-
 <% end %>
+
 <% if @publications.nil?%>
   <div class="row search">
     <div class="search-form well">
@@ -30,6 +30,18 @@
   </div>
 <% end %>
 
+<% if not @users.nil? %>
+  <div class="row search">
+    <div class="search-form well">
+      <h1>Search Users</h1>
+      <%= form_tag(search_user_path, :method => "get", id: "search-user") do %>
+      <%= text_field_tag :search_user, params[:search_user], placeholder: "Search User" %>
+      <%= submit_tag "Search", name: nil, class: 'btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 <% unless @forums.nil?%>
   	<% @forums.each do |forum| %>
     <div class="row search">
@@ -40,7 +52,7 @@
         <h3>| <%= forum.description %></h3>
       </div>
     </div>
-  	<% end %>
+  <% end %>
 <% end %>
 
 <% unless @publications.nil?%>
@@ -54,6 +66,17 @@
         <h3> - <%= link_to publication.user.userName, publication.user  %></h3>
       </div>
     </div>
+  <% end %>  
+<% end %>
 
+<% unless @users.nil?%>
+  <% @users.each do |user| %>
+    <div class="row search">
+      <div class="search-result well">
+        <h3><%= link_to user.userName, user %></h3>
+        <% pos = user.reputation>=0 %>
+        <h3 class="reputation-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= user.reputation%>)</h3>
+      </div>
+    </div>
   <% end %>
 <% end %>
