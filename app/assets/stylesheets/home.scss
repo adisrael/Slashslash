@@ -8,7 +8,7 @@ body {
 }
 
 .search {
-  width: 90%;
+  width: 80%;
   padding: 10px;
   margin: auto;
   margin-top: 0px;
@@ -20,6 +20,20 @@ body {
   .form-control {
     width: 30%;
     padding: 2px;
+  }
+}
+
+.top-results{
+  width: 90%;
+  padding: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin: auto;
+}
+
+.top{
+    h2{
+    text-align: center;
   }
 }
 
@@ -68,6 +82,7 @@ footer a:hover {
 
   }
 }
+
 
 table {
     text-align: left;
