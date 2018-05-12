@@ -5,7 +5,10 @@ class RequestsController < ApplicationController
     redirect_to action: 'show' if request.save
   end
 
-  def reject; end
+  def reject
+    Moderator.destroy(params[:id])
+    redirect_to action: 'show'
+  end
 
   def show
     @requests = Moderator.where(approved: false)
