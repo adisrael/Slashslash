@@ -2,7 +2,6 @@
 
 class UsersController < ApplicationController
   before_action :set_user,  only: %i[show edit update destroy]
-  before_action :check_reputation,  only: %i[show]
 
   # GET /users
   # GET /users.json
@@ -74,13 +73,6 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
-  end
-
-  # Set Up Initial Reputation
-  def check_reputation
-    if not @user.reputation
-      @user.reputation = 0
-    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
