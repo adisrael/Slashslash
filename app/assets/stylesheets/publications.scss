@@ -7,3 +7,14 @@
     display: inline;
   }
 }
+
+.scroll {
+    height: 300px; /* or any value */
+    overflow-y: auto;
+
+}
+
+#right {
+    border-left: 1px solid black;
+    padding-left: 20px;
+}

@@ -1,80 +1,82 @@
 <% provide(:title, @publication.title) %>
 
+<div class="row">
+  <div class="col-xs-6">
+    <h1>
+      <% if @publication.votos >= 0 %>
+      +<%=@publication.votos %>
+      <% else %>
+      -<%=@publication.votos %>
+      <% end %>
+      <strong><%= @publication.title %> </strong>
+    </h1>
 
-<h1>
-  <% if @publication.votos >= 0 %>
-  +<%=@publication.votos %>
-  <% else %>
-  -<%=@publication.votos %>
-  <% end %>
-  <strong><%= @publication.title %> </strong>
-</h1>
+    <p style="font-size:110%;">
+      <%= @publication.content %>
+    </p>
 
-<p style="font-size:110%;">
-  <%= @publication.content %>
-</p>
+    <p>
+      <strong>By:</strong>
+      <%= link_to @publication.user.userName, @publication.user %>
+    </p>
+    <p>
+      <strong>Forum:</strong>
+      <%=  link_to @publication.forum.title, @publication.forum %>
+    </p>
+    <p>
+      <strong>Created at:</strong>
+      <%= @publication.created_at %>
+    </p>
 
-<p>
-  <strong>By:</strong>
-  <%= link_to @publication.user.userName, @publication.user %>
-</p>
-<p>
-  <strong>Forum:</strong>
-  <%=  link_to @publication.forum.title, @publication.forum %>
-</p>
-<p>
-  <strong>Created at:</strong>
-  <%= @publication.created_at %>
-</p>
-
-
-</p>
-<% if (user_signed_in?) %>
-<%# vote = Vote.where(user_id: current_user.id, publication_id: @publication.id).take %>
-  <%# if vote.nil? %>
-  <div class="arrows">
-    <%= form_for @vote do |f| %>
-    <%= f.hidden_field :user_id, value: current_user.id  %>
-    <%= f.hidden_field :publication_id, value: @publication.id  %>
-    <%= f.hidden_field :positive, value: true  %>
-    <%= f.submit "\u{2b06}", value: "\u{2b06}", class: 'btn btn-success' %>
-    <% end %>
-    <%# else %>
-    <%= form_for @vote do |f| %>
-    <%= f.hidden_field :user_id, value: current_user.id  %>
-    <%= f.hidden_field :publication_id, value: @publication.id  %>
-    <%= f.hidden_field :positive, value: false  %>
-    <%= f.submit "\u{2b07}", value: "\u{2b07}", class: 'btn btn-danger' %>
+    <% if (user_signed_in?) %>
+      <div class="arrows">
+        <%= form_for @vote do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id  %>
+        <%= f.hidden_field :publication_id, value: @publication.id  %>
+        <%= f.hidden_field :positive, value: true  %>
+        <%= f.submit "\u{2b06}", value: "\u{2b06}", class: 'btn btn-success' %>
+        <% end %>
+        <%# else %>
+        <%= form_for @vote do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id  %>
+        <%= f.hidden_field :publication_id, value: @publication.id  %>
+        <%= f.hidden_field :positive, value: false  %>
+        <%= f.submit "\u{2b07}", value: "\u{2b07}", class: 'btn btn-danger' %>
+        <% end %>
+      </div>
     <% end %>
   </div>
+  <div id="right" class="col-xs-6">
+    <div class="scroll">
+      <% @publication.comments.each do |comment| %>
+        <p><strong><%= link_to comment.user.userName, comment.user %>:</strong> <%= comment.content %> </p>
+        <p>Votes: <%= comment.votos %> </p>
+          <% if (user_signed_in?) %>
+            <%= form_for @vote_comment do |f| %>
+            <%= f.hidden_field :user_id, value: current_user.id  %>
+            <%= f.hidden_field :comment_id, value: comment.id  %>
+            <%= f.hidden_field :publication_id, value: @publication.id  %>
+            <%= f.submit value: "UpVote Comment", class: 'btn btn-primary' %>
+            <% end %>
+          <% end %>
+      <% end %>
+    </div>
 
-  <%# end %>
-<% end %>
+    <% if (user_signed_in?) %>
+      <%= form_for @comment do |f| %>
+      <%= f.text_field :content  %>
+      <%= f.hidden_field :user_id, value: current_user.id  %>
+      <%= f.hidden_field :publication_id, value: @publication.id  %>
+      <%= f.submit class: 'btn btn-default'%>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
 
 
 <div class="container">
-  <hr>
-  <% @publication.comments.each do |comment| %>
-    <p><strong><%= link_to comment.user.userName, comment.user %>:</strong> <%= comment.content %> </p>
-    <p>Votes: <%= comment.votos %> </p>
-      <% if (user_signed_in?) %>
-        <%= form_for @vote_comment do |f| %>
-        <%= f.hidden_field :user_id, value: current_user.id  %>
-        <%= f.hidden_field :comment_id, value: comment.id  %>
-        <%= f.hidden_field :publication_id, value: @publication.id  %>
-        <%= f.submit value: "UpVote Comment", class: 'btn btn-primary' %>
-        <% end %>
-      <% end %>
-    <hr>
-    <% end %>
-  <% if (user_signed_in?) %>
-    <%= form_for @comment do |f| %>
-    <%= f.text_field :content  %>
-    <%= f.hidden_field :user_id, value: current_user.id  %>
-    <%= f.hidden_field :publication_id, value: @publication.id  %>
-    <%= f.submit class: 'btn btn-default'%>
-    <% end %>
-  <% end %>
+
 </div>
 
 
