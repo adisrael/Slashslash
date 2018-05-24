@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # devise
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -7,12 +6,10 @@ Rails.application.routes.draw do
   }
 
   # vote comments
-  post 'vote_comment/create', as: 'vote_comments'
+  resources :vote_comments
 
   # vote publications
   resources :votes
-  # post 'vote', as: 'votes', to: 'vote#create'
-  # delete 'vote/:id', to: 'vote#destroy'
 
   # moderators
   post 'moderate/request', to: 'requests#apply'
