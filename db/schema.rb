@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20180511222933) do
   create_table "vote_comments", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "comment_id"
+    t.boolean "positive"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["comment_id"], name: "index_vote_comments_on_comment_id"

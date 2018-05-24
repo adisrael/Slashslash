@@ -26,6 +26,8 @@ class VotesController < ApplicationController
     end
   end
 
+  private
+
   def balance
     publication = @vote.publication
     inverse = Vote.where(user_id: @vote.user_id,
@@ -37,8 +39,6 @@ class VotesController < ApplicationController
     end
     publication
   end
-
-  private
 
   def vote_params
     params.require(:vote).permit(:user_id, :publication_id, :positive)
