@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   post 'vote_comment/create', as: 'vote_comments'
 
   # vote publications
-  post 'vote', as: 'votes', to: 'vote#create'
-  delete 'vote', to: 'vote#destroy'
+  resources :votes
+  # post 'vote', as: 'votes', to: 'vote#create'
+  # delete 'vote/:id', to: 'vote#destroy'
 
   # moderators
   post 'moderate/request', to: 'requests#apply'

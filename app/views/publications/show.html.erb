@@ -30,19 +30,23 @@
 
 </p>
 <% if (user_signed_in?) %>
-<% vote = Vote.where(user_id: current_user.id, publication_id: @publication.id).take %>
-  <% if vote.nil? %>
-    <%= form_for @vote do |f| %>
-    <%= f.hidden_field :user_id, value: current_user.id  %>
-    <%= f.hidden_field :publication_id, value: @publication.id  %>
-    <%= f.submit value: "UpVote", class: 'btn btn-primary' %>
-    <% end %>
-  <% else %>
-    <%= form_for vote, method: :delete do |f| %>
-    <%= f.hidden_field :vote_id, value: vote.id  %>
-    <%= f.submit 'asdf', value: "DownVote", class: 'btn btn-primary' %>
-    <% end %>
+<%# vote = Vote.where(user_id: current_user.id, publication_id: @publication.id).take %>
+  <%# if vote.nil? %>
+  <%= form_for @vote do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id  %>
+  <%= f.hidden_field :publication_id, value: @publication.id  %>
+  <%= f.hidden_field :positive, value: true  %>
+  <%= f.submit "\u{2b06}", value: "\u{2b06}", class: 'btn btn-primary' %>
   <% end %>
+  <%# else %>
+  <%= form_for @vote do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id  %>
+  <%= f.hidden_field :publication_id, value: @publication.id  %>
+  <%= f.hidden_field :positive, value: false  %>
+  <%= f.submit "\u{2b07}", value: "\u{2b07}", class: 'btn btn-primary' %>
+  <% end %>
+
+  <%# end %>
 <% end %>
 
 

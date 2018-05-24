@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 20180511222933) do
   create_table "votes", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "publication_id"
+    t.boolean "positive"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["publication_id"], name: "index_votes_on_publication_id"
