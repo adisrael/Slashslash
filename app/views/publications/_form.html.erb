@@ -19,10 +19,10 @@
     <%= form.label :content %>
     <%= form.text_area :content, id: :publication_content %>
   </div>
-
+  <% if @publication.new_record? %>
     <%= form.hidden_field :user_id, id: :publication_user_id, value: current_user.id %>
     <%= form.hidden_field :forum_id, id: :publication_forum_id, value: @forum_id %>
-
+  <% end %>
   <div class="actions">
     <%= form.submit %>
   </div>
