@@ -1,28 +1,6 @@
 # frozen_string_literal: true
 
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: %i[show edit update destroy]
-
-  # GET /subscriptions
-  # GET /subscriptions.json
-  def index
-    @subscriptions = Subscription.all
-  end
-
-  # GET /subscriptions/1
-  # GET /subscriptions/1.json
-  def show; end
-
-  # GET /subscriptions/new
-  def new
-    @subscription = Subscription.new
-  end
-
-  # GET /subscriptions/1/edit
-  def edit; end
-
-  # POST /subscriptions
-  # POST /subscriptions.json
   def create
     @subscription = Subscription.new(subscription_params)
 
@@ -36,26 +14,6 @@ class SubscriptionsController < ApplicationController
         format.html { render :new }
         format.json do
           render json: @subscription.errors, status: :unprocessable_entity
-        end
-      end
-    end
-  end
-
-  # PATCH/PUT /subscriptions/1
-  # PATCH/PUT /subscriptions/1.json
-  def update
-    respond_to do |format|
-      if @subscription.update(subscription_params)
-        format.html do
-          redirect_to @subscription, \
-                      notice: 'Subscription was successfully updated.'
-        end
-        format.json { render :show, status: :ok, location: @subscription }
-      else
-        format.html { render :edit }
-        format.json do
-          render json: @subscription.errors,\
-                 status: :unprocessable_entity
         end
       end
     end
