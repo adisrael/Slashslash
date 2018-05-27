@@ -13,6 +13,7 @@ class PublicationsController < ApplicationController
   # GET /publications/1.json
   def show
     @comment = Comment.new
+    @favorite = Favorite.new
     @vote = Vote.new
     @vote_comment = VoteComment.new
   end

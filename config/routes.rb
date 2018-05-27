@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :publications
   resources :comments
   resources :subscriptions
+  resources :favorites
   resources :forums
   resources :users
 

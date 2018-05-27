@@ -29,6 +29,11 @@
     </p>
 
     <% if (user_signed_in?) %>
+    <%= form_for @favorite do |f| %>
+    <%= f.hidden_field :publication_id, value: @publication.id  %>
+    <%= f.hidden_field :user_id, value: current_user.id  %>
+    <%= f.submit 'Star' %>
+    <% end  %>
       <div class="arrows">
         <%= form_for @vote do |f| %>
         <%= f.hidden_field :user_id, value: current_user.id  %>
