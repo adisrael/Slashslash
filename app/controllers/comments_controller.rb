@@ -66,10 +66,11 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    publication = @comment.publication
     @comment.destroy
     respond_to do |format|
       format.html do
-        redirect_to comments_url, notice: 'Comment was successfully destroyed.'
+        redirect_to publication, notice: 'Comment was successfully deleted.'
       end
       format.json { head :no_content }
     end

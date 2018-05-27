@@ -4,6 +4,8 @@ module PublicationsHelper
       return true
     elsif user.moderated_forums.include?(publication.forum)
       return true
+    elsif publication.user == user
+      return true
     end
     false
   end

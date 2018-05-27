@@ -52,6 +52,9 @@
         <p><strong><%= link_to comment.user.userName, comment.user %>:</strong> <%= comment.content %> </p>
         <p>Votes: <%= comment.votos %> </p>
           <% if (user_signed_in?) %>
+            <% if check_credentials current_user, @publication %>
+              <%= link_to 'Delete', comment, method: :delete %>
+            <% end %>
             <div class="arrows">
               <%= form_for @vote_comment do |f| %>
               <%= f.hidden_field :user_id, value: current_user.id  %>
