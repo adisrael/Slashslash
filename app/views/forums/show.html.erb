@@ -9,6 +9,19 @@
     <p><%= @forum.description %></p>
     <% if user_signed_in? %>
       <%= link_to 'New Publication', new_forum_publication_path %>
+      <% if current_user.forums.include?(@forum) %>
+        <%= form_for @subscription, method: :delete do |f| %>
+        <%= f.hidden_field :forum_id, value: @forum.id  %>
+        <%= f.hidden_field :user_id, value: current_user.id  %>
+        <%= f.submit 'Unsubscribe' %>
+        <% end %>
+      <% else %>
+        <%= form_for @subscription do |f| %>
+        <%= f.hidden_field :forum_id, value: @forum.id  %>
+        <%= f.hidden_field :user_id, value: current_user.id  %>
+        <%= f.submit 'Subscribe' %>
+        <% end  %>
+      <% end %>
       <% if current_user.role.zero? %>
         | <%= link_to 'Edit', edit_forum_path(@forum) %> |
         <%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |

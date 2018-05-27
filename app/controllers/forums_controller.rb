@@ -11,7 +11,14 @@ class ForumsController < ApplicationController
 
   # GET /forums/1
   # GET /forums/1.json
-  def show; end
+  def show
+    current = Subscription.where(forum: @forum, user: current_user).take
+    @subscription = if current.nil?
+                      Subscription.new
+                    else
+                      current
+                    end
+  end
 
   # GET /forums/new
   def new

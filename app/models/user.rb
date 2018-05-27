@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :vote_comments, dependent: :destroy
   has_many :moderators, dependent: :destroy
   has_many :moderated_forums, through: :moderators, source: :forum
+  has_many :forums, through: :subscriptions
 
   before_create :default_role
   before_create :default_reputation

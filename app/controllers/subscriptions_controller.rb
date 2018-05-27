@@ -29,8 +29,7 @@ class SubscriptionsController < ApplicationController
     respond_to do |format|
       if @subscription.save
         format.html do
-          redirect_to @subscription, \
-                      notice: 'Subscription was successfully created.'
+          redirect_to @subscription.forum, notice: 'Subscribed'
         end
         format.json { render :show, status: :created, location: @subscription }
       else
@@ -65,11 +64,12 @@ class SubscriptionsController < ApplicationController
   # DELETE /subscriptions/1
   # DELETE /subscriptions/1.json
   def destroy
-    @subscription.destroy
+    subscription = Subscription.where(subscription_params).take
+    forum = subscription.forum
+    subscription.destroy
     respond_to do |format|
       format.html do
-        redirect_to subscriptions_url,\
-                    notice: 'Subscription was successfully destroyed.'
+        redirect_to forum, notice: 'Unsubscribed'
       end
       format.json { head :no_content }
     end
