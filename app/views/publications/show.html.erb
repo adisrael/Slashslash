@@ -29,10 +29,20 @@
     </p>
 
     <% if (user_signed_in?) %>
-    <%= form_for @favorite do |f| %>
-    <%= f.hidden_field :publication_id, value: @publication.id  %>
-    <%= f.hidden_field :user_id, value: current_user.id  %>
-    <%= f.submit 'Star' %>
+    <% puts 'here2' %>
+    <% puts current_user.favorite_publications %>
+    <% if current_user.favorite_publications.include?(@publication) %>
+      <%= form_for @favorite, method: :delete do |f| %>
+      <%= f.hidden_field :publication_id, value: @publication.id  %>
+      <%= f.hidden_field :user_id, value: current_user.id  %>
+      <%= f.submit 'Unstar' %>
+      <% end  %>
+    <% else %>
+      <%= form_for @favorite do |f| %>
+      <%= f.hidden_field :publication_id, value: @publication.id  %>
+      <%= f.hidden_field :user_id, value: current_user.id  %>
+      <%= f.submit 'Star' %>
+      <% end  %>
     <% end  %>
       <div class="arrows">
         <%= form_for @vote do |f| %>

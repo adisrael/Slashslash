@@ -119,6 +119,8 @@ ActiveRecord::Schema.define(version: 20180527223836) do
 
   add_foreign_key "comments", "publications"
   add_foreign_key "comments", "users"
+  add_foreign_key "favorites", "publications"
+  add_foreign_key "favorites", "users"
   add_foreign_key "moderators", "forums"
   add_foreign_key "moderators", "users"
   add_foreign_key "publications", "forums"

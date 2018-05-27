@@ -11,7 +11,8 @@ class User < ApplicationRecord
   has_many :moderators, dependent: :destroy
   has_many :moderated_forums, through: :moderators, source: :forum
   has_many :forums, through: :subscriptions
-  has_many :favorite_publications, through: :favorites, source: :publications
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_publications, through: :favorites, source: :publication
 
   before_create :default_role
   before_create :default_reputation

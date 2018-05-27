@@ -19,7 +19,17 @@ class FavoritesController < ApplicationController
 
   # DELETE /favorites/1
   # DELETE /favorites/1.json
-  def destroy; end
+  def destroy
+    favorite = Favorite.where(favorite_params).take
+    publication = favorite.publication
+    favorite.destroy
+    respond_to do |format|
+      format.html do
+        redirect_to publication, notice: 'Unstarred'
+      end
+      format.json { head :no_content }
+    end
+  end
 
   private
 

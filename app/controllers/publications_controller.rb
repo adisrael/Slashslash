@@ -13,9 +13,14 @@ class PublicationsController < ApplicationController
   # GET /publications/1.json
   def show
     @comment = Comment.new
-    @favorite = Favorite.new
     @vote = Vote.new
     @vote_comment = VoteComment.new
+    current = Favorite.where(publication: @publication, user: current_user).take
+    @favorite = if current.nil?
+                  Favorite.new
+                else
+                  current
+                end
   end
 
   # GET /publications/new
