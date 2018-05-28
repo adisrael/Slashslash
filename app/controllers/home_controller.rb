@@ -4,6 +4,7 @@ class HomeController < ApplicationController
   def index
     @top_forums = Forum.order(:votos).reverse_order.take(3)
     @top_publications = Publication.order(:votos).reverse_order.take(3)
+    @users = User.search(params[:search_user])
   end
 
   def search_forum
@@ -11,7 +12,7 @@ class HomeController < ApplicationController
     @forums = Forum.search(params[:search_forum]).order(:votos).reverse_order
     respond_to do |format|
       format.html do
-        render 'index'
+        render 'search_forum'
       end
     end
   end
@@ -21,7 +22,7 @@ class HomeController < ApplicationController
     @publications = Publication.search(params[:search_publication])
     respond_to do |format|
       format.html do
-        render 'index'
+        render 'search_publication'
       end
     end
   end
@@ -31,7 +32,7 @@ class HomeController < ApplicationController
     @users = User.search(params[:search_user])
     respond_to do |format|
       format.html do
-        render 'index'
+        render 'search_user'
       end
     end
   end

@@ -1,0 +1,25 @@
+<div class="row search">
+  <div class="search-form well">
+    <h1>Search Forums</h1>
+    <%= form_tag(search_forum_path, :method => "get", id: "search-forum") do %>
+    <%= text_field_tag :search_forum, params[:search_forum], placeholder: "Search Forums" %>
+    <%= submit_tag "Search", name: nil, class: 'btn-primary' %>
+    <% end %>
+    <% unless @forums.nil?  && @users.nil? %>
+      <% if user_signed_in? && current_user.role.zero? %>
+        <%= link_to 'New Forum', new_forum_path %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<% @forums.each do |forum| %>
+<div class="row search">
+  <div class="search-result well">
+    <h3><%= link_to forum.title, forum %></h3>
+    <% pos = forum.votos>=0 %>
+    <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= forum.votos%>)</h3>
+    <h3>| <%= forum.description %></h3>
+  </div>
+</div>
+<% end %>
