@@ -71,5 +71,18 @@
   	<em> The user haven't requested to moderate any forums. </em>
   <% end %>
 </p>
+<p>
+
+<strong>Starred:</strong><br>
+</p>
+<p style="margin-left: 30px">
+  <% @user.favorite_publications.each do | publication | %>
+  <%= publication.id %>. <%= link_to publication.title, publication %><br>
+  <% end %>
+  <% if @user.favorite_publications.size == 0 %>
+  	<em> The user has no starred publications </em>
+  <% end %>
+</p>
+
 
 <%= link_to 'Back to Home', :home %>
