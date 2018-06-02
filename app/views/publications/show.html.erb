@@ -2,12 +2,9 @@
 
 <div class="row">
   <div class="col-xs-6">
-    <h1>
-      <% if @publication.votos >= 0 %>
-      +<%=@publication.votos %>
-      <% else %>
-      -<%=@publication.votos %>
-      <% end %>
+    <% pos = @publication.votos>=0 %>
+    <h1 class="votes-<%= pos ? 'green' : 'red' %> ", style="display:inline;"> (<%= pos ? '+': ''  %> <%= @publication.votos%>)
+    </h1><h1 style="display: inline-block;">
       <strong><%= @publication.title %> </strong>
     </h1>
 
