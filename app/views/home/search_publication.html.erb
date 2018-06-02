@@ -14,7 +14,7 @@
       <h3> <%= link_to publication.forum.title, publication.forum %>:  </h3>
       <h3><%= link_to publication.title, publication %></h3>
       <% pos = publication.votos>=0 %>
-      <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= publication.votos%>)</h3>
+      <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= publication.votos%>)</h3>
       <h3> - By <%= link_to publication.user.userName, publication.user  %></h3>
     </div>
   </div>
