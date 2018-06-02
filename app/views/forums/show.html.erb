@@ -4,7 +4,7 @@
   <div class="search-result well">
     <h1 style="display:inline;"> <%= @forum.title %> </h1>
     <% pos = @forum.votos>=0 %>
-    <h2 class="votes-<%= pos ? 'green' : 'red' %> ", style="display:inline;"> (<%= pos ? '+': '-'  %> <%= @forum.votos%>)</h2>
+    <h2 class="votes-<%= pos ? 'green' : 'red' %> ", style="display:inline;"> (<%= pos ? '+': ''  %> <%= @forum.votos%>)</h2>
     <p></p>
     <p><%= @forum.description %></p>
     <% if user_signed_in? %>
@@ -55,7 +55,7 @@
       <div class="search-result well">
         <h3><%= link_to publication.title, publication %></h3>
         <% pos = publication.votos>=0 %>
-        <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= publication.votos%>)</h3>
+        <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= publication.votos%>)</h3>
         <h3> - <%= link_to publication.user.userName, publication.user  %></h3>
       </div>
     </div>

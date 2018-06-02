@@ -33,7 +33,7 @@
         <div class="search-result well">
           <h4><%= link_to forum.title, forum %></h4>
           <% pos = forum.votos>=0 %>
-          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= forum.votos%>)</h4>
+          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= forum.votos%>)</h4>
           <h4>| <%= forum.description %></h4>
         </div>
       </div>
@@ -46,8 +46,21 @@
         <div class="search-result well">
           <h4><%= link_to publication.title, publication %></h4>
           <% pos = publication.votos>=0 %>
-          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= publication.votos%>)</h4>
+          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= publication.votos%>)</h4>
           <h4>| <%= publication.content %></h4>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-xs-12">
+    <h2>Top 3 Users</h2>
+    <% @top_users.each do |user| %>
+      <div class=" top-results">
+        <div class="search-result well">
+          <h4><%= link_to user.userName, user %></h4>
+          <% pos = user.reputation >=0 %>
+          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= user.reputation %>)</h4>
+          <h4>| <%= user.moderated_forums[0] %></h4>
         </div>
       </div>
     <% end %>
