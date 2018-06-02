@@ -2,7 +2,7 @@
 
 <h1>
   <% pos = @user.reputation>=0 %>
-  <span class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= @user.reputation%>)</span>
+  <span class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= @user.reputation%>)</span>
   <span><strong><%= @user.userName %></strong></span>
 
   <% if user_signed_in? && current_user == @user %>
