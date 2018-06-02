@@ -1,5 +1,8 @@
 <li>
-  <%= comment.content %>
+  <% puts 'here' %>
+  <% puts comment.content %>
+  (<%= comment.votos %>)<%= comment.content %>
+
   <div class="arrows">
     <%= form_for VoteComment.new do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id  %>
@@ -19,7 +22,8 @@
       <%= link_to 'Delete', comment, method: :delete %>
     <% end %>
   <% end %>
-  <div id="comment-<%= comment.id %>" class="reply-form hide">
+  <a class="reply-link" id="<%= comment.id %>" >Reply</a>
+  <div id="comment-<%= comment.id %>" class="hide reply-form">
     <%= form_for Comment.new do |f| %>
     <%= f.text_field :content  %>
     <%= f.hidden_field :user_id, value: current_user.id  %>

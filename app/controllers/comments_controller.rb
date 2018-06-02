@@ -24,8 +24,6 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    # @comment = Comment.new(comment_params)
-    # @comment.votos = 0
     current_user.reputation += 1
 
     if comment_params[:commentable_type] == 'publication'
