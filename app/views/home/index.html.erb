@@ -52,7 +52,7 @@
       </div>
     <% end %>
   </div>
-  <div class="col-xs-12">
+  <div class="col-xs-8 col-xs-offset-2">
     <h2>Top 3 Users</h2>
     <% @top_users.each do |user| %>
       <div class=" top-results">
@@ -60,7 +60,7 @@
           <h4><%= link_to user.userName, user %></h4>
           <% pos = user.reputation >=0 %>
           <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= user.reputation %>)</h4>
-          <h4>| <%= user.moderated_forums[0] %></h4>
+          <h4>| <%= "User Quote or forums it moderates or publications or latest comment. Rolling? " %></h4>
         </div>
       </div>
     <% end %>
