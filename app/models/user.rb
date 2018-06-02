@@ -18,7 +18,8 @@ class User < ApplicationRecord
       square: '200x200#',
       medium: '300x300>'
     }
-  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
 
   before_create :default_role
   before_create :default_reputation
@@ -43,3 +44,5 @@ class User < ApplicationRecord
     self.reputation ||= 0
   end
 end
+
+
