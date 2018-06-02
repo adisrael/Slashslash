@@ -76,6 +76,8 @@ class CommentsController < ApplicationController
   def update_votes(publication)
     publication.votos += 1
     publication.forum.votos += 1
+    publication.save
+    publication.forum.save
   end
 
   # Use callbacks to share common setup or constraints between actions.
