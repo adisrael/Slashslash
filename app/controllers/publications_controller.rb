@@ -1,4 +1,4 @@
-f# frozen_string_literal: true
+# frozen_string_literal: true
 
 class PublicationsController < ApplicationController
   before_action :set_publication, only: %i[show edit update destroy]
