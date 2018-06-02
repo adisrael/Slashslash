@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: hotvjg2pp
+  api_key: '752519814868351'
+  api_secret: AEr-P7FrsNGmf5yE4UZTzbgBe28
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: hotvjg2pp
+  api_key: '752519814868351'
+  api_secret: AEr-P7FrsNGmf5yE4UZTzbgBe28
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: hotvjg2pp
+  api_key: '752519814868351'
+  api_secret: AEr-P7FrsNGmf5yE4UZTzbgBe28
+  enhance_image_tag: true
+  static_image_support: false
