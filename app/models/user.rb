@@ -14,6 +14,13 @@ class User < ApplicationRecord
   has_many :forums, through: :subscriptions
   has_many :favorites, dependent: :destroy
   has_many :favorite_publications, through: :favorites, source: :publication
+  has_attached_file :avatar, styles: {
+      thumb: '100x100>',
+      square: '200x200#',
+      medium: '300x300>'
+    }
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
 
   # User Avatar Validation
   validates_integrity_of  :avatar
@@ -48,3 +55,5 @@ class User < ApplicationRecord
     errors[:avatar] << 'should be less than 500KB' if avatar.size > 0.5.megabytes
   end
 end
+
+
