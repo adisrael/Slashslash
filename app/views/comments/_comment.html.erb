@@ -1,8 +1,5 @@
-<li>
-  <% puts 'here' %>
-  <% puts comment.content %>
-  (<%= comment.votos %>)<%= comment.content %>
-
+<li class="well">
+  <p><strong><%= link_to comment.user.userName, comment.user %>:</strong> <%= comment.content %> </p>
   <div class="arrows">
     <%= form_for VoteComment.new do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id  %>
@@ -16,6 +13,10 @@
     <%= f.hidden_field :positive, value: false  %>
     <%= f.submit "\u{2b07}", value: "\u{2b07}", class: 'btn btn-danger' %>
     <% end %>
+    <div class="box">
+      <strong><%= comment.votos %> </strong>
+
+    </div>
   </div>
   <% if (user_signed_in?) %>
     <% if check_credentials current_user, @publication %>
@@ -33,7 +34,7 @@
     <% end %>
   </div>
 
-  <ul>
+  <ul class="comment-list">
       <%= render partial: 'comments/comment', collection: comment.comments %>
   </ul>
 

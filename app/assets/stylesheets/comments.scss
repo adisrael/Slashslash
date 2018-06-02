@@ -13,6 +13,13 @@
 .reply-link{
 }
 
-ul {
-  border-left: 1px black solid;
+ul.comment-list {
+  border-left: 0px black solid;
+
+  list-style-type: none;
+
+}
+
+.comment-box {
+
 }
