@@ -3,9 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .arrows{
-  form {
+  form, .box {
     display: inline;
   }
+  .box {
+    border: 1px solid gray;
+    border-radius: 2px;
+    padding: 6px;
+    width: 10px;
+  }
+
 }
 
 .scroll {

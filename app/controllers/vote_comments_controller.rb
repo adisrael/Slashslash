@@ -4,7 +4,6 @@ class VoteCommentsController < ApplicationController
     result = VoteComment.where(user_id: data[:user_id],
                                comment_id: data[:comment_id],
                                positive: data[:positive]).to_a
-
     comment = Comment.find(data[:comment_id])
     respond_to do |format|
       if result.empty?
@@ -13,17 +12,23 @@ class VoteCommentsController < ApplicationController
         comment.user.reputation += 1
         if @vote_comment.save
           format.html do
-            publication = balance
+            publication = balance(comment)
             redirect_to publication, notice: 'Voted.'
           end
         else
+          root = comment
+          root = comment.commentable while root.commentable_type != 'Publication'
+          publication = root.commentable
           format.html do
             redirect_to publication, notice: 'Error ocurred'
           end
         end
       else
+        root = result[0].comment
+        root = comment.commentable while root.commentable_type != 'Publication'
+        publication = root.commentable
         format.html do
-          redirect_to result[0].comment.publication, notice: 'Max Votes Reached'
+          redirect_to publication, notice: 'Max Votes Reached'
         end
       end
     end
@@ -31,8 +36,12 @@ class VoteCommentsController < ApplicationController
 
   private
 
-  def balance
-    publication = @vote_comment.comment.publication
+  def create_vote(comment); end
+
+  def balance(comment)
+    root = comment
+    root = comment.commentable while root.commentable_type != 'Publication'
+    publication = root.commentable
     inverse = VoteComment.where(user_id: @vote_comment.user_id,
                                 comment_id: @vote_comment.comment_id,
                                 positive: !@vote_comment.positive).to_a

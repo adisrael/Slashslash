@@ -33,6 +33,11 @@ gem 'aws-sdk'
 gem 'aws-sdk-s3'
 gem 'paperclip'
 
+gem 'carrierwave'
+gem 'cloudinary'
+# gem 'fog'
+gem 'mini_magick'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
