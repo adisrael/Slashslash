@@ -4,6 +4,7 @@ class HomeController < ApplicationController
   def index
     @top_forums = Forum.order(:votos).reverse_order.take(3)
     @top_publications = Publication.order(:votos).reverse_order.take(3)
+    @top_users = User.order(:reputation).reverse_order.take(3)
     # @popular_forums = Subscription.select(:forum_id).group(:forum_id).count
   end
 

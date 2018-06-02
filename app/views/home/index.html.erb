@@ -52,6 +52,19 @@
       </div>
     <% end %>
   </div>
+  <div class="col-xs-6">
+    <h2>Top 3 Users</h2>
+    <% @top_users.each do |user| %>
+      <div class=" top-results">
+        <div class="search-result well">
+          <h4><%= link_to user.userName, user %></h4>
+          <% pos = user.reputation >=0 %>
+          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= user.reputation %>)</h4>
+          <h4>| <%= user.moderated_forums[0] %></h4>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <% if false %>
