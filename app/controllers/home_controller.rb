@@ -5,7 +5,12 @@ class HomeController < ApplicationController
     @top_forums = Forum.order(:votos).reverse_order.take(3)
     @top_publications = Publication.order(:votos).reverse_order.take(3)
     @top_users = User.order(:reputation).reverse_order.take(3)
-    # @popular_forums = Subscription.select(:forum_id).group(:forum_id).count
+    query = Subscription.select(:forum_id).group(:forum_id).count
+    top3 = top query, 3
+    @popular_forums = []
+    top3.each do |data|
+      @popular_forums << Forum.find(data[0])
+    end
   end
 
   def search_forum
@@ -36,5 +41,13 @@ class HomeController < ApplicationController
         render 'search_user'
       end
     end
+  end
+
+  private
+
+  def top(hash, number)
+    top = hash.sort_by { |_key, value| value }
+    return top[-number..-1] if top.length >= number
+    top
   end
 end
