@@ -25,7 +25,6 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     current_user.reputation += 1
-
     if comment_params[:commentable_type] == 'publication'
       publication = Publication.find(comment_params[:commentable_id])
       if publication.comments.create(comment_params)
@@ -38,8 +37,7 @@ class CommentsController < ApplicationController
       publication = root.commentable
       redirect_to publication, notice: 'Comment added' if comment.comments.create(comment_params)
     end
-    publication.votos += 1
-    publication.forum.votos += 1
+    update_votes(publication)
   end
 
   # PATCH/PUT /comments/1
@@ -74,6 +72,11 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def update_votes(publication)
+    publication.votos += 1
+    publication.forum.votos += 1
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_comment

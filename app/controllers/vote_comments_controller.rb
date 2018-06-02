@@ -4,26 +4,10 @@ class VoteCommentsController < ApplicationController
     result = VoteComment.where(user_id: data[:user_id],
                                comment_id: data[:comment_id],
                                positive: data[:positive]).to_a
-
     comment = Comment.find(data[:comment_id])
     respond_to do |format|
       if result.empty?
-        @vote_comment = VoteComment.new(data)
-        comment.votos += 1
-        comment.user.reputation += 1
-        if @vote_comment.save
-          format.html do
-            publication = balance(comment)
-            redirect_to publication, notice: 'Voted.'
-          end
-        else
-          root = comment
-          root = comment.commentable while root.commentable_type != 'Publication'
-          publication = root.commentable
-          format.html do
-            redirect_to publication, notice: 'Error ocurred'
-          end
-        end
+        create_vote(comment)
       else
         root = result[0].comment
         root = comment.commentable while root.commentable_type != 'Publication'
@@ -36,6 +20,25 @@ class VoteCommentsController < ApplicationController
   end
 
   private
+
+  def create_vote(comment)
+    @vote_comment = VoteComment.new(data)
+    comment.votos += 1
+    comment.user.reputation += 1
+    if @vote_comment.save
+      format.html do
+        publication = balance(comment)
+        redirect_to publication, notice: 'Voted.'
+      end
+    else
+      root = comment
+      root = comment.commentable while root.commentable_type != 'Publication'
+      publication = root.commentable
+      format.html do
+        redirect_to publication, notice: 'Error ocurred'
+      end
+    end
+  end
 
   def balance(comment)
     root = comment
