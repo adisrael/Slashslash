@@ -26,38 +26,22 @@ class CommentsController < ApplicationController
   def create
     # @comment = Comment.new(comment_params)
     # @comment.votos = 0
+    current_user.reputation += 1
+
     if comment_params[:commentable_type] == 'publication'
       publication = Publication.find(comment_params[:commentable_id])
       if publication.comments.create(comment_params)
         redirect_to publication, notice: 'Comment added'
-        return
       end
     elsif comment_params[:commentable_type] == 'comment'
       comment = Comment.find(comment_params[:commentable_id])
       root = comment
       root = comment.commentable while root.commentable_type != 'Publication'
-      if comment.comments.create(comment_params)
-        redirect_to root.commentable, notice: 'Comment added'
-        return
-      end
+      publication = root.commentable
+      redirect_to publication, notice: 'Comment added' if comment.comments.create(comment_params)
     end
-    # @comment = publication.comments.new
-    # current_user.reputation += 1
-    # publication.votos += 1
-    # publication.forum.votos += 1
-    respond_to do |format|
-      if @comment.save && current_user.save && publication.save && publication.forum.save
-        format.html do
-          redirect_to publication, notice: 'Comment was successfully created.'
-        end
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new }
-        format.json do
-          render json: @comment.errors, status: :unprocessable_entity
-        end
-      end
-    end
+    publication.votos += 1
+    publication.forum.votos += 1
   end
 
   # PATCH/PUT /comments/1

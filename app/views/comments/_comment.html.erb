@@ -1,12 +1,33 @@
 <li>
-  <%= comment.content %> -
-  <%= form_for Comment.new do |f| %>
-  <%= f.text_field :content  %>
-  <%= f.hidden_field :user_id, value: current_user.id  %>
-  <%= f.hidden_field :commentable_type, value: 'comment'  %>
-  <%= f.hidden_field :commentable_id, value: comment.id  %>
-  <%= f.submit class: 'btn btn-default'%>
+  <%= comment.content %>
+  <div class="arrows">
+    <%= form_for VoteComment.new do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id  %>
+    <%= f.hidden_field :comment_id, value: comment.id  %>
+    <%= f.hidden_field :positive, value: true  %>
+    <%= f.submit "\u{2b06}", value: "\u{2b06}", class: 'btn btn-success' %>
+    <% end %>
+    <%= form_for VoteComment.new do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id  %>
+    <%= f.hidden_field :comment_id, value: comment.id  %>
+    <%= f.hidden_field :positive, value: false  %>
+    <%= f.submit "\u{2b07}", value: "\u{2b07}", class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+  <% if (user_signed_in?) %>
+    <% if check_credentials current_user, @publication %>
+      <%= link_to 'Delete', comment, method: :delete %>
+    <% end %>
   <% end %>
+  <div id="comment-<%= comment.id %>" class="reply-form hide">
+    <%= form_for Comment.new do |f| %>
+    <%= f.text_field :content  %>
+    <%= f.hidden_field :user_id, value: current_user.id  %>
+    <%= f.hidden_field :commentable_type, value: 'comment'  %>
+    <%= f.hidden_field :commentable_id, value: comment.id  %>
+    <%= f.submit class: 'btn btn-default'%>
+    <% end %>
+  </div>
 
   <ul>
       <%= render partial: 'comments/comment', collection: comment.comments %>
