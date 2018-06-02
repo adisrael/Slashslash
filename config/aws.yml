@@ -1,0 +1,7 @@
+development:
+  access_key_id: AKIAIOD5NLDEYIY6QKFQ
+  secret_access_key: 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
+
+production:
+  access_key_id: AKIAIOD5NLDEYIY6QKFQ
+  secret_access_key: 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

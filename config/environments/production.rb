@@ -89,4 +89,21 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.default_url_options = { host: 'proyecto-software-grupo29.herokuapp.com' }
+
+  # config.paperclip_defaults = {
+  #   :storage => :s3,
+  #   :preserve_files => true,
+  #   #:s3_host_name => 'REMOVE_THIS_LINE_IF_UNNECESSARY',
+  #   :bucket => 'software29'
+  # }
+
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: {
+      bucket: ENV.fetch('S3_BUCKET_NAME'),
+      access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
+      secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
+      s3_region: ENV.fetch('AWS_REGION'),
+    }
+  }
 end

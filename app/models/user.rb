@@ -13,6 +13,12 @@ class User < ApplicationRecord
   has_many :forums, through: :subscriptions
   has_many :favorites, dependent: :destroy
   has_many :favorite_publications, through: :favorites, source: :publication
+  has_attached_file :avatar, styles: {
+      thumb: '100x100>',
+      square: '200x200#',
+      medium: '300x300>'
+    }
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   before_create :default_role
   before_create :default_reputation
