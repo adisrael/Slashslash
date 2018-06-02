@@ -1,7 +1,7 @@
 <% provide(:title, @publication.title) %>
 
 <div class="row">
-  <div class="col-xs-6">
+  <div class="col-xs-12">
     <% pos = @publication.votos>=0 %>
     <h1 class="votes-<%= pos ? 'green' : 'red' %> ", style="display:inline;"> (<%= pos ? '+': ''  %> <%= @publication.votos%>)
     </h1><h1 style="display: inline-block;">
@@ -26,8 +26,6 @@
     </p>
 
     <% if (user_signed_in?) %>
-    <% puts 'here2' %>
-    <% puts current_user.favorite_publications %>
     <% if current_user.favorite_publications.include?(@publication) %>
       <%= form_for @favorite, method: :delete do |f| %>
       <%= f.hidden_field :publication_id, value: @publication.id  %>
@@ -58,51 +56,23 @@
       </div>
     <% end %>
   </div>
-  <div id="right" class="col-xs-6">
-    <div class="scroll">
-      <% @publication.comments.each do |comment| %>
-        <p><strong><%= link_to comment.user.userName, comment.user %>:</strong> <%= comment.content %> </p>
-        <p>Votes: <%= comment.votos %> </p>
-          <% if (user_signed_in?) %>
-            <% if check_credentials current_user, @publication %>
-              <%= link_to 'Delete', comment, method: :delete %>
-            <% end %>
-            <div class="arrows">
-              <%= form_for @vote_comment do |f| %>
-              <%= f.hidden_field :user_id, value: current_user.id  %>
-              <%= f.hidden_field :comment_id, value: comment.id  %>
-              <%= f.hidden_field :positive, value: true  %>
-              <%= f.submit "\u{2b06}", value: "\u{2b06}", class: 'btn btn-success' %>
-              <% end %>
-              <%= form_for @vote_comment do |f| %>
-              <%= f.hidden_field :user_id, value: current_user.id  %>
-              <%= f.hidden_field :comment_id, value: comment.id  %>
-              <%= f.hidden_field :positive, value: false  %>
-              <%= f.submit "\u{2b07}", value: "\u{2b07}", class: 'btn btn-danger' %>
-              <% end %>
-            </div>
-          <% end %>
-      <% end %>
-    </div>
+  <div class="col-xs-12">
+    <h3>Comment Section</h3>
+    <ul class="comment-list">
+      <%= render(partial: 'comments/comment', collection: @publication.comments) %>
+    </ul>
+  </div>
 
     <% if (user_signed_in?) %>
       <%= form_for @comment do |f| %>
       <%= f.text_field :content  %>
       <%= f.hidden_field :user_id, value: current_user.id  %>
-      <%= f.hidden_field :publication_id, value: @publication.id  %>
+      <%= f.hidden_field :commentable_type, value: 'publication'  %>
+      <%= f.hidden_field :commentable_id, value: @publication.id  %>
       <%= f.submit class: 'btn btn-default'%>
       <% end %>
     <% end %>
-  </div>
 </div>
-
-
-
-<div class="container">
-
-</div>
-
-
 
 </p>
 <% if user_signed_in? %>
@@ -114,3 +84,18 @@
   <% end %>
 <% end %>
 <%= link_to 'Back', @publication.forum %>
+<script type="text/javascript">
+$(document).ready(()=>{
+  $('.reply-link').click(function(){
+    const id = this.id;
+    $('.reply-form').each(function(index,element){
+      $(element).addClass('hide')
+      $(element).removeClass('show')
+    })
+    $(`#comment-${id}`).addClass('show')
+    $(`#comment-${id}`).removeClass('hide')
+
+  })
+})
+
+</script>
