@@ -1,5 +1,3 @@
-
-
 <div class="row search">
   <div class="search-form well">
     <h1>Search Forums</h1>
@@ -52,7 +50,10 @@
       </div>
     <% end %>
   </div>
-  <div class="col-xs-8 col-xs-offset-2">
+</div>
+
+<div class="row top">
+  <div class="col-xs-6">
     <h2>Top 3 Users</h2>
     <% @top_users.each do |user| %>
       <div class=" top-results">
@@ -60,17 +61,14 @@
           <h4><%= link_to user.userName, user %></h4>
           <% pos = user.reputation >=0 %>
           <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= user.reputation %>)</h4>
-          <h4>| <%= "User Quote or forums it moderates or publications or latest comment. Rolling? " %></h4>
+          <h4>| <%= user.moderated_forums[0] %></h4>
         </div>
       </div>
     <% end %>
   </div>
-</div>
-
-<% if false %>
-<!-- <div class="row">
   <div class="col-xs-6">
-    <%# @popular_forums.each do |forum| %>
+    <h2>Most Popular Forums</h2>
+    <% @popular_forums.each do |forum| %>
       <div class=" top-results">
         <div class="search-result well">
           <h4><%= link_to forum.title, forum %></h4>
@@ -79,7 +77,6 @@
           <h4>| <%= forum.description %></h4>
         </div>
       </div>
-    <%# end %>
+    <% end %>
   </div>
-</div> -->
-<% end %>
+</div>
