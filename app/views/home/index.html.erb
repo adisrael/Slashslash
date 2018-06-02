@@ -59,7 +59,7 @@
         <div class="search-result well">
           <h4><%= link_to user.userName, user %></h4>
           <% pos = user.reputation >=0 %>
-          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= user.reputation %>)</h4>
+          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= user.reputation %>)</h4>
           <h4>| <%= user.moderated_forums[0] %></h4>
         </div>
       </div>
