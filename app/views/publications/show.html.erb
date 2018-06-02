@@ -26,8 +26,6 @@
     </p>
 
     <% if (user_signed_in?) %>
-    <% puts 'here2' %>
-    <% puts current_user.favorite_publications %>
     <% if current_user.favorite_publications.include?(@publication) %>
       <%= form_for @favorite, method: :delete do |f| %>
       <%= f.hidden_field :publication_id, value: @publication.id  %>
@@ -61,12 +59,12 @@
   <div id="right" class="col-xs-6">
     <div class="scroll">
       <% @publication.comments.each do |comment| %>
-        <p><strong><%= link_to comment.user.userName, comment.user %>:</strong> <%= comment.content %> </p>
-        <p>Votes: <%= comment.votos %> </p>
+
           <% if (user_signed_in?) %>
             <% if check_credentials current_user, @publication %>
               <%= link_to 'Delete', comment, method: :delete %>
             <% end %>
+            
             <div class="arrows">
               <%= form_for @vote_comment do |f| %>
               <%= f.hidden_field :user_id, value: current_user.id  %>
@@ -89,7 +87,8 @@
       <%= form_for @comment do |f| %>
       <%= f.text_field :content  %>
       <%= f.hidden_field :user_id, value: current_user.id  %>
-      <%= f.hidden_field :publication_id, value: @publication.id  %>
+      <%= f.hidden_field :commentable_type, value: 'publication'  %>
+      <%= f.hidden_field :commentable_id, value: @publication.id  %>
       <%= f.submit class: 'btn btn-default'%>
       <% end %>
     <% end %>
@@ -114,3 +113,7 @@
   <% end %>
 <% end %>
 <%= link_to 'Back', @publication.forum %>
+
+<ul>
+  <%= render(partial: 'comments/comment', collection: @publication.comments) %>
+</ul>

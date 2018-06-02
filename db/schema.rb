@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 20180527223836) do
   create_table "comments", force: :cascade do |t|
     t.string "content"
     t.integer "votos"
+    t.integer "commentable_id"
+    t.string "commentable_type"
     t.bigint "user_id"
-    t.bigint "publication_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["publication_id"], name: "index_comments_on_publication_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -117,7 +117,6 @@ ActiveRecord::Schema.define(version: 20180527223836) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
-  add_foreign_key "comments", "publications"
   add_foreign_key "comments", "users"
   add_foreign_key "favorites", "publications"
   add_foreign_key "favorites", "users"

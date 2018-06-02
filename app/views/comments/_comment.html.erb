@@ -1,0 +1,15 @@
+<li>
+  <%= comment.content %> -
+  <%= form_for Comment.new do |f| %>
+  <%= f.text_field :content  %>
+  <%= f.hidden_field :user_id, value: current_user.id  %>
+  <%= f.hidden_field :commentable_type, value: 'comment'  %>
+  <%= f.hidden_field :commentable_id, value: comment.id  %>
+  <%= f.submit class: 'btn btn-default'%>
+  <% end %>
+
+  <ul>
+      <%= render partial: 'comments/comment', collection: comment.comments %>
+  </ul>
+
+</li>
