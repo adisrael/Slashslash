@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>
+  <% if @user.avatar.thumb.url%>
+    <%= image_tag(@user.avatar.thumb.url)%>
+  <% end %>
   <% pos = @user.reputation>=0 %>
   <span class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= @user.reputation%>)</span>
   <span><strong><%= @user.userName %></strong></span>
