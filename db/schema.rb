@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20180602230614) do
     t.string "lastName"
     t.integer "role"
     t.integer "reputation"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
@@ -93,7 +94,6 @@ ActiveRecord::Schema.define(version: 20180602230614) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.json "avatar"
     t.string "avatar_file_name"
     t.string "avatar_content_type"
     t.integer "avatar_file_size"

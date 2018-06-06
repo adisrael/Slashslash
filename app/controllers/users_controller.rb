@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update destroy upload]
 
   # GET /users
   # GET /users.json
@@ -68,6 +68,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def upload
+    uploaded_io = params[:picture]
+    path = uploaded_io.tempfile.path
+    save_screenshot_to_s3(path, 'folder', 1)
+    redirect_to @user
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -77,7 +84,16 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:userName, :firstName, :lastName, :role, :avatar)
+    params.require(:user).permit(:userName, :firstName, :lastName, :role, :avatar, :picture)
+  end
 
+  def save_screenshot_to_s3(image_location, folder_name, _user_id)
+    s3 = Aws::S3::Resource.new(region: 'sa-east-1')
+    bucket_name = 'slash-bucket'
+    key = folder_name.to_s + '/' + File.basename(image_location)
+    object = s3.bucket(bucket_name).object(key)
+    object.upload_file(image_location)
+    @user.image = object.public_url.to_s
+    @user.save
   end
 end

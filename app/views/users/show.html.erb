@@ -1,7 +1,12 @@
 <p id="notice"><%= notice %></p>
-
+<% if @user.image %>
+<div class="profile-pic" style="background-image: url(<%= @user.image %>)">
+</div>
+<% else %>
+<div class="profile-pic">
+</div>
+<% end %>
 <h1>
-
   <% pos = @user.reputation>=0 %>
   <span class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= @user.reputation%>)</span>
   <span><strong><%= @user.userName %></strong></span>
@@ -15,9 +20,14 @@
   <% if @user.role.zero? %>
   <i style="font-size:20px">(admin)</i>
   <% end %>
-
 </h1>
-<%= image_tag @user.avatar.url(:square) %>
+<% if @user == current_user %>
+  <%= form_tag("/upload/#{@user.id}", multipart: true) do %>
+    <%= file_field_tag :picture %>
+    <%= submit_tag 'Submit' %>
+  <% end %>
+<% end %>
+
 
 <p>
 <strong>Publications:</strong><br>

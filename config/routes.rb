@@ -24,7 +24,10 @@ Rails.application.routes.draw do
   resources :subscriptions
   resources :favorites
   resources :forums
+
+  # users
   resources :users
+  post '/upload/:id', to: 'users#upload'
 
   # forums
   get '/forums/:id/new_publication', to: 'forums#new_publication', as: 'new_forum_publication'
