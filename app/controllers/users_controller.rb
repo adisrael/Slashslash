@@ -88,7 +88,7 @@ class UsersController < ApplicationController
   end
 
   def save_screenshot_to_s3(image_location, folder_name, _user_id)
-    s3 = Aws::S3::Resource.new(region: 'sa-east-1', access_key_id: ENV['ACCESS_KEY_ID'], secret_access_key: ENV['SECRET_ACCESS_KEY'])
+    s3 = Aws::S3::Resource.new(region: 'sa-east-1')
     bucket_name = 'slash-bucket'
     key = folder_name.to_s + '/' + File.basename(image_location)
     object = s3.bucket(bucket_name).object(key)

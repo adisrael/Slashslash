@@ -21,10 +21,11 @@
   <i style="font-size:20px">(admin)</i>
   <% end %>
 </h1>
-
-<%= form_tag("/upload/#{@user.id}", multipart: true) do %>
-  <%= file_field_tag :picture %>
-  <%= submit_tag 'Submit' %>
+<% if @user == current_user %>
+  <%= form_tag("/upload/#{@user.id}", multipart: true) do %>
+    <%= file_field_tag :picture %>
+    <%= submit_tag 'Submit' %>
+  <% end %>
 <% end %>
 
 
