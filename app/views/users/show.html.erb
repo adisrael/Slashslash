@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
+<div class="profile-pic">
 
+</div>
 <h1>
-
   <% pos = @user.reputation>=0 %>
   <span class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= @user.reputation%>)</span>
   <span><strong><%= @user.userName %></strong></span>
@@ -15,7 +16,6 @@
   <% if @user.role.zero? %>
   <i style="font-size:20px">(admin)</i>
   <% end %>
-
 </h1>
 
 <h3>upload image</h3>
