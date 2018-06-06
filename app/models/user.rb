@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  mount_uploader :avatar, AvatarUploader
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -14,17 +13,6 @@ class User < ApplicationRecord
   has_many :forums, through: :subscriptions
   has_many :favorites, dependent: :destroy
   has_many :favorite_publications, through: :favorites, source: :publication
-  has_attached_file :avatar, styles: {
-      thumb: '100x100>',
-      square: '200x200#',
-      medium: '300x300>'
-    }
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
-
-
-  # User Avatar Validation
-  validates_integrity_of  :avatar
-  validates_processing_of :avatar
 
   before_create :default_role
   before_create :default_reputation
@@ -48,12 +36,4 @@ class User < ApplicationRecord
   def default_reputation
     self.reputation ||= 0
   end
-
-  private
-
-  def avatar_size_validation
-    errors[:avatar] << 'should be less than 500KB' if avatar.size > 0.5.megabytes
-  end
 end
-
-

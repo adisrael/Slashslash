@@ -17,7 +17,6 @@
   <% end %>
 
 </h1>
-<%= image_tag @user.avatar.url(:square) %>
 
 <h3>upload image</h3>
 <%= form_tag({action: :upload}, multipart: true) do %>
