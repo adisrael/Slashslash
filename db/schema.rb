@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20180602230614) do
     t.string "lastName"
     t.integer "role"
     t.integer "reputation"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false

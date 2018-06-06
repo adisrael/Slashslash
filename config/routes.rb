@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   # users
   resources :users
-  post '/upload', to: 'users#upload'
+  post '/upload/:id', to: 'users#upload'
 
   # forums
   get '/forums/:id/new_publication', to: 'forums#new_publication', as: 'new_forum_publication'

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update destroy upload]
 
   # GET /users
   # GET /users.json
@@ -71,13 +71,8 @@ class UsersController < ApplicationController
   def upload
     uploaded_io = params[:picture]
     path = uploaded_io.tempfile.path
-    # path = Rails.root.join('public', 'uploads', uploaded_io.original_filename)
-    # File.open(path, 'wb') do |file|
-    #   file.write(uploaded_io.read)
-    # end
-    # puts 'here2'
-    # puts path
     save_screenshot_to_s3(path, 'folder', 1)
+    redirect_to @user
   end
 
   private
@@ -98,10 +93,7 @@ class UsersController < ApplicationController
     key = folder_name.to_s + '/' + File.basename(image_location)
     object = s3.bucket(bucket_name).object(key)
     object.upload_file(image_location)
-    # s3_file.acl = :public_read
-    puts object.public_url.to_s
-    # user = User.where(id: user_id).first
-    # user.image = s3_file.public_url.to_s
-    # user.save
+    @user.image = object.public_url.to_s
+    @user.save
   end
 end

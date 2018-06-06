@@ -1,7 +1,11 @@
 <p id="notice"><%= notice %></p>
-<div class="profile-pic">
-
+<% if @user.image %>
+<div class="profile-pic" style="background-image: url(<%= @user.image %>)">
 </div>
+<% else %>
+<div class="profile-pic">
+</div>
+<% end %>
 <h1>
   <% pos = @user.reputation>=0 %>
   <span class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= @user.reputation%>)</span>
@@ -18,8 +22,7 @@
   <% end %>
 </h1>
 
-<h3>upload image</h3>
-<%= form_tag({action: :upload}, multipart: true) do %>
+<%= form_tag("/upload/#{@user.id}", multipart: true) do %>
   <%= file_field_tag :picture %>
   <%= submit_tag 'Submit' %>
 <% end %>
