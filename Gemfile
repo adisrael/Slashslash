@@ -27,14 +27,12 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
-gem 'devise'
 gem 'aws-sdk'
-gem 'aws-sdk-s3'
-gem 'paperclip'
-
+gem 'bcrypt', '~> 3.1.7'
 gem 'carrierwave'
 gem 'cloudinary'
+gem 'devise'
+gem 'paperclip'
 # gem 'fog'
 gem 'mini_magick'
 

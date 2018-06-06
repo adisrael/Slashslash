@@ -68,6 +68,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def upload
+    uploaded_io = params[:picture]
+    path = uploaded_io.tempfile.path
+    # path = Rails.root.join('public', 'uploads', uploaded_io.original_filename)
+    # File.open(path, 'wb') do |file|
+    #   file.write(uploaded_io.read)
+    # end
+    # puts 'here2'
+    # puts path
+    save_screenshot_to_s3(path, 'folder', 1)
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -77,7 +89,19 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:userName, :firstName, :lastName, :role, :avatar)
+    params.require(:user).permit(:userName, :firstName, :lastName, :role, :avatar, :picture)
+  end
 
+  def save_screenshot_to_s3(image_location, folder_name, _user_id)
+    s3 = Aws::S3::Resource.new(region: 'sa-east-1', access_key_id: ENV['ACCESS_KEY_ID'], secret_access_key: ENV['SECRET_ACCESS_KEY'])
+    bucket_name = 'slash-bucket'
+    key = folder_name.to_s + '/' + File.basename(image_location)
+    object = s3.bucket(bucket_name).object(key)
+    object.upload_file(image_location)
+    # s3_file.acl = :public_read
+    puts object.public_url.to_s
+    # user = User.where(id: user_id).first
+    # user.image = s3_file.public_url.to_s
+    # user.save
   end
 end
