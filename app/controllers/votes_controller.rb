@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  def create
+  def add_vote
     data = vote_params # publication_id, user_id, positive
     result = Vote.where(user_id: data[:user_id],
                         publication_id: data[:publication_id],

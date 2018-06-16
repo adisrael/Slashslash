@@ -40,18 +40,19 @@
       <% end  %>
     <% end  %>
       <div class="arrows">
-        <%= form_for @vote do |f| %>
+        <%= form_for @vote, url: votes_path, method: :post do |f| %>
         <%= f.hidden_field :user_id, value: current_user.id  %>
         <%= f.hidden_field :publication_id, value: @publication.id  %>
         <%= f.hidden_field :positive, value: true  %>
-        <%= f.submit "\u{2b06}", value: "\u{2b06}", class: 'btn btn-success' %>
+        <%= f.submit "\u{2b06}", value: "\u{2b06}", class: 'btn btn-success', disabled: @vote.new_record? ? false : @vote.positive %>
         <% end %>
-        <%# else %>
-        <%= form_for @vote do |f| %>
+        <% puts 'here' %>
+        <% puts @vote.positive.nil? %>
+        <%= form_for @vote, url: votes_path, method: :post do |f| %>
         <%= f.hidden_field :user_id, value: current_user.id  %>
         <%= f.hidden_field :publication_id, value: @publication.id  %>
         <%= f.hidden_field :positive, value: false  %>
-        <%= f.submit "\u{2b07}", value: "\u{2b07}", class: 'btn btn-danger' %>
+        <%= f.submit "\u{2b07}", value: "\u{2b07}", class: 'btn btn-danger', disabled: @vote.new_record? ? false : !@vote.positive %>
         <% end %>
       </div>
     <% end %>
