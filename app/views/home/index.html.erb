@@ -76,6 +76,7 @@
           <% pos = forum.votos>=0 %>
           <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= forum.votos%>)</h4>
           <h4>| <%= forum.description %></h4>
+          <h4>| <%= forum.subscriptors %></h4>
         </div>
       </div>
     <% end %>

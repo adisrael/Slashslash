@@ -9,7 +9,9 @@ class HomeController < ApplicationController
     top3 = top query, 3
     @popular_forums = []
     top3.each do |data|
-      @popular_forums << Forum.find(data[0])
+      forum = Forum.find(data[0])
+      forum.subscriptors = data[1]
+      @popular_forums << forum
     end
   end
 
