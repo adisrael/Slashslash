@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :vote_comments
 
   # vote publications
-  resources :votes
+  post 'votes', to: 'votes#add_vote'
 
   # moderators
   post 'moderate/request', to: 'requests#apply'

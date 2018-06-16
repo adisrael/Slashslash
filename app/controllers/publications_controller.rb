@@ -13,7 +13,13 @@ class PublicationsController < ApplicationController
   # GET /publications/1.json
   def show
     @comment = Comment.new
-    @vote = Vote.new
+    vote = Vote.where(user_id: current_user.id,
+                      publication_id: @publication.id).to_a
+    @vote = if vote.empty?
+              Vote.new
+            else
+              vote[0]
+            end
     @vote_comment = VoteComment.new
     current = Favorite.where(publication: @publication, user: current_user).take
     @favorite = if current.nil?
