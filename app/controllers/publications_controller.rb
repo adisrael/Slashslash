@@ -76,10 +76,11 @@ class PublicationsController < ApplicationController
   # DELETE /publications/1
   # DELETE /publications/1.json
   def destroy
+    forum = @publication.forum
     @publication.destroy
     respond_to do |format|
       format.html do
-        redirect_to publications_url,\
+        redirect_to forum_path,\
                     notice: 'Publication was successfully destroyed.'
       end
       format.json { head :no_content }
