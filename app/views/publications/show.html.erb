@@ -2,6 +2,20 @@
 
 <div class="row">
   <div class="col-xs-12">
+    <div class="publication-meta">
+      <strong>
+        <%= link_to @publication.forum.title, @publication.forum %>
+      </strong>
+      <p>Created by
+      <%= link_to @publication.user.userName, @publication.user %>
+      <% hours = (((Time.zone.now - @publication.created_at) / 3600).to_i) %>
+      <% if  hours < 24 %>
+        <%= hours %> hours ago
+      <% else %>
+        <%= (hours / 24).to_i%> days ago
+      <% end %>
+      </p>
+    </div>
     <% pos = @publication.votos>=0 %>
     <h1 class="votes-<%= pos ? 'green' : 'red' %> ", style="display:inline;"> (<%= pos ? '+': ''  %> <%= @publication.votos%>)
     </h1><h1 style="display: inline-block;">
@@ -12,18 +26,6 @@
       <%= @publication.content %>
     </p>
 
-    <p>
-      <strong>By:</strong>
-      <%= link_to @publication.user.userName, @publication.user %>
-    </p>
-    <p>
-      <strong>Forum:</strong>
-      <%=  link_to @publication.forum.title, @publication.forum %>
-    </p>
-    <p>
-      <strong>Created at:</strong>
-      <%= @publication.created_at %>
-    </p>
 
     <% if (user_signed_in?) %>
     <% if current_user.favorite_publications.include?(@publication) %>
