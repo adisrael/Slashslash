@@ -3,21 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .arrows{
-  // .btn{
-  //   padding: 0;
-  //   width: 20px;
-  // }
-  form, .box {
-    display: block;
-  }
-  .box {
-    border: 1px solid gray;
-    border-radius: 5px;
-    width: 40px;
-    text-align: center;
-  }
-
-
+  margin: auto;
+  text-align: center;
 }
 
 .scroll {
@@ -38,15 +25,23 @@
 }
 
 .publication-score{
+  padding: 0px;
 }
 
 .score{
   text-align: center;
 }
 
-.submit-icon-green, .submit-icon-red{
+.submit-icon-green, .submit-icon-red, .submit-icon-empty, .submit-icon-full{
   background: transparent;
   border: none;
+}
+
+.submit-icon-empty:hover{
+  color: rgb(201, 195, 35);
+}
+.submit-icon-full{
+  color: rgb(201, 195, 35);
 }
 
 .submit-icon-green:hover{

@@ -18,8 +18,7 @@
 
 <div class="row">
   <div class="col-xs-1 publication-score">
-
-    <div class="arrows">
+    <div class="row arrows">
       <%= form_for @vote, url: votes_path, method: :post do |f| %>
       <%= f.hidden_field :user_id, value: current_user.id  %>
       <%= f.hidden_field :publication_id, value: @publication.id  %>
@@ -31,10 +30,12 @@
         <span class="glyphicon glyphicon-chevron-up"></span>
       </button>
       <% end %>
-    <% pos = @publication.votos>=0 %>
-    <div class="score">
+      <% pos = @publication.votos>=0 %>
+    </div>
+    <div class="row arrows">
       <strong><%=@publication.votos%></strong>
     </div>
+    <div class="row arrows">
       <%= form_for @vote, url: votes_path, method: :post do |f| %>
       <%= f.hidden_field :user_id, value: current_user.id  %>
       <%= f.hidden_field :publication_id, value: @publication.id  %>
@@ -46,6 +47,25 @@
         <span class="glyphicon glyphicon-chevron-down"></span>
       </button>
       <% end %>
+    </div>
+    <div class="row arrows">
+      <% if current_user.favorite_publications.include?(@publication) %>
+        <%= form_for @favorite, method: :delete do |f| %>
+        <%= f.hidden_field :publication_id, value: @publication.id  %>
+        <%= f.hidden_field :user_id, value: current_user.id  %>
+        <button type="submit" class="submit-icon-full">
+          <span class="glyphicon glyphicon-star"></span>
+        </button>
+        <% end  %>
+      <% else %>
+        <%= form_for @favorite do |f| %>
+        <%= f.hidden_field :publication_id, value: @publication.id  %>
+        <%= f.hidden_field :user_id, value: current_user.id  %>
+        <button type="submit" class="submit-icon-empty">
+          <span class="glyphicon glyphicon-star-empty"></span>
+        </button>
+        <% end  %>
+      <% end  %>
     </div>
   </div>
   <div class="col-xs-11">
@@ -62,23 +82,6 @@
     </p>
   </div>
 </div>
-
-
-    <% if (user_signed_in?) %>
-      <% if current_user.favorite_publications.include?(@publication) %>
-        <%= form_for @favorite, method: :delete do |f| %>
-        <%= f.hidden_field :publication_id, value: @publication.id  %>
-        <%= f.hidden_field :user_id, value: current_user.id  %>
-        <%= f.submit 'Unstar' %>
-        <% end  %>
-      <% else %>
-        <%= form_for @favorite do |f| %>
-        <%= f.hidden_field :publication_id, value: @publication.id  %>
-        <%= f.hidden_field :user_id, value: current_user.id  %>
-        <%= f.submit 'Star' %>
-        <% end  %>
-      <% end  %>
-    <% end %>
 
   <div class="col-xs-12">
     <h3>Comment Section</h3>

@@ -19,11 +19,14 @@
     <%= render 'layouts/navbar' %>
     <div class="container-fluid">
       <div class="content">
-      <% if notice %>
-        <p class="ex1 alert alert-success"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="ex1 alert alert-danger"><%= alert %></p>
+
+      <% if false %>
+        <% if notice %>
+          <p class="ex1 alert alert-success"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="ex1 alert alert-danger"><%= alert %></p>
+        <% end %>
       <% end %>
         <%= yield %>
       </div>
