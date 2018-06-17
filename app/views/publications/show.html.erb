@@ -1,64 +1,85 @@
 <% provide(:title, @publication.title) %>
-
-<div class="row">
-  <div class="col-xs-12">
-    <div class="publication-meta">
+<div class="row publication-meta">
+    <p>
       <strong>
-        <%= link_to @publication.forum.title, @publication.forum %>
+        <%= link_to @publication.forum.title, @publication.forum %>.
       </strong>
-      <p>Created by
+      Created by
       <%= link_to @publication.user.userName, @publication.user %>
       <% hours = (((Time.zone.now - @publication.created_at) / 3600).to_i) %>
       <% if  hours < 24 %>
-        <%= hours %> hours ago
+      <%= hours %> hours ago
       <% else %>
-        <%= (hours / 24).to_i%> days ago
+      <%= (hours / 24).to_i%> days ago
       <% end %>
-      </p>
-    </div>
+    </p>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-1 publication-score">
+
+    <div class="arrows">
+      <%= form_for @vote, url: votes_path, method: :post do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id  %>
+      <%= f.hidden_field :publication_id, value: @publication.id  %>
+      <%= f.hidden_field :positive, value: true  %>
+      <button
+        type="submit"
+        class="submit-icon-green <%= @vote.new_record? ?  '' : @vote.positive ? 'green' : ''  %>"
+        <%= @vote.new_record? ?  '' : @vote.positive ? 'disabled' : ''  %>>
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      </button>
+      <% end %>
     <% pos = @publication.votos>=0 %>
-    <h1 class="votes-<%= pos ? 'green' : 'red' %> ", style="display:inline;"> (<%= pos ? '+': ''  %> <%= @publication.votos%>)
-    </h1><h1 style="display: inline-block;">
+    <div class="score">
+      <strong><%=@publication.votos%></strong>
+    </div>
+      <%= form_for @vote, url: votes_path, method: :post do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id  %>
+      <%= f.hidden_field :publication_id, value: @publication.id  %>
+      <%= f.hidden_field :positive, value: false  %>
+      <button
+        type="submit"
+        class="submit-icon-red <%= @vote.new_record? ?  '' : @vote.positive ? '' : 'red'  %>"
+        <%= @vote.new_record? ?  '' : @vote.positive ? '' : 'disabled'  %>>
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </button>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-xs-11">
+    <h1>
       <strong><%= @publication.title %> </strong>
     </h1>
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-xs-11 col-xs-offset-1">
     <p style="font-size:110%;">
       <%= @publication.content %>
     </p>
+  </div>
+</div>
 
 
     <% if (user_signed_in?) %>
-    <% if current_user.favorite_publications.include?(@publication) %>
-      <%= form_for @favorite, method: :delete do |f| %>
-      <%= f.hidden_field :publication_id, value: @publication.id  %>
-      <%= f.hidden_field :user_id, value: current_user.id  %>
-      <%= f.submit 'Unstar' %>
-      <% end  %>
-    <% else %>
-      <%= form_for @favorite do |f| %>
-      <%= f.hidden_field :publication_id, value: @publication.id  %>
-      <%= f.hidden_field :user_id, value: current_user.id  %>
-      <%= f.submit 'Star' %>
-      <% end  %>
-    <% end  %>
-      <div class="arrows">
-        <%= form_for @vote, url: votes_path, method: :post do |f| %>
-        <%= f.hidden_field :user_id, value: current_user.id  %>
+      <% if current_user.favorite_publications.include?(@publication) %>
+        <%= form_for @favorite, method: :delete do |f| %>
         <%= f.hidden_field :publication_id, value: @publication.id  %>
-        <%= f.hidden_field :positive, value: true  %>
-        <%= f.submit "\u{2b06}", value: "\u{2b06}", class: 'btn btn-success', disabled: @vote.new_record? ? false : @vote.positive %>
-        <% end %>
-        <% puts 'here' %>
-        <% puts @vote.positive.nil? %>
-        <%= form_for @vote, url: votes_path, method: :post do |f| %>
         <%= f.hidden_field :user_id, value: current_user.id  %>
+        <%= f.submit 'Unstar' %>
+        <% end  %>
+      <% else %>
+        <%= form_for @favorite do |f| %>
         <%= f.hidden_field :publication_id, value: @publication.id  %>
-        <%= f.hidden_field :positive, value: false  %>
-        <%= f.submit "\u{2b07}", value: "\u{2b07}", class: 'btn btn-danger', disabled: @vote.new_record? ? false : !@vote.positive %>
-        <% end %>
-      </div>
+        <%= f.hidden_field :user_id, value: current_user.id  %>
+        <%= f.submit 'Star' %>
+        <% end  %>
+      <% end  %>
     <% end %>
-  </div>
+
   <div class="col-xs-12">
     <h3>Comment Section</h3>
     <ul class="comment-list">
@@ -75,7 +96,7 @@
       <%= f.submit class: 'btn btn-default'%>
       <% end %>
     <% end %>
-</div>
+
 
 </p>
 <% if user_signed_in? %>

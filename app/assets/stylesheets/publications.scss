@@ -3,15 +3,20 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .arrows{
+  // .btn{
+  //   padding: 0;
+  //   width: 20px;
+  // }
   form, .box {
-    display: inline;
+    display: block;
   }
   .box {
     border: 1px solid gray;
-    border-radius: 2px;
-    padding: 6px;
-    width: 10px;
+    border-radius: 5px;
+    width: 40px;
+    text-align: center;
   }
+
 
 }
 
@@ -24,4 +29,36 @@
 #right {
     border-left: 1px solid black;
     padding-left: 20px;
+}
+
+.publication-meta{
+  color: white;
+  background-color: rgb(24, 40, 70);
+  padding: 5px;
+}
+
+.publication-score{
+}
+
+.score{
+  text-align: center;
+}
+
+.submit-icon-green, .submit-icon-red{
+  background: transparent;
+  border: none;
+}
+
+.submit-icon-green:hover{
+  color: rgb(64, 222, 113);
+}
+.submit-icon-red:hover{
+  color: rgb(222, 64, 64);
+}
+
+.green{
+  color: rgb(64, 222, 113);
+}
+.red{
+  color: rgb(222, 64, 64);
 }
