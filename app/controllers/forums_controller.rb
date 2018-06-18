@@ -84,6 +84,12 @@ class ForumsController < ApplicationController
     render 'publications/new'
   end
 
+  def new_publication_image
+    @publication = Publication.new
+    @forum_id = params[:id]
+    render 'publications/new_image'
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
