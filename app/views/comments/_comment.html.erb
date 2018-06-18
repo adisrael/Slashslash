@@ -2,11 +2,21 @@
   <div class="row">
     <div class="col-xs-1 publication-score">
       <div class="row arrows">
-        <%= form_for VoteComment.new do |f| %>
+        <% vote = VoteComment.where(user_id: current_user.id, comment_id: comment.id).to_a %>
+
+        <% vote = if vote.empty? %>
+        <%         VoteComment.new %>
+        <%         else %>
+        <%         vote[0] %>
+        <%         end %>
+        <%= form_for vote do |f| %>
         <%= f.hidden_field :user_id, value: current_user.id  %>
         <%= f.hidden_field :comment_id, value: comment.id  %>
         <%= f.hidden_field :positive, value: true  %>
-        <button type="submit" class="submit-icon-green">
+        <button
+          type="submit"
+          class="submit-icon-green <%= vote.new_record? ?  '' : vote.positive ? 'green' : ''  %>"
+          <%= vote.new_record? ?  '' : vote.positive ? 'disabled' : ''  %>>
           <span class="glyphicon glyphicon-chevron-up"></span>
         </button>
         <% end %>
@@ -21,7 +31,10 @@
         <%= f.hidden_field :user_id, value: current_user.id  %>
         <%= f.hidden_field :comment_id, value: comment.id  %>
         <%= f.hidden_field :positive, value: false  %>
-        <button type="submit" class="submit-icon-red">
+        <button
+          type="submit"
+          class="submit-icon-red <%= vote.new_record? ?  '' : vote.positive ? '' : 'red'  %>"
+          <%= vote.new_record? ?  '' : vote.positive ? '' : 'disabled'  %>>
           <span class="glyphicon glyphicon-chevron-down"></span>
         </button>
         <% end %>
