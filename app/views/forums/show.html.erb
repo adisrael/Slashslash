@@ -8,7 +8,13 @@
     <p></p>
     <p><%= @forum.description %></p>
     <% if user_signed_in? %>
-      <%= link_to 'New Publication', new_forum_publication_path %>
+    <a id="new-publication" href="/forums/<%=@forum.id%>/new_publication/text">New Publication</a>
+      <select id="publication-type" class="" name="type">
+        <option value="text">Text</option>
+        <option value="link">Link</option>
+        <option value="image">Image</option>
+        <option value="poll">Poll</option>
+      </select>
       <% if current_user.forums.include?(@forum) %>
         <%= form_for @subscription, method: :delete do |f| %>
         <%= f.hidden_field :forum_id, value: @forum.id  %>
@@ -65,3 +71,11 @@
   	<em> This forum has no publications </em>
   <% end %>
 </p>
+<script type="text/javascript">
+$(document).ready(()=>{
+  $('#publication-type').change(function(){
+    $('#new-publication').attr('href',  `/forums/<%=@forum.id%>/new_publication/${this.value}`)
+  })
+})
+
+</script>

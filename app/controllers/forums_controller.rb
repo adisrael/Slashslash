@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ForumsController < ApplicationController
-  before_action :set_forum, only: %i[show edit update destroy]
+  before_action :set_forum, only: %i[show edit update destroy image_upload]
 
   # GET /forums
   # GET /forums.json
@@ -84,7 +84,37 @@ class ForumsController < ApplicationController
     render 'publications/new'
   end
 
+  def new_publication_image
+    @publication = Publication.new
+    @forum_id = params[:id]
+    render 'publications/new_image'
+  end
+
+  def image_upload
+    @publication = Publication.new(
+      content: params[:content],
+      title: params[:title],
+      user: current_user,
+      forum: @forum
+    )
+    @publication.votos = 0
+    uploaded_io = params[:picture]
+    path = uploaded_io.tempfile.path
+    save_screenshot_to_s3(path, 'folder')
+    redirect_to @publication
+  end
+
   private
+
+  def save_screenshot_to_s3(image_location, folder_name)
+    s3 = Aws::S3::Resource.new(region: 'sa-east-1')
+    bucket_name = 'slash-bucket'
+    key = folder_name.to_s + '/' + File.basename(image_location)
+    object = s3.bucket(bucket_name).object(key)
+    object.upload_file(image_location)
+    @publication.image = object.public_url.to_s
+    @publication.save
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_forum

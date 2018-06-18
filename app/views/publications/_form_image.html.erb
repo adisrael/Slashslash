@@ -1,0 +1,8 @@
+<%= form_tag(image_upload_path, multipart: true) do %>
+  <%= label_tag :title %>
+  <%= text_field_tag :title, '', id: :publication_title %>
+  <%= label_tag :content %>
+  <%= text_area_tag :content, '', id: :publication_content %>
+  <%= file_field_tag :picture %>
+  <%= submit_tag 'Submit' %>
+<% end %>
