@@ -14,12 +14,28 @@
 }
 
 ul.comment-list {
-  border-left: 0px black solid;
+  border-left: 5px #777 solid;
 
   list-style-type: none;
-
+  padding-left: 5px;
 }
 
 .comment-box {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-bottom: 1px rgba(#c2bbbb, 0.75) solid;
+}
 
+.comment-small{
+  font-size: 10px;
+}
+
+li.row {
+  width: 10%;
+}
+
+.line {
+  border-left: 5px #777 solid;
+  height: 30px;
+  margin-left: 47%;
 }

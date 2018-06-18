@@ -3,8 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .arrows{
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
+  .score{
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
 }
 
 .scroll {
@@ -24,12 +29,15 @@
   padding: 5px;
 }
 
-.publication-score{
-  padding: 0px;
+.col-xs-1.publication-score{
+  padding-left: 20px;
+  padding-right: 0;
+  width: 5%;
+  margin-top: 20px;
 }
 
-.score{
-  text-align: center;
+.col-xs-11{
+  padding-right: 0;
 }
 
 .submit-icon-green, .submit-icon-red, .submit-icon-empty, .submit-icon-full{

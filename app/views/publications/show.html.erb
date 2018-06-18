@@ -7,7 +7,9 @@
       Created by
       <%= link_to @publication.user.userName, @publication.user %>
       <% hours = (((Time.zone.now - @publication.created_at) / 3600).to_i) %>
-      <% if  hours < 24 %>
+      <% if  hours.zero? %>
+      just now
+      <% elsif  hours < 24 %>
       <%= hours %> hours ago
       <% else %>
       <%= (hours / 24).to_i%> days ago
@@ -82,13 +84,14 @@
     </p>
   </div>
 </div>
-
+<div class="row">
   <div class="col-xs-12">
     <h3>Comment Section</h3>
     <ul class="comment-list">
-      <%= render(partial: 'comments/comment', collection: @publication.comments) %>
+      <%= render partial: 'comments/comment', collection: @publication.comments.order(:created_at) %>
     </ul>
   </div>
+</div>
 
     <% if (user_signed_in?) %>
       <%= form_for @comment do |f| %>
