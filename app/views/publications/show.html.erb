@@ -82,6 +82,9 @@
     <p style="font-size:110%;">
       <%= @publication.content %>
     </p>
+    <% unless @publication.image.nil? %>
+    <img src="<%= @publication.image %> " alt="">
+    <% end %>
   </div>
 </div>
 <div class="row">

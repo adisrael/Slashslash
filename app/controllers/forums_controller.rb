@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ForumsController < ApplicationController
-  before_action :set_forum, only: %i[show edit update destroy]
+  before_action :set_forum, only: %i[show edit update destroy image_upload]
 
   # GET /forums
   # GET /forums.json
@@ -91,7 +91,13 @@ class ForumsController < ApplicationController
   end
 
   def image_upload
-    @publication = Publication.new
+    @publication = Publication.new(
+      content: params[:content],
+      title: params[:title],
+      user: current_user,
+      forum: @forum
+    )
+    @publication.votos = 0
     uploaded_io = params[:picture]
     path = uploaded_io.tempfile.path
     save_screenshot_to_s3(path, 'folder')
