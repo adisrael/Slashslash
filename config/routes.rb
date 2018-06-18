@@ -30,7 +30,10 @@ Rails.application.routes.draw do
   post '/upload/:id', to: 'users#upload'
 
   # forums
-  get '/forums/:id/new_publication', to: 'forums#new_publication', as: 'new_forum_publication'
+  get '/forums/:id/new_publication/text', to: 'forums#new_publication', as: 'new_publication_text'
+  get '/forums/:id/new_publication/link', to: 'forums#new_publication_link', as: 'new_publication_link'
+  get '/forums/:id/new_publication/image', to: 'forums#new_publication_image', as: 'new_publication_image'
+  get '/forums/:id/new_publication/poll', to: 'forums#new_publication_poll', as: 'new_publication_poll'
 
   # search
   get '/home/search/forums', to: 'home#search_forum', as: 'search_forum'
