@@ -12,6 +12,7 @@ class PublicationsController < ApplicationController
   # GET /publications/1
   # GET /publications/1.json
   def show
+    @time = Time.zone.now
     @comment = Comment.new
     vote = Vote.where(user_id: current_user.id,
                       publication_id: @publication.id).to_a

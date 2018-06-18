@@ -1,41 +1,84 @@
-<li class="well">
-  <p><strong><%= link_to comment.user.userName, comment.user %>:</strong> <%= comment.content %> </p>
-  <div class="arrows">
-    <%= form_for VoteComment.new do |f| %>
-    <%= f.hidden_field :user_id, value: current_user.id  %>
-    <%= f.hidden_field :comment_id, value: comment.id  %>
-    <%= f.hidden_field :positive, value: true  %>
-    <%= f.submit "\u{2b06}", value: "\u{2b06}", class: 'btn btn-success' %>
-    <% end %>
-    <%= form_for VoteComment.new do |f| %>
-    <%= f.hidden_field :user_id, value: current_user.id  %>
-    <%= f.hidden_field :comment_id, value: comment.id  %>
-    <%= f.hidden_field :positive, value: false  %>
-    <%= f.submit "\u{2b07}", value: "\u{2b07}", class: 'btn btn-danger' %>
-    <% end %>
-    <div class="box">
-      <strong><%= comment.votos %> </strong>
+<li class="">
+  <div class="row">
+    <div class="col-xs-1 publication-score">
+      <div class="row arrows">
+        <% vote = VoteComment.where(user_id: current_user.id, comment_id: comment.id).to_a %>
 
+        <% vote = if vote.empty? %>
+        <%         VoteComment.new %>
+        <%         else %>
+        <%         vote[0] %>
+        <%         end %>
+        <%= form_for vote do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id  %>
+        <%= f.hidden_field :comment_id, value: comment.id  %>
+        <%= f.hidden_field :positive, value: true  %>
+        <button
+          type="submit"
+          class="submit-icon-green <%= vote.new_record? ?  '' : vote.positive ? 'green' : ''  %>"
+          <%= vote.new_record? ?  '' : vote.positive ? 'disabled' : ''  %>>
+          <span class="glyphicon glyphicon-chevron-up"></span>
+        </button>
+        <% end %>
+      </div>
+      <div class="row arrows">
+        <div class="score">
+          <strong><%= comment.votos %> </strong>
+        </div>
+      </div>
+      <div class="row arrows">
+        <%= form_for VoteComment.new do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id  %>
+        <%= f.hidden_field :comment_id, value: comment.id  %>
+        <%= f.hidden_field :positive, value: false  %>
+        <button
+          type="submit"
+          class="submit-icon-red <%= vote.new_record? ?  '' : vote.positive ? '' : 'red'  %>"
+          <%= vote.new_record? ?  '' : vote.positive ? '' : 'disabled'  %>>
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </button>
+        <% end %>
+      </div>
     </div>
-  </div>
-  <% if (user_signed_in?) %>
-    <% if check_credentials current_user, @publication %>
-      <%= link_to 'Delete', comment, method: :delete %>
-    <% end %>
-  <% end %>
-  <a class="reply-link" id="<%= comment.id %>" >Reply</a>
-  <div id="comment-<%= comment.id %>" class="hide reply-form">
-    <%= form_for Comment.new do |f| %>
-    <%= f.text_field :content  %>
-    <%= f.hidden_field :user_id, value: current_user.id  %>
-    <%= f.hidden_field :commentable_type, value: 'comment'  %>
-    <%= f.hidden_field :commentable_id, value: comment.id  %>
-    <%= f.submit class: 'btn btn-default'%>
-    <% end %>
+    <div class="col-xs-11">
+      <div class="comment-box">
+        <div class="comment-small">
+          <%= link_to comment.user.userName, comment.user %> ·
+          <% hours = (((@time - comment.created_at) / 3600).to_i) %>
+          <% if  hours.zero? %>
+          Just now
+          <% elsif  hours < 24 %>
+          <%= hours %> hours ago
+          <% else %>
+          <%= (hours / 24).to_i%> days ago
+          <% end %>
+        </div>
+        <p> <%= comment.content %> </p>
+        <div class="comment-small">
+          <% if (user_signed_in?) %>
+          <% if check_credentials current_user, @publication %>
+          <%= link_to 'Delete', comment, method: :delete %>
+          <% end %>
+          <% end %>
+          <a class="reply-link" id="<%= comment.id %>" >Reply</a>
+        </div>
+        <div id="comment-<%= comment.id %>" class="hide reply-form">
+          <%= form_for Comment.new do |f| %>
+          <%= f.text_field :content  %>
+          <%= f.hidden_field :user_id, value: current_user.id  %>
+          <%= f.hidden_field :commentable_type, value: 'comment'  %>
+          <%= f.hidden_field :commentable_id, value: comment.id  %>
+          <%= f.submit class: 'btn btn-default'%>
+          <% end %>
+        </div>
+      </div>
+      <ul class="comment-list">
+          <%= render partial: 'comments/comment', collection: comment.comments.order(:created_at) %>
+      </ul>
+    </div>
+
   </div>
 
-  <ul class="comment-list">
-      <%= render partial: 'comments/comment', collection: comment.comments %>
-  </ul>
+
 
 </li>

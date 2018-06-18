@@ -3,14 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .arrows{
-  form, .box {
-    display: inline;
-  }
-  .box {
-    border: 1px solid gray;
-    border-radius: 2px;
-    padding: 6px;
-    width: 10px;
+  margin: 0 auto;
+  text-align: center;
+  .score{
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
 }
@@ -24,4 +21,47 @@
 #right {
     border-left: 1px solid black;
     padding-left: 20px;
+}
+
+.publication-meta{
+  color: white;
+  background-color: rgb(24, 40, 70);
+  padding: 5px;
+}
+
+.col-xs-1.publication-score{
+  padding-left: 20px;
+  padding-right: 0;
+  width: 5%;
+  margin-top: 20px;
+}
+
+.col-xs-11{
+  padding-right: 0;
+}
+
+.submit-icon-green, .submit-icon-red, .submit-icon-empty, .submit-icon-full{
+  background: transparent;
+  border: none;
+}
+
+.submit-icon-empty:hover{
+  color: rgb(201, 195, 35);
+}
+.submit-icon-full{
+  color: rgb(201, 195, 35);
+}
+
+.submit-icon-green:hover{
+  color: rgb(64, 222, 113);
+}
+.submit-icon-red:hover{
+  color: rgb(222, 64, 64);
+}
+
+.green{
+  color: rgb(64, 222, 113);
+}
+.red{
+  color: rgb(222, 64, 64);
 }
