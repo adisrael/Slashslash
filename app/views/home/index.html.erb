@@ -56,7 +56,7 @@
 
 <div class="row top">
   <div class="col-xs-6">
-    <h2>Top 3 Users</h2>
+    <h2><%= link_to 'Top 3 Users', top_users_path%></h2>
     <% @top_users.take(3).each do |user| %>
       <div class=" top-results">
         <div class="search-result well">

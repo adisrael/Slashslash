@@ -20,6 +20,9 @@ class HomeController < ApplicationController
   def top_publications
     @top_publications = Publication.order(:votos).reverse_order
   end
+  def top_users
+    @top_users = User.order(:reputation).reverse_order 
+  end
   def search_forum
     @home = false
     @forums = Forum.search(params[:search_forum]).order(:votos).reverse_order

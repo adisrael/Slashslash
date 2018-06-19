@@ -1,0 +1,12 @@
+<div class="row top">
+  <h2>Top Users</h2>
+  <% @top_users.each do |user| %>
+    <div class=" top-results">
+      <div class="search-result well">
+        <h4><%= link_to user.userName, user %></h4>
+        <% pos = user.reputation >=0 %>
+        <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= user.reputation %>)</h4>
+      </div>
+    </div>
+  <% end %>
+</div>
