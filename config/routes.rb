@@ -37,6 +37,12 @@ Rails.application.routes.draw do
   get '/home/search/publications', to: 'home#search_publication', as: 'search_publication'
   get '/home/search/users', to: 'home#search_user', as: 'search_user'
 
+  # top
+  get '/home/top_forums', to: 'home#top_forums', as: 'top_forums'
+  get '/home/top/publications', to: 'home#top_publications', as: 'top_publications'
+  get '/home/top/users', to: 'home#top_users', as: 'top_users'
+  get '/home/top/subscribed', to: 'home#top_subscribed', as: 'top_subscribed'
+
   # home and root
   get 'welcome/index'
   root 'welcome#index'

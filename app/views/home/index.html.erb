@@ -12,7 +12,7 @@
     <% end %>
   </div>
 </div>
-
+  
 <div class="row search">
   <div class="search-form well">
     <h1>Search Publications</h1>
@@ -24,11 +24,10 @@
 </div>
 
 
-
 <div class="row top">
   <div class="col-xs-6">
-    <h2>Top 3 Forums</h2>
-    <% @top_forums.each do |forum| %>
+    <h2><%= link_to 'Top 3 Forums', top_forums_path%></h2>
+    <% @top_forums.take(3).each do |forum| %>
       <div class=" top-results">
         <div class="search-result well">
           <h4><%= link_to forum.title, forum %></h4>
@@ -39,9 +38,10 @@
       </div>
     <% end %>
   </div>
+  
   <div class="col-xs-6">
     <h2>Top 3 Publications</h2>
-    <% @top_publications.each do |publication| %>
+    <% @top_publications.take(3).each do |publication| %>
       <div class=" top-results">
         <div class="search-result well">
           <h4><%= link_to publication.title, publication %></h4>
@@ -57,7 +57,7 @@
 <div class="row top">
   <div class="col-xs-6">
     <h2>Top 3 Users</h2>
-    <% @top_users.each do |user| %>
+    <% @top_users.take(3).each do |user| %>
       <div class=" top-results">
         <div class="search-result well">
           <h4><%= link_to user.userName, user %></h4>
@@ -74,7 +74,7 @@
         <div class="search-result well">
           <h4><%= link_to forum.title, forum %></h4>
           <% pos = forum.votos>=0 %>
-          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': '-'  %> <%= forum.votos%>)</h4>
+          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= forum.votos%>)</h4>
           <h4>| <%= forum.description %></h4>
           <h4>| <%= forum.subscriptors %></h4>
         </div>
