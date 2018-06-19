@@ -1,5 +1,5 @@
 class Poll < ApplicationRecord
-  has_many :poll_option, dependent: :destroy
-  has_many :poll_vote, dependent: :destroy
+  has_many :poll_options, dependent: :destroy
+  has_many :poll_votes, dependent: :destroy
   belongs_to :publication
 end

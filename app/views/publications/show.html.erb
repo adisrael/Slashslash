@@ -82,6 +82,12 @@
     <p style="font-size:110%;">
       <%= @publication.content %>
     </p>
+    <% if @publication.content_type == 'poll' %>
+      <h3><%= @publication.poll.question %> </h3>
+      <% @publication.poll.poll_options.each do |option| %>
+        <button type="button" name="button"><%= option.text %> </button><br>
+      <% end %>
+    <% end %>
     <% unless @publication.image.nil? %>
     <img src="<%= @publication.image %> " alt="">
     <% end %>

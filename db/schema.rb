@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20180619001106) do
     t.integer "votos"
     t.string "title"
     t.string "image"
-    t.string "type"
+    t.string "content_type"
     t.text "content"
     t.bigint "user_id"
     t.bigint "forum_id"
