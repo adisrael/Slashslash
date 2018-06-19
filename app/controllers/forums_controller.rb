@@ -123,6 +123,7 @@ class ForumsController < ApplicationController
     params.each do |k, v|
       if k.split('_')[0] == 'option'
         option = PollOption.new(text: v)
+        option.votos = 0
         option.poll = poll
         option.save
       end
