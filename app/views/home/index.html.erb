@@ -23,7 +23,6 @@
   </div>
 </div>
 
-
 <div class="row top">
   <div class="col-xs-6">
     <h2><%= link_to 'Top 3 Forums', top_forums_path%></h2>
@@ -67,8 +66,9 @@
       </div>
     <% end %>
   </div>
+
   <div class="col-xs-6">
-    <h2><%= link_to 'Most Subscribed Forums', top_subscribed_path%></h2>
+    <h2><%= link_to 'Top 3 Subscribed Forums', top_subscribed_path%></h2>
     <% @popular_forums.each do |forum| %>
       <div class=" top-results">
         <div class="search-result well">
