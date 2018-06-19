@@ -1,8 +1,14 @@
 <%= form_tag create_poll_path, method: :post %>
+<%= label_tag :publication_title, 'Publication Title:' %>
 <%= text_field_tag :publication_title %><br>
+<%= label_tag :question, 'Poll:' %>
 <%= text_field_tag :question %><br>
+<%= label_tag :option_1, 'Option 1:' %>
 <%= text_field_tag :option_1 %><br>
+<%= label_tag :option_2, 'Option 2:' %>
 <%= text_field_tag :option_2 %><br>
+<%= label_tag :option_3, 'Option 3:' %>
 <%= text_field_tag :option_3 %><br>
+<%= label_tag :option_4, 'Option 4:' %>
 <%= text_field_tag :option_4 %><br>
 <%= submit_tag 'Submit' %>
