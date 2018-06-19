@@ -1,0 +1,15 @@
+
+<div class="row top">
+  <h2>Top Publications</h2>
+  <% @top_publications.each do |publication| %>
+    <div class=" top-results">
+      <div class="search-result well">
+        <h4><%= link_to publication.title, publication %></h4>
+        <% pos = publication.votos>=0 %>
+        <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= publication.votos%>)</h4>
+        <h4>| <%= publication.content %></h4>
+      </div>
+    </div>
+  <% end %>
+</div>
+

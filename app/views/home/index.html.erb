@@ -40,7 +40,7 @@
   </div>
   
   <div class="col-xs-6">
-    <h2>Top 3 Publications</h2>
+    <h2><%= link_to 'Top 3 Publications', top_publications_path%></h2>
     <% @top_publications.take(3).each do |publication| %>
       <div class=" top-results">
         <div class="search-result well">
