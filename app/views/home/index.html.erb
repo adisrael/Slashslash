@@ -68,7 +68,7 @@
     <% end %>
   </div>
   <div class="col-xs-6">
-    <h2>Most Subscribed Forums</h2>
+    <h2><%= link_to 'Most Subscribed Forums', top_subscribed_path%></h2>
     <% @popular_forums.each do |forum| %>
       <div class=" top-results">
         <div class="search-result well">

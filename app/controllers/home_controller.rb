@@ -23,6 +23,16 @@ class HomeController < ApplicationController
   def top_users
     @top_users = User.order(:reputation).reverse_order 
   end
+  def top_subscribed
+    query = Subscription.select(:forum_id).group(:forum_id).count
+    topN = top query, Forum.all.length
+    @popular_forums = []
+    topN.each do |data|
+      forum = Forum.find(data[0])
+      forum.subscriptors = data[1]
+      @popular_forums << forum
+    end  
+  end
   def search_forum
     @home = false
     @forums = Forum.search(params[:search_forum]).order(:votos).reverse_order
