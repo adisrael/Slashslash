@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180602230614) do
+ActiveRecord::Schema.define(version: 20180619001106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,33 @@ ActiveRecord::Schema.define(version: 20180602230614) do
     t.datetime "updated_at", null: false
     t.index ["forum_id"], name: "index_moderators_on_forum_id"
     t.index ["user_id"], name: "index_moderators_on_user_id"
+  end
+
+  create_table "poll_options", force: :cascade do |t|
+    t.string "text"
+    t.bigint "poll_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poll_id"], name: "index_poll_options_on_poll_id"
+  end
+
+  create_table "poll_votes", force: :cascade do |t|
+    t.bigint "poll_id"
+    t.bigint "user_id"
+    t.bigint "poll_option_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poll_id"], name: "index_poll_votes_on_poll_id"
+    t.index ["poll_option_id"], name: "index_poll_votes_on_poll_option_id"
+    t.index ["user_id"], name: "index_poll_votes_on_user_id"
+  end
+
+  create_table "polls", force: :cascade do |t|
+    t.string "question"
+    t.bigint "publication_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["publication_id"], name: "index_polls_on_publication_id"
   end
 
   create_table "publications", force: :cascade do |t|
@@ -129,6 +156,11 @@ ActiveRecord::Schema.define(version: 20180602230614) do
   add_foreign_key "favorites", "users"
   add_foreign_key "moderators", "forums"
   add_foreign_key "moderators", "users"
+  add_foreign_key "poll_options", "polls"
+  add_foreign_key "poll_votes", "poll_options"
+  add_foreign_key "poll_votes", "polls"
+  add_foreign_key "poll_votes", "users"
+  add_foreign_key "polls", "publications"
   add_foreign_key "publications", "forums"
   add_foreign_key "publications", "users"
   add_foreign_key "subscriptions", "forums"

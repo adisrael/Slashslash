@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get '/forums/:id/new_publication/image', to: 'forums#new_publication_image', as: 'new_publication_image'
   post '/forums/:id/new_publication/image', to: 'forums#image_upload', as: 'image_upload'
   get '/forums/:id/new_publication/poll', to: 'forums#new_publication_poll', as: 'new_publication_poll'
+  post '/forums/:id/new_publication/poll', to: 'forums#create_poll', as: 'create_poll'
 
   # search
   get '/home/search/forums', to: 'home#search_forum', as: 'search_forum'

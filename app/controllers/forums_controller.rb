@@ -104,6 +104,34 @@ class ForumsController < ApplicationController
     redirect_to @publication
   end
 
+  def new_publication_poll
+    @publication = Publication.new
+    @poll = Poll.new
+    render 'publications/new_poll'
+  end
+
+  def create_poll
+    forum = Forum.find(params[:id])
+    publication = Publication.new(title: params[:publication_title], forum: forum)
+    publication.user = current_user
+    publication.votos = 0
+    publication.content_type = 'poll'
+    publication.save
+    poll = Poll.new
+    params.each do |k, v|
+      if k.split('_')[0] == 'option'
+        option = PollOption.new(text: v, poll: poll)
+        option.save
+        puts option.errors.full_messages
+      end
+    end
+    poll.publication = publication
+    poll.save
+    puts poll.errors.full_messages
+    redirect_to publication
+
+  end
+
   private
 
   def save_screenshot_to_s3(image_location, folder_name)
