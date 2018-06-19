@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :forums, through: :subscriptions
   has_many :favorites, dependent: :destroy
   has_many :favorite_publications, through: :favorites, source: :publication
+  has_many :poll_vote, dependent: :destroy
 
   before_create :default_role
   before_create :default_reputation
