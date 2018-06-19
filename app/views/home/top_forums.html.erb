@@ -1,0 +1,16 @@
+
+<div class="row top">
+  <h2>Top Forums</h2>
+  <% @top_forums.each do |forum| %>
+    <div class=" top-results">
+      <div class="search-result well">
+        <h4><%= link_to forum.title, forum %></h4>
+        <% pos = forum.votos>=0 %>
+        <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= forum.votos%>)</h4>
+        <h4>| <%= forum.description %></h4>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
