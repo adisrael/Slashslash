@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   resources :favorites
   resources :forums
 
+  # polls
+  post 'poll', to: 'publications#poll_vote'
+
   # users
   resources :users
   post '/upload/:id', to: 'users#upload'

@@ -94,6 +94,10 @@ class PublicationsController < ApplicationController
     end
   end
 
+  def poll_vote
+
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
