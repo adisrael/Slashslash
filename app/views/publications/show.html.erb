@@ -84,10 +84,15 @@
     </p>
     <% if @publication.content_type == 'poll' %>
       <h3><%= @publication.poll.question %> </h3>
-      <%= form_tag poll_vote_path do  %>
-        <% @publication.poll.poll_options.each do |option| %>
-          <button type="submit" name="vote" class="btn btn-default" value="<%= option.id %>"><%= option.text %> </button><br>
+      <%if PollVote.where(user_id: current_user.id, poll_id: @publication.poll.id).to_a.empty? %>
+        <%= form_tag poll_vote_path do  %>
+        <%= hidden_field_tag :poll_id, @publication.poll.id %>
+          <% @publication.poll.poll_options.each do |option| %>
+            <button type="submit" name="vote" class="btn btn-default" value="<%= option.id %>"><%= option.text %> </button><br>
+          <% end %>
         <% end %>
+      <% else %>
+        <h3> Already Voted</h3>
       <% end %>
     <% end %>
     <% unless @publication.image.nil? %>

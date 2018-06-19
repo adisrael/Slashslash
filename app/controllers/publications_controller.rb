@@ -95,8 +95,12 @@ class PublicationsController < ApplicationController
   end
 
   def poll_vote
-    puts 'here'
-    puts params[:vote]
+    poll = Poll.find(params[:poll_id])
+    option = PollOption.find(params[:vote])
+    vote = PollVote.new(poll: poll, poll_option: option, user: current_user)
+    vote.save
+    redirect_to poll.publication
+
   end
 
   private
