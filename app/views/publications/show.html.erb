@@ -82,6 +82,21 @@
     <p style="font-size:110%;">
       <%= @publication.content %>
     </p>
+    <% if @publication.content_type == 'poll' %>
+      <h3><%= @publication.poll.question %> </h3>
+      <%if PollVote.where(user_id: current_user.id, poll_id: @publication.poll.id).to_a.empty? %>
+        <%= form_tag poll_vote_path do  %>
+        <%= hidden_field_tag :poll_id, @publication.poll.id %>
+          <% @publication.poll.poll_options.each do |option| %>
+            <button type="submit" name="vote" class="btn btn-default" value="<%= option.id %>"><%= option.text %> </button><br>
+          <% end %>
+        <% end %>
+      <% else %>
+        <% @publication.poll.poll_options.each do |option| %>
+          <h5><%= option.text %>- <%= option.votos*100/@publication.poll.total %>% </h5>
+          <% end %>
+      <% end %>
+    <% end %>
     <% unless @publication.image.nil? %>
     <img src="<%= @publication.image %> " alt="">
     <% end %>

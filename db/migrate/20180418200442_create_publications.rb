@@ -5,7 +5,7 @@ class CreatePublications < ActiveRecord::Migration[5.1]
       t.integer :votos
       t.string :title
       t.string :image
-      t.string :type
+      t.string :content_type
       t.text :content
       t.references :user, foreign_key: true
       t.references :forum, foreign_key: true

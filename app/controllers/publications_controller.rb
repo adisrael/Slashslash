@@ -28,6 +28,13 @@ class PublicationsController < ApplicationController
                 else
                   current
                 end
+    if @publication.content_type == 'poll'
+      poll = @publication.poll
+      poll.total = 0
+      poll.poll_options.each do |option|
+        poll.total += option.votos
+      end
+    end
   end
 
   # GET /publications/new
@@ -92,6 +99,17 @@ class PublicationsController < ApplicationController
       end
       format.json { head :no_content }
     end
+  end
+
+  def poll_vote
+    poll = Poll.find(params[:poll_id])
+    option = PollOption.find(params[:vote])
+    option.votos += 1
+    option.save
+    vote = PollVote.new(poll: poll, poll_option: option, user: current_user)
+    vote.save
+    redirect_to poll.publication
+
   end
 
   private
