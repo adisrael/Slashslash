@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :forums
 
   # polls
-  post 'poll', to: 'publications#poll_vote'
+  post 'poll', to: 'publications#poll_vote', as: 'poll_vote'
 
   # users
   resources :users

@@ -95,7 +95,8 @@ class PublicationsController < ApplicationController
   end
 
   def poll_vote
-
+    puts 'here'
+    puts params[:vote]
   end
 
   private

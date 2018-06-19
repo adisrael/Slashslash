@@ -84,8 +84,10 @@
     </p>
     <% if @publication.content_type == 'poll' %>
       <h3><%= @publication.poll.question %> </h3>
-      <% @publication.poll.poll_options.each do |option| %>
-        <button type="button" name="button"><%= option.text %> </button><br>
+      <%= form_tag poll_vote_path do  %>
+        <% @publication.poll.poll_options.each do |option| %>
+          <button type="submit" name="vote" class="btn btn-default" value="<%= option.id %>"><%= option.text %> </button><br>
+        <% end %>
       <% end %>
     <% end %>
     <% unless @publication.image.nil? %>
