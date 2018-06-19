@@ -93,7 +93,8 @@
         <% end %>
       <% else %>
         <% @publication.poll.poll_options.each do |option| %>
-          <h5><% option.text %>- <% option.voto*100/@publication.poll.total %>% </h5>
+          <h5><%= option.text %>- <%= option.votos*100/@publication.poll.total %>% </h5>
+          <% end %>
       <% end %>
     <% end %>
     <% unless @publication.image.nil? %>

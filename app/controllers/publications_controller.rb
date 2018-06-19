@@ -28,11 +28,12 @@ class PublicationsController < ApplicationController
                 else
                   current
                 end
-
-    poll = @publication.poll
-    poll.total = 0
-    poll.poll_options.each do |option|
-      poll.total += option.votos
+    if @publication.content_type == 'poll'
+      poll = @publication.poll
+      poll.total = 0
+      poll.poll_options.each do |option|
+        poll.total += option.votos
+      end
     end
   end
 
@@ -104,6 +105,7 @@ class PublicationsController < ApplicationController
     poll = Poll.find(params[:poll_id])
     option = PollOption.find(params[:vote])
     option.votos += 1
+    option.save
     vote = PollVote.new(poll: poll, poll_option: option, user: current_user)
     vote.save
     redirect_to poll.publication
