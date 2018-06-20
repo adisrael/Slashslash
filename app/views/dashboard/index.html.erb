@@ -1,0 +1,159 @@
+<% provide(:title, "Statistics") %>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<!-- Container WELCOME -->
+<div class="row text-center Statistics">
+    <h1>Statistics - //slashslash</h1>
+</div>
+
+<div class="row top">
+    <div class="col-xs-6">
+      <h2>Total Users</h2>
+        <div class="top-results text-center">
+          <div class="search-result well">
+            <p style="font-size:200%;"><%= @users.count %></p>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-xs-6">
+      <h2>Total Forums</h2>
+        <div class="top-results text-center">
+          <div class="search-result well">
+            <p style="font-size:200%;"><%= @forums.count %><p>
+          </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row top">
+
+    <div class="col-xs-3">
+      <h2>Total Publications</h2>
+        <div class="top-results text-center">
+          <div class="search-result well">
+            <p style="font-size:200%;"><%= @publications.count %></p>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h2>Total Comments</h2>
+        <div class="top-results text-center">
+          <div class="search-result well">
+            <p style="font-size:200%;"><%= @comments.count %></p>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h2>Total Moderators</h2>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @moderators_a %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h2>Total Subscriptions</h2>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @subscriptions.count %></p>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="row top">
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Publications per User (active)</h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @avg_p %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Comments per User (active)</h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @avg_c %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Votes per User (active)</h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @avg_v %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Subscriptions per User (active)</h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @avg_s %></p>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<div class="row top">
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Publications per User </h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @publications.count.to_f / @users.count %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Comments per User </h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @comments.count.to_f / @users.count %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Votes per User </h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= (@votes.count + @vote_comments.count).to_f / @users.count %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Subscriptions per User </h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @subscriptions.count.to_f / @users.count %></p>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div class="row">
+  <footer class="text-center">
+    <p>Created by: Alfredo De Goyeneche, Yoav Navon, Alexander Israel</p>
+    <p>IIC2143 - Ingeniería de Software - 2018-1 - Pontificia Universidad Católica de Chile (PUC)</p>
+  </footer>
+</div>
+
+
+</body>
