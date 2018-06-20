@@ -65,3 +65,19 @@
 .red{
   color: rgb(222, 64, 64);
 }
+
+.progress{
+  width: 50%;
+  .progress-bar{
+    color:  rgb(65, 65, 65);
+    p {
+      padding-left: 10px;
+      text-align: left;
+    }
+  }
+  .percent{
+    color:  rgb(65, 65, 65);
+    right: 52%;
+    position: absolute;
+  }
+}
