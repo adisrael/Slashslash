@@ -30,10 +30,48 @@
 }
 
 .col-xs-1.publication-score{
-  padding-left: 20px;
-  padding-right: 0;
+  // padding-left: 20px;
+  // padding-right: 0;
+  padding: 0;
   width: 5%;
   margin-top: 20px;
+  button {
+    padding: 0;
+  }
+  text-align: center;
+}
+
+.publication-sidebar{
+  background-color: rgb(141, 158, 176);
+  padding-bottom: 100%;
+  margin-bottom: -100%;
+  overflow: hidden;
+}
+
+.sidebar-container{
+  background-color: white;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 0px;
+  height:300px;
+}
+
+.sidebar-topbar{
+  margin: 0;
+  background-color: rgb(24, 40, 70);
+  border-radius: 5px 5px 0 0;
+  height: 20px;
+}
+
+.sidebar-content{
+  padding: 5px;
+  h3{
+    margin: 0;
+  }
+}
+
+#publication-title{
+  margin-top: 30px;
 }
 
 .col-xs-11{
@@ -79,5 +117,17 @@
     color:  rgb(65, 65, 65);
     right: 52%;
     position: absolute;
+  }
+}
+
+.poll-container{
+  margin: 0 auto;
+  width: 55%;
+  padding-right: 10%;
+  button{
+    width: 100%;
+  }
+  h3{
+    text-align: center;
   }
 }
