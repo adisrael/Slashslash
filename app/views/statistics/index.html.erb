@@ -1,0 +1,191 @@
+<% provide(:title, "Statistics") %>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<!-- Container WELCOME -->
+<div class="row text-center Statistics">
+    <h1>Statistics - //slashslash</h1>
+</div>
+
+<div class="row top">
+    <div class="col-xs-6">
+      <h2>Total Users</h2>
+        <div class="top-results text-center">
+          <div class="search-result well">
+            <p style="font-size:200%;"><%= @users.count %></p>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-xs-6">
+      <h2>Total Forums</h2>
+        <div class="top-results text-center">
+          <div class="search-result well">
+            <p style="font-size:200%;"><%= @forums.count %><p>
+          </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row top">
+
+    <div class="col-xs-3">
+      <h2>Total Publications</h2>
+        <div class="top-results text-center">
+          <div class="search-result well">
+            <p style="font-size:200%;"><%= @publications.count %></p>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h2>Total Comments</h2>
+        <div class="top-results text-center">
+          <div class="search-result well">
+            <p style="font-size:200%;"><%= @comments.count %></p>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h2>Total Moderators</h2>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @moderators_a %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h2>Total Subscriptions</h2>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @subscriptions.count %></p>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="row top">
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Publications per User (active)</h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @avg_p.round(2) %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Comments per User (active)</h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @avg_c.round(2) %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Votes per User (active)</h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @avg_v.round(2) %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Subscriptions per User (active)</h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= @avg_s.round(2) %></p>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<div class="row top">
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Publications per User </h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= (@publications.count.to_f / @users.count).round(2) %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Comments per User </h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= (@comments.count.to_f / @users.count).round(2) %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Votes per User </h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= ((@votes.count + @vote_comments.count).to_f / @users.count).round(2) %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <h4 class="text-center">Avg Subscriptions per User </h4>
+      <div class="top-results text-center">
+        <div class="search-result well">
+          <p style="font-size:200%;"><%= (@subscriptions.count.to_f / @users.count).round(2) %></p>
+        </div>
+      </div>
+    </div>
+
+</div>
+<div class="row top">
+
+    <div class="col-xs-6">
+      <h4 class="text-center">Publications by Date</h4>
+      <%= column_chart Publication.group_by_day(:created_at).count, discrete: true%>
+    </div>
+
+    <div class="col-xs-6">
+      <h4 class="text-center">Publications by Month</h4>
+      <%= column_chart Publication.group_by_month(:created_at, format: "%b %Y").count, discrete: true %>
+    </div>
+
+</div>
+<br>
+<div class="row top">
+
+    <div class="col-xs-6">
+      <h4 class="text-center">User Registration by Date</h4>
+      <%= column_chart User.group_by_day(:created_at).count, discrete: true %>
+    </div>
+
+    <div class="col-xs-6">
+      <h4 class="text-center">User Registration by Month</h4>
+      <%= column_chart User.group_by_month(:created_at, format: "%b %Y").count, discrete: true %>
+    </div>
+
+</div>
+<br>
+<div class="row top">
+    <div class="col-xs-3">
+    </div>
+
+    <div class="col-xs-6">
+      <h4 class="text-center">Total Votes Distribution</h4>
+      <%= column_chart [{name: "Positive", data: @total_votes_p}, {name: "Negative", data: @total_votes_n}], colors: ["green", "red"]%>
+    </div>
+
+    <div class="col-xs-3">
+    </div>
+
+</div>
+
+</body>

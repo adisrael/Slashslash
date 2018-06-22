@@ -56,5 +56,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get '/home', to: 'home#index', as: :home
 
+  # dashboard
+  get '/stats', to: 'statistics#index', as: '/stats'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

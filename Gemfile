@@ -36,6 +36,9 @@ gem 'paperclip'
 # gem 'fog'
 gem 'mini_magick'
 
+gem 'chartkick'
+gem 'groupdate'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
