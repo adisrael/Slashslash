@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class StatisticsController < ApplicationController
   def index
     if user_signed_in? && current_user.role.zero?
       @forums = Forum
@@ -9,6 +9,7 @@ class DashboardController < ApplicationController
       @votes = Vote
       @vote_comments = VoteComment
       @moderators_a = 0
+      @pub = Publication.all
       Moderator.all.each do |m|
         if m.approved?
           @moderators_a += 1
@@ -28,6 +29,27 @@ class DashboardController < ApplicationController
       query = Subscription.select(:user_id).group(:user_id).count
       selection = select_from query
       @avg_s = selection.inject(0.0) { |sum, el| sum + el[1] } / selection.size
+
+      @total_pos = 0
+      @total_neg = 0
+      Vote.all.each do |v|
+        if v.positive?
+          @total_pos += 1
+        else
+          @total_neg += 1
+        end
+      end
+      VoteComment.all.each do |v|
+        if v.positive?
+          @total_pos += 1
+        else
+          @total_neg += 1
+        end
+      end
+      @total_votes_p = {}
+      @total_votes_n = {}
+      @total_votes_p[''] = @total_pos
+      @total_votes_n[''] = @total_neg
     else
       redirect_to :home
     end
