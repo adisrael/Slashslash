@@ -24,6 +24,7 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    print comment_params
     current_user.reputation += 1
     if comment_params[:commentable_type] == 'publication'
       publication = Publication.find(comment_params[:commentable_id])
