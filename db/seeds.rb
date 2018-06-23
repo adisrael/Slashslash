@@ -85,7 +85,29 @@ pubs_array = Array.new
 pubs_array.push(p1, p2, p3, p4, p5, p6)
 pub = Publication.create({
           numero: i,
-          title: Faker::MostInterestingManInTheWorld.quote,
+          title: 'A quote for you!',
+          content: Faker::MostInterestingManInTheWorld.quote,
+          user: users_array.sample,
+          forum: quotes,
+          votos:0,
+          created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
+          })
+pubs_array.push(pub)
+i += 1
+pub = Publication.create({
+          numero: i,
+          title: 'Interesting Knowledge',
+          content: Faker::MostInterestingManInTheWorld.quote,
+          user: users_array.sample,
+          forum: quotes,
+          votos:0,
+          created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
+          })
+pubs_array.push(pub)
+i += 1
+pub = Publication.create({
+          numero: i,
+          title: 'Most Interesting Man In The World!',
           content: Faker::Lorem.sentence,
           user: users_array.sample,
           forum: quotes,
@@ -96,8 +118,8 @@ pubs_array.push(pub)
 i += 1
 pub = Publication.create({
           numero: i,
-          title: Faker::MostInterestingManInTheWorld.quote,
-          content: Faker::Lorem.sentence,
+          title: 'Found this online somewhere!',
+          content: Faker::Matz.quote,
           user: users_array.sample,
           forum: quotes,
           votos:0,
@@ -107,30 +129,8 @@ pubs_array.push(pub)
 i += 1
 pub = Publication.create({
           numero: i,
-          title: Faker::MostInterestingManInTheWorld.quote,
-          content: Faker::Lorem.sentence,
-          user: users_array.sample,
-          forum: quotes,
-          votos:0,
-          created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
-          })
-pubs_array.push(pub)
-i += 1
-pub = Publication.create({
-          numero: i,
-          title: Faker::Matz.quote,
-          content: Faker::Lorem.sentence,
-          user: users_array.sample,
-          forum: quotes,
-          votos:0,
-          created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
-          })
-pubs_array.push(pub)
-i += 1
-pub = Publication.create({
-          numero: i,
-          title: Faker::Matz.quote,
-          content: Faker::Lorem.sentence,
+          title: 'I\'ve always liked this one!',
+          content: Faker::Matz.quote,
           user: users_array.sample,
           forum: quotes,
           votos:0,
@@ -142,7 +142,8 @@ i += 1
 
 pub = Publication.create({
           numero: i,
-          title: Faker::ChuckNorris.fact,
+          title: 'Wow!',
+          content: Faker::ChuckNorris.fact,
           user: users_array.sample,
           forum: chn,
           votos:0,
@@ -152,7 +153,8 @@ pubs_array.push(pub)
 i += 1
 pub = Publication.create({
           numero: i,
-          title: Faker::ChuckNorris.fact,
+          title: 'Awesome!',
+          content: Faker::ChuckNorris.fact,
           user: users_array.sample,
           forum: chn,
           votos:0,
@@ -163,7 +165,8 @@ i += 1
 
 pub = Publication.create({
           numero: i,
-          title: Faker::HarryPotter.quote,
+          title: 'I love hp so much! <3',
+          content: Faker::HarryPotter.quote,
           user: users_array.sample,
           forum: hp,
           votos:0,
@@ -173,7 +176,8 @@ pubs_array.push(pub)
 i += 1
 pub = Publication.create({
           numero: i,
-          title: Faker::HarryPotter.quote,
+          title: 'Wizards Unite!',
+          content: Faker::HarryPotter.quote,
           user: users_array.sample,
           forum: hp,
           votos:0,
@@ -183,7 +187,8 @@ pubs_array.push(pub)
 i += 1
 pub = Publication.create({
           numero: i,
-          title: Faker::HarryPotter.house,
+          title: 'Not for muggles...',
+          content: Faker::HarryPotter.house,
           user: users_array.sample,
           forum: hp,
           votos:0,
@@ -194,7 +199,8 @@ i += 1
 
 pub = Publication.create({
           numero: i,
-          title: Faker::GameOfThrones.quote,
+          title: 'Love this show!',
+          content: Faker::GameOfThrones.quote,
           user: users_array.sample,
           forum: got,
           votos:0,
@@ -204,7 +210,8 @@ pubs_array.push(pub)
 i += 1
 pub = Publication.create({
           numero: i,
-          title: Faker::GameOfThrones.quote,
+          title: 'DominGoT',
+          content: Faker::GameOfThrones.quote,
           user: users_array.sample,
           forum: got,
           votos:0,
@@ -224,7 +231,8 @@ pubs_array.push(pub)
 i += 1
 pub = Publication.create({
           numero: i,
-          title: Faker::GameOfThrones.house,
+          title: 'Best house in Westeros!',
+          content: Faker::GameOfThrones.house,
           user: users_array.sample,
           forum: got,
           votos:0,
@@ -235,7 +243,8 @@ i += 1
 
 pub = Publication.create({
           numero: i,
-          title: Faker::Friends.quote,
+          title: 'Nostalgia',
+          content: Faker::Friends.quote,
           user: users_array.sample,
           forum: tv,
           votos:0,
@@ -245,7 +254,8 @@ pubs_array.push(pub)
 i += 1
 pub = Publication.create({
           numero: i,
-          title: Faker::Friends.quote,
+          title: 'Hahaha remember this! XD',
+          content: Faker::Friends.quote,
           user: users_array.sample,
           forum: tv,
           votos:0,
@@ -255,7 +265,74 @@ pubs_array.push(pub)
 i += 1
 pub = Publication.create({
           numero: i,
-          title: Faker::Friends.quote,
+          title: 'LOL',
+          content: Faker::Friends.quote,
+          user: users_array.sample,
+          forum: tv,
+          votos:0,
+          created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
+          })
+pubs_array.push(pub)
+i += 1
+pub = Publication.create({
+          numero: i,
+          title: 'Best TV show ever!!',
+          content: Faker::Friends.quote,
+          user: users_array.sample,
+          forum: tv,
+          votos:0,
+          created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
+          })
+pubs_array.push(pub)
+i += 1
+pub = Publication.create({
+          numero: i,
+          title: 'Any Rick & Morty fans here??',
+          content: Faker::RickAndMorty.quote,
+          user: users_array.sample,
+          forum: tv,
+          votos:0,
+          created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
+          })
+pubs_array.push(pub)
+i += 1
+pub = Publication.create({
+          numero: i,
+          title: 'Can\'t stop laughing at this! lol',
+          content: Faker::RickAndMorty.quote,
+          user: users_array.sample,
+          forum: tv,
+          votos:0,
+          created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
+          })
+pubs_array.push(pub)
+i += 1
+pub = Publication.create({
+          numero: i,
+          title: 'Seinfeld!',
+          content: Faker::Seinfeld.quote,
+          user: users_array.sample,
+          forum: tv,
+          votos:0,
+          created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
+          })
+pubs_array.push(pub)
+i += 1
+pub = Publication.create({
+          numero: i,
+          title: 'HIMYM!!!',
+          content: Faker::HowIMetYourMother.quote,
+          user: users_array.sample,
+          forum: tv,
+          votos:0,
+          created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
+          })
+pubs_array.push(pub)
+i += 1
+pub = Publication.create({
+          numero: i,
+          title: 'I love Barney!',
+          content: Faker::HowIMetYourMother.quote,
           user: users_array.sample,
           forum: tv,
           votos:0,
@@ -264,9 +341,11 @@ pub = Publication.create({
 pubs_array.push(pub)
 i += 1
 
+
 pub = Publication.create({
           numero: i,
-          title: Faker::Dog.meme_phrase,
+          title: 'Don\'t you just love doggies!',
+          content: Faker::Dog.sound,
           user: users_array.sample,
           forum: dog,
           votos:0,
@@ -276,7 +355,8 @@ pubs_array.push(pub)
 i += 1
 pub = Publication.create({
           numero: i,
-          title: Faker::Dog.meme_phrase,
+          title: 'What\'s your fav dog breed?',
+          content: Faker::Dog.breed,
           user: users_array.sample,
           forum: dog,
           votos:0,
@@ -314,7 +394,7 @@ for i in 0..num_comments
             user: users_array.sample,
             commentable_type: 'Publication',
             commentable_id: prng.rand(Publication.all.count),
-            content: Faker::MostInterestingManInTheWorld.quote,
+            content: Faker::HowIMetYourMother.catch_phrase,
             votos: 0,
             created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
   })
@@ -326,7 +406,7 @@ for i in 0..10
             user: users_array.sample,
             commentable_type: 'Comment',
             commentable_id: prng.rand(num_comments),
-            content: Faker::MostInterestingManInTheWorld.quote,
+            content: Faker::HowIMetYourMother.high_five,
             votos: 0,
             created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
   })
