@@ -22,7 +22,7 @@ class HomeController < ApplicationController
     @top_publications = Publication.order(:votos).reverse_order.paginate(:page => params[:page], per_page: 5)
   end
   def top_users
-    @top_users = User.order(:reputation).reverse_order
+    @top_users = User.order(:reputation).reverse_order.paginate(:page => params[:page], per_page: 5)
   end
   def top_subscribed
     query = Subscription.select(:forum_id).group(:forum_id).count
