@@ -38,6 +38,7 @@ gem 'mini_magick'
 
 gem 'chartkick'
 gem 'groupdate'
+gem 'omniauth-facebook'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
