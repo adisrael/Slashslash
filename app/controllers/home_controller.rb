@@ -27,12 +27,13 @@ class HomeController < ApplicationController
   def top_subscribed
     query = Subscription.select(:forum_id).group(:forum_id).count
     topN = top query, Forum.all.length
-    @popular_forums = []
+    pop_forums = []
     topN.each do |data|
       forum = Forum.find(data[0])
       forum.subscriptors = data[1]
-      @popular_forums << forum
-    end  
+      pop_forums << forum
+    end
+    @popular_forums = pop_forums.paginate(:page => params[:page], per_page: 5)
   end
   def search_forum
     @home = false
