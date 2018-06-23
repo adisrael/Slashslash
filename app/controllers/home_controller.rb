@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'will_paginate' 
 
 class HomeController < ApplicationController
   def index
@@ -15,6 +16,7 @@ class HomeController < ApplicationController
     end
   end
   def top_forums
+    @paginate_formus = Forum.paginate(:page => params[:page], per_page: 2)
     @top_forums = Forum.order(:votos).reverse_order
   end
   def top_publications
