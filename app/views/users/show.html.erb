@@ -37,7 +37,7 @@
   <%= publication.id %>. <%= link_to publication.title, publication %><br>
   <% end %>
   <% if @user.publications.size == 0 %>
-  	<em> The user has no publications </em>
+    <em> The user has no publications </em>
   <% end %>
 </p>
 
@@ -49,7 +49,7 @@
   <%= subscription.forum.id %>. <%= link_to subscription.forum.title, subscription.forum %><br>
   <% end %>
   <% if @user.subscriptions.size == 0 %>
-  	<em> The user has no subscriptions </em>
+    <em> The user has no subscriptions </em>
   <% end %>
 </p>
 
@@ -65,7 +65,7 @@
     <% end %>
   <% end %>
   <% if count.zero? %>
-  	<em> The user doesn't moderate any forums. </em>
+    <em> The user doesn't moderate any forums. </em>
   <% end %>
 </p>
 <p>
@@ -80,7 +80,7 @@
     <% end %>
   <% end %>
   <% if count.zero? %>
-  	<em> The user haven't requested to moderate any forums. </em>
+    <em> The user haven't requested to moderate any forums. </em>
   <% end %>
 </p>
 <p>
@@ -92,7 +92,7 @@
   <%= publication.id %>. <%= link_to publication.title, publication %><br>
   <% end %>
   <% if @user.favorite_publications.size == 0 %>
-  	<em> The user has no starred publications </em>
+    <em> The user has no starred publications </em>
   <% end %>
 </p>
 
