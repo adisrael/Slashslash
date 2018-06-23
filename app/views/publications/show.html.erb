@@ -1,9 +1,6 @@
 <% provide(:title, @publication.title) %>
 <div class="row publication-meta">
     <p>
-      <strong>
-        <%= link_to @publication.forum.title, @publication.forum %>.
-      </strong>
       Created by
       <%= link_to @publication.user.userName, @publication.user %>
       <% hours = (((Time.zone.now - @publication.created_at) / 3600).to_i) %>
@@ -16,126 +13,182 @@
       <% end %>
     </p>
 </div>
-
-
 <div class="row">
-  <div class="col-xs-1 publication-score">
-    <div class="row arrows">
-      <%= form_for @vote, url: votes_path, method: :post do |f| %>
-      <%= f.hidden_field :user_id, value: current_user.id  %>
-      <%= f.hidden_field :publication_id, value: @publication.id  %>
-      <%= f.hidden_field :positive, value: true  %>
-      <button
-        type="submit"
-        class="submit-icon-green <%= @vote.new_record? ?  '' : @vote.positive ? 'green' : ''  %>"
-        <%= @vote.new_record? ?  '' : @vote.positive ? 'disabled' : ''  %>>
-        <span class="glyphicon glyphicon-chevron-up"></span>
-      </button>
-      <% end %>
-      <% pos = @publication.votos>=0 %>
-    </div>
-    <div class="row arrows">
-      <strong><%=@publication.votos%></strong>
-    </div>
-    <div class="row arrows">
-      <%= form_for @vote, url: votes_path, method: :post do |f| %>
-      <%= f.hidden_field :user_id, value: current_user.id  %>
-      <%= f.hidden_field :publication_id, value: @publication.id  %>
-      <%= f.hidden_field :positive, value: false  %>
-      <button
-        type="submit"
-        class="submit-icon-red <%= @vote.new_record? ?  '' : @vote.positive ? '' : 'red'  %>"
-        <%= @vote.new_record? ?  '' : @vote.positive ? '' : 'disabled'  %>>
-        <span class="glyphicon glyphicon-chevron-down"></span>
-      </button>
-      <% end %>
-    </div>
-    <div class="row arrows">
-      <% if current_user.favorite_publications.include?(@publication) %>
-        <%= form_for @favorite, method: :delete do |f| %>
-        <%= f.hidden_field :publication_id, value: @publication.id  %>
-        <%= f.hidden_field :user_id, value: current_user.id  %>
-        <button type="submit" class="submit-icon-full">
-          <span class="glyphicon glyphicon-star"></span>
-        </button>
-        <% end  %>
-      <% else %>
-        <%= form_for @favorite do |f| %>
-        <%= f.hidden_field :publication_id, value: @publication.id  %>
-        <%= f.hidden_field :user_id, value: current_user.id  %>
-        <button type="submit" class="submit-icon-empty">
-          <span class="glyphicon glyphicon-star-empty"></span>
-        </button>
-        <% end  %>
-      <% end  %>
-    </div>
-  </div>
-  <div class="col-xs-11">
-    <h1>
-      <strong><%= @publication.title %> </strong>
-    </h1>
-  </div>
-</div>
+  <div class="col-xs-9">
+    <div class="row">
+      <div class="col-xs-1 publication-score">
+        <div class="row arrows">
+          <%= form_for @vote, url: votes_path, method: :post do |f| %>
+          <%= f.hidden_field :user_id, value: current_user.id  %>
+          <%= f.hidden_field :publication_id, value: @publication.id  %>
+          <%= f.hidden_field :positive, value: true  %>
+          <button
+            type="submit"
+            class="submit-icon-green <%= @vote.new_record? ?  '' : @vote.positive ? 'green' : ''  %>"
+            <%= @vote.new_record? ?  '' : @vote.positive ? 'disabled' : ''  %>>
+            <span class="glyphicon glyphicon-chevron-up"></span>
+          </button>
+          <% end %>
+        </div>
+        <div class="row arrows">
+          <p>
+            <strong><%=@publication.votos%></strong>
+          </p>
+        </div>
+        <div class="row arrows">
+          <%= form_for @vote, url: votes_path, method: :post do |f| %>
+          <%= f.hidden_field :user_id, value: current_user.id  %>
+          <%= f.hidden_field :publication_id, value: @publication.id  %>
+          <%= f.hidden_field :positive, value: false  %>
+          <button
+            type="submit"
+            class="submit-icon-red <%= @vote.new_record? ?  '' : @vote.positive ? '' : 'red'  %>"
+            <%= @vote.new_record? ?  '' : @vote.positive ? '' : 'disabled'  %>>
+            <span class="glyphicon glyphicon-chevron-down"></span>
+          </button>
+          <% end %>
+        </div>
+        <div class="row arrows">
+          <% if current_user.favorite_publications.include?(@publication) %>
+            <%= form_for @favorite, method: :delete do |f| %>
+            <%= f.hidden_field :publication_id, value: @publication.id  %>
+            <%= f.hidden_field :user_id, value: current_user.id  %>
+            <button type="submit" class="submit-icon-full">
+              <span class="glyphicon glyphicon-star"></span>
+            </button>
+            <% end  %>
+          <% else %>
+            <%= form_for @favorite do |f| %>
+            <%= f.hidden_field :publication_id, value: @publication.id  %>
+            <%= f.hidden_field :user_id, value: current_user.id  %>
+            <button type="submit" class="submit-icon-empty">
+              <span class="glyphicon glyphicon-star-empty"></span>
+            </button>
+            <% end  %>
+          <% end  %>
+        </div>
+      </div>
+      <div class="col-xs-11">
+        <h1 id="publication-title">
+          <strong><%= @publication.title %> </strong>
+        </h1>
+        <p style="font-size:110%;">
+          <%= @publication.content %>
+        </p>
+        <% if @publication.content_type == 'poll' %>
+          <div class="poll-container">
+            <h3><%= @publication.poll.question %> </h3>
+            <%if PollVote.where(user_id: current_user.id, poll_id: @publication.poll.id).to_a.empty? %>
+              <%= form_tag poll_vote_path do  %>
+              <%= hidden_field_tag :poll_id, @publication.poll.id %>
+                <% @publication.poll.poll_options.each do |option| %>
+                  <button type="submit" name="vote" class="btn btn-default" value="<%= option.id %>"><%= option.text %> </button><br>
+                <% end %>
+              <% end %>
+            <% else %>
+              <% @publication.poll.poll_options.each do |option| %>
+              <% value = (option.votos*100/@publication.poll.total).to_i %>
+              <div class="progress">
+                <div class="progress-bar" style="width: <%=value %>%;" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100">
+                  <span><%= option.text %></span>
+                  <span class="percent"><%= value %>% </span>
+                </div>
+              </div>
+                <% end %>
+            <% end %>
+          </div>
 
-<div class="row">
-  <div class="col-xs-11 col-xs-offset-1">
-    <p style="font-size:110%;">
-      <%= @publication.content %>
-    </p>
-    <% if @publication.content_type == 'poll' %>
-      <h3><%= @publication.poll.question %> </h3>
-      <%if PollVote.where(user_id: current_user.id, poll_id: @publication.poll.id).to_a.empty? %>
-        <%= form_tag poll_vote_path do  %>
-        <%= hidden_field_tag :poll_id, @publication.poll.id %>
-          <% @publication.poll.poll_options.each do |option| %>
-            <button type="submit" name="vote" class="btn btn-default" value="<%= option.id %>"><%= option.text %> </button><br>
+        <% end %>
+        <% unless @publication.image.nil? %>
+        <img src="<%= @publication.image %> " alt="">
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Comment Section</h3>
+        <ul class="comment-list">
+          <%= render partial: 'comments/comment', collection: @publication.comments.order(:created_at) %>
+        </ul>
+        <% if (user_signed_in?) %>
+          <%= form_for @comment do |f| %>
+          <%= f.text_field :content  %>
+          <%= f.hidden_field :user_id, value: current_user.id  %>
+          <%= f.hidden_field :commentable_type, value: 'publication'  %>
+          <%= f.hidden_field :commentable_id, value: @publication.id  %>
+          <%= f.submit class: 'btn btn-default'%>
           <% end %>
         <% end %>
-      <% else %>
-        <% @publication.poll.poll_options.each do |option| %>
-        <% value = (option.votos*100/@publication.poll.total).to_i %>
-        <div class="progress">
-          <div class="progress-bar" style="width: <%=value %>%;" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100"><p> <%= option.text %></p></div>
-          <p class="percent"><%= value %>%</p>
-        </div>
+
+
+      <% if user_signed_in? %>
+        <% if @publication.user == current_user %>
+          <%= link_to 'Edit', edit_publication_path(@publication) %> |
+        <% end %>
+        <% if check_credentials current_user, @publication %>
+        <%= link_to 'Destroy', @publication, method: :delete, data: { confirm: 'Are you sure?' } %> |
+        <% end %>
+      <% end %>
+      <%= link_to 'Back', @publication.forum %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-3 publication-sidebar">
+    <div class="sidebar-container">
+      <div class="sidebar-topbar"></div>
+      <div class="sidebar-content">
+        <h3>
+          <%= link_to @publication.forum.title, @publication.forum %>
+        </h3>
+        <p><strong><%= @publication.forum.subscriptors %> Subscribers</strong> </p>
+        <p><%= @publication.forum.description %> </p>
+        <% if  user_signed_in? %>
+          <% current = Subscription.where(forum: @publication.forum, user: current_user).take %>
+          <% subscription = current.nil? ? Subscription.new : current %>
+          <% if current_user.forums.include?(@publication.forum) %>
+            <%= form_for subscription, method: :delete do |f| %>
+            <%= f.hidden_field :forum_id, value: @publication.forum.id  %>
+            <%= f.hidden_field :user_id, value: current_user.id  %>
+            <%= f.submit 'Unsubscribe', class: 'btn btn-warning' %>
+            <% end %>
+          <% else %>
+            <%= form_for subscription do |f| %>
+            <%= f.hidden_field :forum_id, value: @publication.forum.id  %>
+            <%= f.hidden_field :user_id, value: current_user.id  %>
+            <%= f.submit 'Subscribe', class: 'btn btn-warning' %>
+            <% end  %>
           <% end %>
-      <% end %>
-    <% end %>
-    <% unless @publication.image.nil? %>
-    <img src="<%= @publication.image %> " alt="">
-    <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="sidebar-container">
+      <div class="sidebar-topbar"></div>
+      <div class="sidebar-content">
+        <h3>Other Publication</h3>
+        <% @publication.forum.publications.each do |publication| %>
+          <% if publication != @publication %>
+            <%= link_to publication.title, publication %><br>
+
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="sidebar-container">
+      <div class="sidebar-topbar"></div>
+      <div class="sidebar-content">
+        <h3>Moderators</h3>
+        <% @publication.forum.moderator_users.each do |user| %>
+            <%= link_to user.userName, user %><br>
+
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-xs-12">
-    <h3>Comment Section</h3>
-    <ul class="comment-list">
-      <%= render partial: 'comments/comment', collection: @publication.comments.order(:created_at) %>
-    </ul>
-  </div>
-</div>
-
-    <% if (user_signed_in?) %>
-      <%= form_for @comment do |f| %>
-      <%= f.text_field :content  %>
-      <%= f.hidden_field :user_id, value: current_user.id  %>
-      <%= f.hidden_field :commentable_type, value: 'publication'  %>
-      <%= f.hidden_field :commentable_id, value: @publication.id  %>
-      <%= f.submit class: 'btn btn-default'%>
-      <% end %>
-    <% end %>
 
 
-</p>
-<% if user_signed_in? %>
-  <% if @publication.user == current_user %>
-    <%= link_to 'Edit', edit_publication_path(@publication) %> |
-  <% end %>
-  <% if check_credentials current_user, @publication %>
-  <%= link_to 'Destroy', @publication, method: :delete, data: { confirm: 'Are you sure?' } %> |
-  <% end %>
-<% end %>
-<%= link_to 'Back', @publication.forum %>
+
+
 <script type="text/javascript">
 $(document).ready(()=>{
   $('.reply-link').click(function(){

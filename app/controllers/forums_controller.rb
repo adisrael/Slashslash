@@ -128,12 +128,8 @@ class ForumsController < ApplicationController
         option.save
       end
     end
-    puts 'start'
     poll.poll_options.each do |option|
-      puts 'something'
-      puts option
     end
-    puts 'finish'
     redirect_to publication
 
   end

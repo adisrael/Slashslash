@@ -5,6 +5,7 @@
 .arrows{
   margin: 0 auto;
   text-align: center;
+  padding-left: 10px;
   .score{
     padding-left: 8px;
     padding-right: 8px;
@@ -30,10 +31,55 @@
 }
 
 .col-xs-1.publication-score{
-  padding-left: 20px;
-  padding-right: 0;
+  // padding-left: 20px;
+  // padding-right: 0;
+  padding: 0;
   width: 5%;
   margin-top: 20px;
+  button {
+    padding: 0;
+  }
+  text-align: center;
+}
+
+.publication-sidebar{
+  background-color: rgb(141, 158, 176);
+  padding-bottom: 100%;
+  margin-bottom: -100%;
+  overflow: hidden;
+}
+
+.sidebar-container{
+  background-color: white;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 0px;
+  margin-top: 40px;
+}
+
+.sidebar-topbar{
+  margin: 0;
+  background-color: rgb(24, 40, 70);
+  border-radius: 5px 5px 0 0;
+  height: 20px;
+}
+
+.sidebar-content{
+  padding: 5px;
+  text-align: center;
+  h3{
+    margin: 0;
+  }
+  p{
+    margin: 5px;
+  }
+  .btn {
+    width: 80%;
+  }
+}
+
+#publication-title{
+  margin-top: 30px;
 }
 
 .col-xs-11{
@@ -67,17 +113,29 @@
 }
 
 .progress{
-  width: 50%;
+  // width: 50%;
   .progress-bar{
     color:  rgb(65, 65, 65);
-    p {
-      padding-left: 10px;
-      text-align: left;
-    }
   }
   .percent{
     color:  rgb(65, 65, 65);
-    right: 52%;
+    padding-left: 35%;
+  }
+  span {
     position: absolute;
+    display: block;
+    padding-left: 10px;
+  }
+}
+
+.poll-container{
+  margin: 0 auto;
+  width: 55%;
+  padding-right: 10%;
+  button{
+    width: 100%;
+  }
+  h3{
+    text-align: center;
   }
 }
