@@ -6,6 +6,8 @@
     <%= text_field_tag :search_publication, params[:search_publication], placeholder: "Search Publication" %>
     <%= submit_tag "Search", name: nil, class: 'btn-primary' %>
     <% end %>
+    <h3><%= link_to 'Top Publications', top_publications_path%></h3>
+
   </div>
 </div>
 

@@ -6,9 +6,10 @@
     <%= text_field_tag :search_forum, params[:search_forum], placeholder: "Search Forums" %>
     <%= submit_tag "Search", name: nil, class: 'btn-primary' %>
     <% end %>
+    <h3><%= link_to 'Top Forums', top_forums_path%></h3>
     <% unless @forums.nil?  && @users.nil? %>
       <% if user_signed_in? && current_user.role.zero? %>
-        <%= link_to 'New Forum', new_forum_path %>
+        <h3><%= link_to 'New Forum', new_forum_path %></h3>
       <% end %>
     <% end %>
   </div>
