@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user1 = User.create({userName: 'yanavon', firstName: 'Yoav', lastName:'Navon',role:0,email:'yanavon@uc.cl', password:'asdfasdf', reputation:0})
+user1 = User.create({userName: 'yanavon', firstName: 'Yoav', lastName:'Navon',role:0,email:'yanavon@uce.cl', password:'asdfasdf', reputation:0})
 user2 = User.create({userName: 'adisrael', firstName: 'Alex', lastName:'Israel',role:0,email:'adisrael@uc.cl', password:'asdfasdf', reputation:0})
-user3 = User.create({userName: 'asdegoyeneche', firstName: 'Alfredo', lastName:'De Goyeneche',role:0,email:'asdegoyeneche@uc.cl', password:'asdfasdf', reputation:0})
+user3 = User.create({userName: 'asdegoyeneche', firstName: 'Alfredo', lastName:'De Goyeneche',role:0,email:'asdegoyeneche@uc.cl', password:'asdfasdf', reputation:10})
 user4 = User.create(userName: 'regular', firstName: 'aname', lastName: 'anothername', role: 1, email: 'regular@uc.cl', password: 'asdfasdf', reputation: 0)
 sports = Forum.create({title: 'Sports', description: 'This is a forum for sports enthuast', votos:0})
 movies = Forum.create({title: 'Movies', description: 'This is a forum for movies enthuast', votos:0})
