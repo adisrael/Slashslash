@@ -12,22 +12,6 @@ class PublicationsController < ApplicationController
   # GET /publications/1
   # GET /publications/1.json
   def show
-    @time = Time.zone.now
-    @comment = Comment.new
-    vote = Vote.where(user_id: current_user.id,
-                      publication_id: @publication.id).to_a
-    @vote = if vote.empty?
-              Vote.new
-            else
-              vote[0]
-            end
-    @vote_comment = VoteComment.new
-    current = Favorite.where(publication: @publication, user: current_user).take
-    @favorite = if current.nil?
-                  Favorite.new
-                else
-                  current
-                end
     subscriptors = Subscription.where(forum: @publication.forum).count
     @publication.forum.subscriptors = subscriptors
     if @publication.content_type == 'poll'
@@ -36,6 +20,24 @@ class PublicationsController < ApplicationController
       poll.poll_options.each do |option|
         poll.total += option.votos
       end
+    end
+    @time = Time.zone.now
+    if user_signed_in?
+      @comment = Comment.new
+      vote = Vote.where(user_id: current_user.id,
+                        publication_id: @publication.id).to_a
+      @vote = if vote.empty?
+                Vote.new
+              else
+                vote[0]
+              end
+      @vote_comment = VoteComment.new
+      current = Favorite.where(publication: @publication, user: current_user).take
+      @favorite = if current.nil?
+                    Favorite.new
+                  else
+                    current
+                  end
     end
   end
 
