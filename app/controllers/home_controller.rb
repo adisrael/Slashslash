@@ -16,13 +16,13 @@ class HomeController < ApplicationController
     end
   end
   def top_forums
-    @paginate_formus = Forum.order(:votos).reverse_order.paginate(:page => params[:page], per_page: 2)
+    @top_forums = Forum.order(:votos).reverse_order.paginate(:page => params[:page], per_page: 5)
   end
   def top_publications
-    @top_publications = Publication.order(:votos).reverse_order
+    @top_publications = Publication.order(:votos).reverse_order.paginate(:page => params[:page], per_page: 5)
   end
   def top_users
-    @top_users = User.order(:reputation).reverse_order 
+    @top_users = User.order(:reputation).reverse_order
   end
   def top_subscribed
     query = Subscription.select(:forum_id).group(:forum_id).count
