@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 <li class="">
   <div class="row">
     <div class="col-xs-1 publication-score">
@@ -79,6 +80,51 @@
 
   </div>
 
+</li>
+
+<% else %>
+
+<li class="">
+  <div class="row">
+    <div class="col-xs-1 publication-score">
+      <div class="row arrows">
+        <p>
+          <strong><%= comment.votos %> </strong>
+        </p>
+      </div>
+    </div>
+    <div class="col-xs-11">
+      <div class="comment-box">
+        <div class="comment-small">
+          <%= link_to comment.user.userName, comment.user %> ·
+          <% hours = (((@time - comment.created_at) / 3600).to_i) %>
+          <% if  hours.zero? %>
+          Just now
+          <% elsif  hours < 24 %>
+          <%= hours %> hours ago
+          <% else %>
+          <%= (hours / 24).to_i%> days ago
+          <% end %>
+        </div>
+        <p> <%= comment.content %> </p>
+        <div class="comment-small">
+          <% if (user_signed_in?) %>
+          <% if check_credentials current_user, @publication %>
+          <%= link_to 'Delete', comment, method: :delete %>
+          <% end %>
+          <% end %>
+          <a class="reply-link" id="<%= comment.id %>" >Reply</a>
+        </div>
+      </div>
+      <ul class="comment-list">
+          <%= render partial: 'comments/comment', collection: comment.comments.order(:created_at) %>
+      </ul>
+    </div>
+
+  </div>
+
 
 
 </li>
+
+<% end %>

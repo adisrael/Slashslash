@@ -221,7 +221,8 @@ pubs_array.push(pub)
 i += 1
 pub = Publication.create({
           numero: i,
-          title: Faker::GameOfThrones.dragon,
+          title: 'DRAGONS!!',
+          content: Faker::GameOfThrones.dragon,
           user: users_array.sample,
           forum: got,
           votos:0,
