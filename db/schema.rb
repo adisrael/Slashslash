@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20180622221123) do
     t.integer "role"
     t.integer "reputation"
     t.string "image"
+    t.integer "facebook_registered"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false

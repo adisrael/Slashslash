@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
   before_create :default_role
   before_create :default_reputation
+  before_create :default_facebook_registered
 
   def self.search(search)
     where('userName ILIKE ? OR lastName ILIKE ? OR firstName ILIKE ?',
@@ -27,6 +28,10 @@ class User < ApplicationRecord
 
   def default_role
     self.role ||= 2
+  end
+
+  def default_facebook_registered
+    self.facebook_registered = 0
   end
 
   def accepted(forum_id)
@@ -56,6 +61,7 @@ class User < ApplicationRecord
       user.firstName = auth.info.name.match(" ").pre_match   # assuming the user model has a name
       user.lastName = auth.info.name.match(" ").post_match   # assuming the user model has a name
       user.image = auth.info.image # assuming the user model has an image
+      user.facebook_registered = 1
     end
   end
 
