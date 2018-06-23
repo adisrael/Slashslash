@@ -29,7 +29,6 @@
             <span class="glyphicon glyphicon-chevron-up"></span>
           </button>
           <% end %>
-          <% pos = @publication.votos>=0 %>
         </div>
         <div class="row arrows">
           <p>
@@ -90,8 +89,10 @@
               <% @publication.poll.poll_options.each do |option| %>
               <% value = (option.votos*100/@publication.poll.total).to_i %>
               <div class="progress">
-                <div class="progress-bar" style="width: <%=value %>%;" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100"><p> <%= option.text %></p></div>
-                <p class="percent"><%= value %>%</p>
+                <div class="progress-bar" style="width: <%=value %>%;" role="progressbar" aria-valuenow="<%= value %>" aria-valuemin="0" aria-valuemax="100">
+                  <span><%= option.text %></span>
+                  <span class="percent"><%= value %>% </span>
+                </div>
               </div>
                 <% end %>
             <% end %>

@@ -5,6 +5,7 @@
 .arrows{
   margin: 0 auto;
   text-align: center;
+  padding-left: 10px;
   .score{
     padding-left: 8px;
     padding-right: 8px;
@@ -112,18 +113,18 @@
 }
 
 .progress{
-  width: 50%;
+  // width: 50%;
   .progress-bar{
     color:  rgb(65, 65, 65);
-    p {
-      padding-left: 10px;
-      text-align: left;
-    }
   }
   .percent{
     color:  rgb(65, 65, 65);
-    right: 52%;
+    padding-left: 35%;
+  }
+  span {
     position: absolute;
+    display: block;
+    padding-left: 10px;
   }
 }
 
