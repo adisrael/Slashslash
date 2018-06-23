@@ -137,7 +137,15 @@ class ForumsController < ApplicationController
     render 'publications/new_link'
   end
 
-  def create_link; end
+  def create_link
+    forum = Forum.find(params[:id])
+    publication = Publication.new(title: params[:publication_title], forum: forum)
+    publication.content = params[:url]
+    publication.content_type = 'link'
+    publication.user = current_user
+    publication.save
+    redirect_to publication
+  end
 
   private
 
