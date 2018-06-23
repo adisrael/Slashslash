@@ -73,9 +73,13 @@
           <h1 id="publication-title">
             <strong><%= @publication.title %> </strong>
           </h1>
+          <% if @publication.content_type == 'link' %>
+            <a href="<%= @publication.content %> "><%= @publication.content %> </a>
+          <% else %>
           <p style="font-size:110%;">
             <%= @publication.content %>
           </p>
+          <% end %>
           <% if @publication.content_type == 'poll' %>
             <div class="poll-container">
               <h3><%= @publication.poll.question %> </h3>

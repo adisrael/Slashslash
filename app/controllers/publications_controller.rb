@@ -98,7 +98,7 @@ class PublicationsController < ApplicationController
     @publication.destroy
     respond_to do |format|
       format.html do
-        redirect_to forum_path,\
+        redirect_to forum,\
                     notice: 'Publication was successfully destroyed.'
       end
       format.json { head :no_content }
@@ -113,7 +113,6 @@ class PublicationsController < ApplicationController
     vote = PollVote.new(poll: poll, poll_option: option, user: current_user)
     vote.save
     redirect_to poll.publication
-
   end
 
   private

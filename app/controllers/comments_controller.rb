@@ -62,7 +62,7 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     root = @comment
-    root = comment.commentable while root.commentable_type != 'Publication'
+    root = @comment.commentable while root.commentable_type != 'Publication'
     publication = root.commentable
     @comment.destroy
     respond_to do |format|
