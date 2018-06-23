@@ -14,6 +14,7 @@ class HomeController < ApplicationController
       forum.subscriptors = data[1]
       @popular_forums << forum
     end
+    @popular_forums.reverse!
   end
 
   def top_forums
@@ -37,9 +38,8 @@ class HomeController < ApplicationController
       forum.subscriptors = data[1]
       pop_forums << forum
     end
-    @popular_forums = pop_forums.reverse.paginate(:page => params[:page], per_page: 5,)
+    @popular_forums = pop_forums.reverse.paginate(:page => params[:page], per_page: 5)
   end
-
 
   def search_forum
     @home = false
