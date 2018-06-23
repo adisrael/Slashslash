@@ -1,3 +1,4 @@
+<br>
 <div class="requests">
   <% if @requests.empty? %>
   <div class="row well">
@@ -20,3 +21,9 @@
     <% end %>
   <% end %>
 </div>
+
+<center>
+<div class="digg_pagination">
+<%= will_paginate @requests %>
+</div>
+</center>
