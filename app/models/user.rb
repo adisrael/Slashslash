@@ -57,13 +57,12 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.userName = auth.info.name.gsub(' ', '_')   # assuming the user model has a name
+      user.userName = auth.info.name.downcase.gsub(' ', '_')   # assuming the user model has a name
       user.firstName = auth.info.name.match(" ").pre_match   # assuming the user model has a name
       user.lastName = auth.info.name.match(" ").post_match   # assuming the user model has a name
       user.image = auth.info.image # assuming the user model has an image
       user.facebook_registered = 1
     end
   end
-
 
 end
