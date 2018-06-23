@@ -1,6 +1,6 @@
 
 <div class="row top">
-  <h2>Top Forums</h2>
+<h2>Top Forums</h2>
   <% @paginate_formus.each do |forum| %>
     <div class=" top-results">
       <div class="search-result well">
@@ -14,5 +14,5 @@
 </div>
 
 
-
-<%= will_paginate @paginate_formus %>
+<center><%= will_paginate @paginate_formus %>
+</center>

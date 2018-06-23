@@ -16,8 +16,7 @@ class HomeController < ApplicationController
     end
   end
   def top_forums
-    @paginate_formus = Forum.paginate(:page => params[:page], per_page: 2)
-    @top_forums = Forum.order(:votos).reverse_order
+    @paginate_formus = Forum.order(:votos).reverse_order.paginate(:page => params[:page], per_page: 2)
   end
   def top_publications
     @top_publications = Publication.order(:votos).reverse_order
