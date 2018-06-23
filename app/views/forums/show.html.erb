@@ -1,8 +1,8 @@
 <% provide(:title, @forum.title) %>
-
+<br>
 <div class="row search">
   <div class="search-result well">
-    <h1 style="display:inline;"> <%= @forum.title %> </h1>
+    <h1 style="display:inline"> <%= @forum.title %> </h1>
     <% pos = @forum.votos>=0 %>
     <h2 class="votes-<%= pos ? 'green' : 'red' %> ", style="display:inline;"> (<%= pos ? '+': ''  %> <%= @forum.votos%>)</h2>
     <p></p>
@@ -19,13 +19,13 @@
         <%= form_for @subscription, method: :delete do |f| %>
         <%= f.hidden_field :forum_id, value: @forum.id  %>
         <%= f.hidden_field :user_id, value: current_user.id  %>
-        <%= f.submit 'Unsubscribe' %>
+        <%= f.submit 'Unsubscribe', class: 'btn btn-default'  %>
         <% end %>
       <% else %>
         <%= form_for @subscription do |f| %>
         <%= f.hidden_field :forum_id, value: @forum.id  %>
         <%= f.hidden_field :user_id, value: current_user.id  %>
-        <%= f.submit 'Subscribe' %>
+        <%= f.submit 'Subscribe', class: 'btn btn-default'  %>
         <% end  %>
       <% end %>
       <% if current_user.role.zero? %>
@@ -56,7 +56,7 @@
 
 
 <p style="margin-left: 30px">
-  <% @forum.publications.order(:id).each do | publication | %>
+  <% @publications.each do | publication | %>
     <div class="row search">
       <div class="search-result well">
         <h3><%= link_to publication.title, publication %></h3>
@@ -71,6 +71,15 @@
   	<em> This forum has no publications </em>
   <% end %>
 </p>
+
+
+<center>
+<div class="digg_pagination">
+<%= will_paginate @publications %>
+</div>
+</center>
+
+
 <script type="text/javascript">
 $(document).ready(()=>{
   $('#publication-type').change(function(){

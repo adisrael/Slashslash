@@ -18,6 +18,7 @@ class ForumsController < ApplicationController
                     else
                       current
                     end
+    @publications = @forum.publications.order(:id).paginate(:page => params[:page], per_page: 5)
   end
 
   # GET /forums/new
