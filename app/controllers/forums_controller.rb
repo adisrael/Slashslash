@@ -12,7 +12,9 @@ class ForumsController < ApplicationController
   # GET /forums/1
   # GET /forums/1.json
   def show
-    current = Subscription.where(forum: @forum, user: current_user).take
+    if user_signed_in?
+      current = Subscription.where(forum: @forum, user: current_user).take
+    end
     @subscription = if current.nil?
                       Subscription.new
                     else
