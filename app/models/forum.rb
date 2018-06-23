@@ -4,7 +4,6 @@ class Forum < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :moderators, dependent: :destroy
   has_many :moderator_users, through: :moderators, source: :user
-  has_many :votes, dependent: :destroy
 
   def self.search(search)
     where('title ILIKE ? OR description ILIKE ? ', "%#{search}%", "%#{search}%")

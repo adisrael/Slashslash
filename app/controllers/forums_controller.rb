@@ -18,7 +18,7 @@ class ForumsController < ApplicationController
                     else
                       current
                     end
-    @publications = @forum.publications.order(:id).paginate(:page => params[:page], per_page: 5)
+    @publications = @forum.publications.order(:id).paginate(page: params[:page], per_page: 5)
   end
 
   # GET /forums/new
@@ -73,7 +73,7 @@ class ForumsController < ApplicationController
     @forum.destroy
     respond_to do |format|
       format.html do
-        redirect_to forums_url, notice: 'Forum was successfully destroyed.'
+        redirect_to search_forum_path, notice: 'Forum was successfully destroyed.'
       end
       format.json { head :no_content }
     end
