@@ -219,7 +219,11 @@
           <strong><%= @publication.title %> </strong>
         </h1>
         <p style="font-size:110%;">
+          <% if @publication.content_type == 'link' %>
+            <a href="http://<%= @publication.content %>"><%= @publication.content %> </a>
+          <% else %>
           <%= @publication.content %>
+          <% end %>
         </p>
         <% if @publication.content_type == 'poll' %>
           <div class="poll-container">

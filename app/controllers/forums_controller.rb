@@ -122,17 +122,30 @@ class ForumsController < ApplicationController
     poll.publication = publication
     poll.save
     params.each do |k, v|
-      if k.split('_')[0] == 'option'
-        option = PollOption.new(text: v)
-        option.votos = 0
-        option.poll = poll
-        option.save
-      end
+      next unless k.split('_')[0] == 'option'
+      option = PollOption.new(text: v)
+      option.votos = 0
+      option.poll = poll
+      option.save
     end
     poll.poll_options.each do |option|
     end
     redirect_to publication
+  end
 
+  def new_publication_link
+    @publication = Publication.new
+    render 'publications/new_link'
+  end
+
+  def create_link
+    forum = Forum.find(params[:id])
+    publication = Publication.new(title: params[:publication_title], forum: forum)
+    publication.content = params[:url]
+    publication.content_type = 'link'
+    publication.user = current_user
+    publication.save
+    redirect_to publication
   end
 
   private

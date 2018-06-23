@@ -1,0 +1,6 @@
+<%= form_tag create_link_path, method: :post %>
+<%= label_tag :publication_title, 'Publication Title:' %>
+<%= text_field_tag :publication_title %><br>
+<%= label_tag :url, 'Url:' %>
+<%= text_field_tag :url %><br>
+<%= submit_tag 'Submit' %>

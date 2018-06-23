@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'registrations',
-    omniauth_callbacks: "users/omniauth_callbacks"
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
-
 
   # vote comments
   resources :vote_comments
@@ -41,13 +40,14 @@ Rails.application.routes.draw do
   post '/forums/:id/new_publication/image', to: 'forums#image_upload', as: 'image_upload'
   get '/forums/:id/new_publication/poll', to: 'forums#new_publication_poll', as: 'new_publication_poll'
   post '/forums/:id/new_publication/poll', to: 'forums#create_poll', as: 'create_poll'
+  post '/forums/:id/new_publication/link', to: 'forums#create_link', as: 'create_link'
 
   # search
   get '/home/search/forums', to: 'home#search_forum', as: 'search_forum'
   get '/home/search/publications', to: 'home#search_publication', as: 'search_publication'
   get '/home/search/users', to: 'home#search_user', as: 'search_user'
 
-  # top
+  #  top
   get '/home/top_forums', to: 'home#top_forums', as: 'top_forums'
   get '/home/top/publications', to: 'home#top_publications', as: 'top_publications'
   get '/home/top/users', to: 'home#top_users', as: 'top_users'
