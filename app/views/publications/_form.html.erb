@@ -11,12 +11,12 @@
   <% end %>
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title, id: :publication_title %>
+    <%= form.text_field :title, id: :publication_title, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :content %>
-    <%= form.text_area :content, id: :publication_content %>
+    <%= form.text_area :content, id: :publication_content, required: true %>
   </div>
   <% if @publication.new_record? %>
     <%= form.hidden_field :user_id, id: :publication_user_id, value: current_user.id %>

@@ -60,6 +60,9 @@
     <div class="row search">
       <div class="search-result well">
         <h3><%= link_to publication.title, publication %></h3>
+        <% if publication.votos.nil? %>
+            <% publication.votos = 0 %>
+        <% end %>
         <% pos = publication.votos>=0 %>
         <h3 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= publication.votos%>)</h3>
         <h3> - <%= link_to publication.user.userName, publication.user  %></h3>

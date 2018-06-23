@@ -1,12 +1,12 @@
 <%= form_tag create_poll_path, method: :post %>
 <%= label_tag :publication_title, 'Publication Title:' %>
-<%= text_field_tag :publication_title %><br>
+<%= text_field_tag :publication_title, '',required: true %><br>
 <%= label_tag :question, 'Poll:' %>
-<%= text_field_tag :question %><br>
+<%= text_field_tag :question, '',required: true %><br>
 <%= label_tag :option_1, 'Option 1:' %>
-<%= text_field_tag :option_1 %><br>
+<%= text_field_tag :option_1, '',required: true %><br>
 <%= label_tag :option_2, 'Option 2:' %>
-<%= text_field_tag :option_2 %><br>
+<%= text_field_tag :option_2, '',required: true %><br>
 <%= label_tag :option_3, 'Option 3:' %>
 <%= text_field_tag :option_3 %><br>
 <%= label_tag :option_4, 'Option 4:' %>

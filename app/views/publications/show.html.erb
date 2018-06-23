@@ -105,7 +105,7 @@
 
           <% end %>
           <% unless @publication.image.nil? %>
-          <img src="<%= @publication.image %> " alt="">
+          <img src="<%= @publication.image %> " alt="" width=100%; >
           <% end %>
         </div>
       </div>
@@ -124,7 +124,6 @@
             <%= f.submit class: 'btn btn-default'%>
             <% end %>
           <% end %>
-
 
         <% if user_signed_in? %>
           <% if @publication.user == current_user %>
