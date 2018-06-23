@@ -53,7 +53,7 @@ class HomeController < ApplicationController
 
   def search_publication
     @home = false
-    @publications = Publication.search(params[:search_publication])
+    @publications = Publication.search(params[:search_publication]).order(:created_at).reverse_order.paginate(:page => params[:page], per_page: 5)
     respond_to do |format|
       format.html do
         render 'search_publication'
@@ -63,7 +63,7 @@ class HomeController < ApplicationController
 
   def search_user
     @home = false
-    @users = User.search(params[:search_user])
+    @users = User.search(params[:search_user]).order(:created_at).reverse_order.paginate(:page => params[:page], per_page: 5)
     respond_to do |format|
       format.html do
         render 'search_user'

@@ -1,4 +1,5 @@
 <div class="row search">
+  <br>
   <div class="search-form well">
     <h1>Search Publications</h1>
     <%= form_tag(search_publication_path, :method => "get", id: "search-publication") do %>
@@ -19,3 +20,9 @@
     </div>
   </div>
 <% end %>  
+
+<center>
+<div class="digg_pagination">
+<%= will_paginate @publications %>
+</div>
+</center>
