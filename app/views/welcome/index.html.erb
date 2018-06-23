@@ -9,17 +9,8 @@
   <br>
   <h3>Welcome!  -  //slashslash</h3>
   <br>
-  <div class="welcome-link">
-    <%= link_to(new_user_registration_path) do%>
-    <h4>Sign Up</h4>
-    <% end %>
-  </div>
-    <button id="myBtn" class="welcome-link">Log In Modal</button>
-  <div class="welcome-link">
-    <%= link_to(new_user_session_path) do%>
-    <h4>Log In</h4>
-    <% end %>
-  </div>
+  <button id="signUpBtn" class="welcome-link">Sign Up</button><br>
+  <button id="logInBtn" class="welcome-link">Log In Modal</button>
   <div class="welcome-link" style="background-color:darkblue">
     <%= link_to(user_facebook_omniauth_authorize_path) do%>
     <h4>Sign In with Facebook</h4>
@@ -37,6 +28,8 @@
   <br>
 </div>
 <%= render "modals/session" %>
+<%= render "modals/registration" %>
+
 
 <!-- Footer -->
 <div class="row">

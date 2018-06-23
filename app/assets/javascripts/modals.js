@@ -1,30 +1,45 @@
 // Get the modal
 $(document).ready(()=>{
-  var modal = document.getElementById('myModal');
-
-  // Get the button that opens the modal
-  var btn = document.getElementById("myBtn");
-
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
-
+  const closeLogIn = document.getElementById("closeLogIn");
+  const closeSignUp = document.getElementById("closeSignUp");
+  const logInModal = document.getElementById('logInModal');
+  const logInBtn = document.getElementById("logInBtn");
+  const signUpModal = document.getElementById('signUpModal');
+  const signUpBtn = document.getElementById("signUpBtn");
 
 
 
   // When the user clicks on the button, open the modal
-  if (btn && modal && span){
-    btn.onclick = function() {
-      modal.style.display = "block";
+  if (logInBtn && logInModal){
+    logInBtn.onclick = function() {
+      logInModal.style.display = "block";
     }
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
+    // When the user clicks on <span> (x), close the logInModal
+    closeLogIn.onclick = function() {
+      logInModal.style.display = "none";
     }
 
-    // When the user clicks anywhere outside of the modal, close it
+    // When the user clicks anywhere outside of the logInModal, close it
     window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
+      if (event.target == logInModal) {
+        logInModal.style.display = "none";
+      }
+    }
+  }
+
+  if (signUpBtn && signUpModal){
+    signUpBtn.onclick = function() {
+      signUpModal.style.display = "block";
+    }
+    // When the user clicks on <span> (x), close the signUpModal
+    closeSignUp.onclick = function() {
+      signUpModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the signUpModal, close it
+    window.onclick = function(event) {
+      if (event.target == signUpModal) {
+        signUpModal.style.display = "none";
       }
     }
   }
