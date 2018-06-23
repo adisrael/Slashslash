@@ -15,15 +15,19 @@ class HomeController < ApplicationController
       @popular_forums << forum
     end
   end
+
   def top_forums
     @top_forums = Forum.order(:votos).reverse_order.paginate(:page => params[:page], per_page: 5)
   end
+
   def top_publications
     @top_publications = Publication.order(:votos).reverse_order.paginate(:page => params[:page], per_page: 5)
   end
+
   def top_users
     @top_users = User.order(:reputation).reverse_order.paginate(:page => params[:page], per_page: 5)
   end
+
   def top_subscribed
     query = Subscription.select(:forum_id).group(:forum_id).count
     topN = top query, Forum.all.length
@@ -33,8 +37,10 @@ class HomeController < ApplicationController
       forum.subscriptors = data[1]
       pop_forums << forum
     end
-    @popular_forums = pop_forums.paginate(:page => params[:page], per_page: 5)
+    @popular_forums = pop_forums.reverse.paginate(:page => params[:page], per_page: 5,)
   end
+
+
   def search_forum
     @home = false
     @forums = Forum.search(params[:search_forum]).order(:votos).reverse_order
