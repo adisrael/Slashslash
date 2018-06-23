@@ -33,7 +33,7 @@
           <h4><%= link_to forum.title, forum %></h4>
           <% pos = forum.votos>=0 %>
           <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= forum.votos%>)</h4>
-          <h4>| <%= forum.description %></h4>
+          <h4>| <%= forum.description.truncate(50, separator: ' ') %></h4>
         </div>
       </div>
     <% end %>
@@ -47,7 +47,7 @@
           <h4><%= link_to publication.title, publication %></h4>
           <% pos = publication.votos>=0 %>
           <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= publication.votos%>)</h4>
-          <h4>| <%= publication.content %></h4>
+          <h4>| <%= publication.content.truncate(50, separator: ' ') %></h4>
         </div>
       </div>
     <% end %>
@@ -76,8 +76,7 @@
           <h4><%= link_to forum.title, forum %></h4>
           <% pos = forum.votos>=0 %>
           <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= forum.votos%>)</h4>
-          <h4>| <%= forum.description %></h4>
-          <h4>| <%= forum.subscriptors %></h4>
+          <h4> |  <%= forum.subscriptors %> Subscriptions</h4>
         </div>
       </div>
     <% end %>
