@@ -1,5 +1,7 @@
 <div class="row top">
+  <br>
   <h2>Top Users</h2>
+  <br>
   <% @top_users.each do |user| %>
     <div class=" top-results">
       <div class="search-result well">
@@ -12,5 +14,8 @@
 </div>
 
 
-<center><%= will_paginate @top_users %>
+<center>
+<div class="digg_pagination">
+<%= will_paginate @top_users %>
+</div>
 </center>

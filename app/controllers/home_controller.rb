@@ -43,7 +43,7 @@ class HomeController < ApplicationController
 
   def search_forum
     @home = false
-    @forums = Forum.search(params[:search_forum]).order(:votos).reverse_order
+    @forums = Forum.search(params[:search_forum]).order(:created_at).reverse_order.paginate(:page => params[:page], per_page: 5)
     respond_to do |format|
       format.html do
         render 'search_forum'

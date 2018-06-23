@@ -1,6 +1,7 @@
-
 <div class="row top">
+  <br>
   <h2>Top Publications</h2>
+  <br>
   <% @top_publications.each do |publication| %>
     <div class=" top-results">
       <div class="search-result well">
@@ -13,6 +14,9 @@
   <% end %>
 </div>
 
-
-<center><%= will_paginate @top_publications %>
+<center>
+<div class="digg_pagination">
+<%= will_paginate @top_publications %>
+</div>
 </center>
+
