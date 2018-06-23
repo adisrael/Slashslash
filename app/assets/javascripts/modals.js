@@ -6,7 +6,6 @@ $(document).ready(()=>{
   const logInBtn = document.getElementById("logInBtn");
   const signUpModal = document.getElementById('signUpModal');
   const signUpBtn = document.getElementById("signUpBtn");
-  console.log('readey')
 
 
 
@@ -14,7 +13,6 @@ $(document).ready(()=>{
   if (logInBtn && logInModal){
     logInBtn.onclick = function() {
       logInModal.style.display = "block";
-      console.log('login')
     }
     // When the user clicks on <span> (x), close the logInModal
     closeLogIn.onclick = function() {
@@ -32,7 +30,6 @@ $(document).ready(()=>{
   if (signUpBtn && signUpModal){
     signUpBtn.onclick = function() {
       signUpModal.style.display = "block";
-      console.log('signup')
     }
     // When the user clicks on <span> (x), close the signUpModal
     closeSignUp.onclick = function() {
