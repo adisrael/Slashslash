@@ -146,6 +146,7 @@ class ForumsController < ApplicationController
     publication.content = params[:url]
     publication.content_type = 'link'
     publication.user = current_user
+    publication.votos = 0
     publication.save
     redirect_to publication
   end
