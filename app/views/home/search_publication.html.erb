@@ -1,10 +1,13 @@
 <div class="row search">
+  <br>
   <div class="search-form well">
     <h1>Search Publications</h1>
     <%= form_tag(search_publication_path, :method => "get", id: "search-publication") do %>
     <%= text_field_tag :search_publication, params[:search_publication], placeholder: "Search Publication" %>
     <%= submit_tag "Search", name: nil, class: 'btn-primary' %>
     <% end %>
+    <h3><%= link_to 'Top Publications', top_publications_path%></h3>
+
   </div>
 </div>
 
@@ -19,3 +22,9 @@
     </div>
   </div>
 <% end %>  
+
+<center>
+<div class="digg_pagination">
+<%= will_paginate @publications %>
+</div>
+</center>

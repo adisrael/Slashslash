@@ -1,6 +1,7 @@
-
 <div class="row top">
-<h2>Top Forums</h2>
+  <br>
+  <h1 align="center">Top Forums</h1>
+  <br>
   <% @top_forums.each do |forum| %>
     <div class=" top-results">
       <div class="search-result well">
@@ -14,5 +15,8 @@
 </div>
 
 
-<center><%= will_paginate @top_forums %>
+<center>
+<div class="digg_pagination">
+<%= will_paginate @top_forums %>
+</div>
 </center>
