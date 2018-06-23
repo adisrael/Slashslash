@@ -20,6 +20,8 @@ class User < ApplicationRecord
   before_create :default_role
   before_create :default_reputation
   before_create :default_facebook_registered
+  
+  validates_uniqueness_of :userName
 
   def self.search(search)
     where('userName ILIKE ? OR lastName ILIKE ? OR firstName ILIKE ?',
@@ -31,7 +33,9 @@ class User < ApplicationRecord
   end
 
   def default_facebook_registered
-    self.facebook_registered = 0
+    unless self.facebook_registered == 1
+      self.facebook_registered = 0
+    end
   end
 
   def accepted(forum_id)
