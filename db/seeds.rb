@@ -83,6 +83,19 @@ forums_array.push(sports, movies, science, quotes, hp, got, tv, dog, chn)
 i = 7
 pubs_array = Array.new
 pubs_array.push(p1, p2, p3, p4, p5, p6)
+# for i in 1..10
+#   pub = Publication.create({
+#             numero: i,
+#             title: "Quote #{i}",
+#             content: Faker::MostInterestingManInTheWorld.quote,
+#             user: users_array.sample,
+#             forum: quotes,
+#             votos:0,
+#             created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
+#             })
+#   pubs_array.push(pub)
+#   i += 1
+# end
 pub = Publication.create({
           numero: i,
           title: 'A quote for you!',
@@ -386,7 +399,7 @@ end
 
 # Create Comments
 
-num_comments = 20
+num_comments = 30
 prng = Random.new
 comm_array = Array.new
 
@@ -402,7 +415,7 @@ for i in 0..num_comments
   comm_array.push(c)
 end
 
-for i in 0..10
+for i in 0..15
   c = Comment.create({
             user: users_array.sample,
             commentable_type: 'Comment',
@@ -429,17 +442,33 @@ for i in 0..20
   Vote.create({
     user: users_array.sample,
     publication: pubs_array.sample,
-    positive: Faker::Boolean.boolean,
+    positive: true,
+    created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
+    })
+end
+for i in 0..10
+  Vote.create({
+    user: users_array.sample,
+    publication: pubs_array.sample,
+    positive: false,
     created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
     })
 end
 
 # Create vote comments
-for i in 0..10
+for i in 0..15
   VoteComment.create({
     user: users_array.sample,
     comment: comm_array.sample,
-    positive: Faker::Boolean.boolean,
+    positive: true,
+    created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
+    })
+end
+for i in 0..5
+  VoteComment.create({
+    user: users_array.sample,
+    comment: comm_array.sample,
+    positive: false,
     created_at: Faker::Date.between_except(60.days.ago, Date.today, Date.today)
     })
 end
