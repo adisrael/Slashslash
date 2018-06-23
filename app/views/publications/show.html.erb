@@ -134,15 +134,52 @@
   </div>
   <div class="col-xs-3 publication-sidebar">
     <div class="sidebar-container">
-      <div class="sidebar-topbar">
-
-      </div>
+      <div class="sidebar-topbar"></div>
       <div class="sidebar-content">
         <h3>
-          <strong>
-            <%= link_to @publication.forum.title, @publication.forum %>.
-          </strong>
+          <%= link_to @publication.forum.title, @publication.forum %>
         </h3>
+        <p><strong><%= @publication.forum.subscriptors %> Subscribers</strong> </p>
+        <p><%= @publication.forum.description %> </p>
+        <% if  user_signed_in? %>
+          <% current = Subscription.where(forum: @publication.forum, user: current_user).take %>
+          <% subscription = current.nil? ? Subscription.new : current %>
+          <% if current_user.forums.include?(@publication.forum) %>
+            <%= form_for subscription, method: :delete do |f| %>
+            <%= f.hidden_field :forum_id, value: @publication.forum.id  %>
+            <%= f.hidden_field :user_id, value: current_user.id  %>
+            <%= f.submit 'Unsubscribe', class: 'btn btn-warning' %>
+            <% end %>
+          <% else %>
+            <%= form_for subscription do |f| %>
+            <%= f.hidden_field :forum_id, value: @publication.forum.id  %>
+            <%= f.hidden_field :user_id, value: current_user.id  %>
+            <%= f.submit 'Subscribe', class: 'btn btn-warning' %>
+            <% end  %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="sidebar-container">
+      <div class="sidebar-topbar"></div>
+      <div class="sidebar-content">
+        <h3>Other Publication</h3>
+        <% @publication.forum.publications.each do |publication| %>
+          <% if publication != @publication %>
+            <%= link_to publication.title, publication %><br>
+
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="sidebar-container">
+      <div class="sidebar-topbar"></div>
+      <div class="sidebar-content">
+        <h3>Moderators</h3>
+        <% @publication.forum.moderator_users.each do |user| %>
+            <%= link_to user.userName, user %><br>
+
+        <% end %>
       </div>
     </div>
   </div>

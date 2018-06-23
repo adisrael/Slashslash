@@ -28,6 +28,8 @@ class PublicationsController < ApplicationController
                 else
                   current
                 end
+    subscriptors = Subscription.where(forum: @publication.forum).count
+    @publication.forum.subscriptors = subscriptors
     if @publication.content_type == 'poll'
       poll = @publication.poll
       poll.total = 0

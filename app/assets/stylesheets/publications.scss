@@ -53,7 +53,7 @@
   border-radius: 5px;
   margin: 5px;
   padding: 0px;
-  height:300px;
+  margin-top: 40px;
 }
 
 .sidebar-topbar{
@@ -65,8 +65,15 @@
 
 .sidebar-content{
   padding: 5px;
+  text-align: center;
   h3{
     margin: 0;
+  }
+  p{
+    margin: 5px;
+  }
+  .btn {
+    width: 80%;
   }
 }
 
