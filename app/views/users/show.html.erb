@@ -23,7 +23,7 @@
 </h1>
 <% if @user == current_user %>
   <%= form_tag("/upload/#{@user.id}", multipart: true) do %>
-    <%= file_field_tag :picture %>
+    <%= file_field_tag :picture, required: true %>
     <%= submit_tag 'Submit' %>
   <% end %>
 <% end %>
