@@ -38,6 +38,8 @@ gem 'mini_magick'
 
 gem 'chartkick'
 gem 'groupdate'
+gem 'omniauth-facebook'
+gem 'will_paginate', '~> 3.1.0'
 
 gem 'faker'
 

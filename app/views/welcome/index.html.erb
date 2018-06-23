@@ -6,24 +6,34 @@
 
 <!-- Container WELCOME -->
 <div class="row text-center welcome">
-    <h3>WELCOME - //slashslash</h3>
-    <div class="welcome-link">
-      <%= link_to(new_user_registration_path) do%>
-      <h4>SIGN UP</h4>
-      <% end %>
-    </div>
-    <div class="welcome-link">
-      <%= link_to(new_user_session_path) do%>
-      <h4>LOG IN</h4>
-      <% end %>
-    </div>
-    <div class="welcome-link">
-      <%= link_to(home_path) do%>
-      <h4>GUEST</h4>
-      <% end %>
-    </div>
-    <p>Upon registration you will be able to create new content and actively participate in the communities you want!</p>
-    <p>Don't miss your chance to be a part of something great!</p>
+  <br>
+  <h3>Welcome!  -  //slashslash</h3>
+  <br>
+  <div class="welcome-link">
+    <%= link_to(new_user_registration_path) do%>
+    <h4>Sign Up</h4>
+    <% end %>
+  </div>
+  <div class="welcome-link">
+    <%= link_to(new_user_session_path) do%>
+    <h4>Log In</h4>
+    <% end %>
+  </div>
+  <div class="welcome-link" style="background-color:darkblue">
+    <%= link_to(user_facebook_omniauth_authorize_path) do%>
+    <h4>Sign In with Facebook</h4>
+    <% end %>
+  </div>
+  <div class="welcome-link">
+    <%= link_to(home_path) do%>
+    <h4>Continue as Guest</h4>
+    <% end %>
+  </div>
+  <br><br>
+
+  <p>Upon registration you will be able to create new content and actively participate in the communities you want!</p>
+  <p>Don't miss your chance to be a part of something great!</p>
+  <br>
 </div>
 
 <!-- Footer -->

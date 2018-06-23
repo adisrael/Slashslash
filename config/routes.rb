@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   # devise
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'registrations'
+    registrations: 'registrations',
+    omniauth_callbacks: "users/omniauth_callbacks"
   }
+
 
   # vote comments
   resources :vote_comments
