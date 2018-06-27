@@ -11,9 +11,7 @@ class StatisticsController < ApplicationController
       @moderators_a = 0
       @pub = Publication.all
       Moderator.all.each do |m|
-        if m.approved?
-          @moderators_a += 1
-        end
+        @moderators_a += 1 if m.approved?
       end
       # @votes = Vote
       query = Publication.select(:user_id).group(:user_id).count

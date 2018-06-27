@@ -15,6 +15,7 @@ AllCops:
     - 'bin/**/*'
     - 'app/controllers/users/*'
     - 'test/test_helper.rb'
+    - 'app/controllers/statistics_controller.rb'
 
 
 Rails:
@@ -24,14 +25,14 @@ Metrics/ClassLength:
   Max: 200
 
 Metrics/AbcSize:
-  Max: 30
+  Max: 50
 
 Metrics/MethodLength:
-  Max: 30
+  Max: 50
 
 Metrics/LineLength:
   IgnoredPatterns: ['\A\s*#']
-  Max: 100
+  Max: 120
 
 Metrics/CyclomaticComplexity:
   Max: 15
@@ -51,3 +52,5 @@ Style/GuardClause:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Style/InverseOf:
+  Enabled: false
