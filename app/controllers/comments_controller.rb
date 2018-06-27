@@ -27,9 +27,7 @@ class CommentsController < ApplicationController
     current_user.reputation += 1
     if comment_params[:commentable_type] == 'publication'
       publication = Publication.find(comment_params[:commentable_id])
-      if publication.comments.create(comment_params)
-        redirect_to publication, notice: 'Comment added'
-      end
+      redirect_to publication, notice: 'Comment added' if publication.comments.create(comment_params)
     elsif comment_params[:commentable_type] == 'comment'
       comment = Comment.find(comment_params[:commentable_id])
       root = comment

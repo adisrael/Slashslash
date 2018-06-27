@@ -65,6 +65,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
   def public_id
-    return model.short_name
+    model.short_name
   end
 end

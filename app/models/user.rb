@@ -2,8 +2,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, 
-         :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook]
 
   has_many :publications, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -20,8 +20,8 @@ class User < ApplicationRecord
   before_create :default_role
   before_create :default_reputation
   before_create :default_facebook_registered
-  
-  validates_uniqueness_of :userName
+
+  validates :userName, uniqueness: true
 
   def self.search(search)
     where('userName ILIKE ? OR lastName ILIKE ? OR firstName ILIKE ?',
@@ -33,9 +33,7 @@ class User < ApplicationRecord
   end
 
   def default_facebook_registered
-    unless self.facebook_registered == 1
-      self.facebook_registered = 0
-    end
+    self.facebook_registered = 0 unless facebook_registered == 1
   end
 
   def accepted(forum_id)
@@ -51,8 +49,8 @@ class User < ApplicationRecord
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
+      if (data = session['devise.facebook_data']) && session['devise.facebook_data']['extra']['raw_info']
+        user.email = data['email'] if user.email.blank?
       end
     end
   end
@@ -60,13 +58,12 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.userName = auth.info.name.downcase.gsub(' ', '.')   # assuming the user model has a name
-      user.firstName = auth.info.name.match(" ").pre_match   # assuming the user model has a name
-      user.lastName = auth.info.name.match(" ").post_match   # assuming the user model has a name
+      user.password = Devise.friendly_token[0, 20]
+      user.userName = auth.info.name.downcase.tr(' ', '.') # assuming the user model has a name
+      user.firstName = auth.info.name.match(' ').pre_match   # assuming the user model has a name
+      user.lastName = auth.info.name.match(' ').post_match   # assuming the user model has a name
       user.image = auth.info.image # assuming the user model has an image
       user.facebook_registered = 1
     end
   end
-
 end
