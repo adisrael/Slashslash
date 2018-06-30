@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require modals
 //= require_tree .
 //= require chartkick
+//= require turbolinks
