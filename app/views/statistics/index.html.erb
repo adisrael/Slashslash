@@ -1,6 +1,7 @@
 <% provide(:title, "Statistics") %>
 
-<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<%= javascript_include_tag "https://www.google.com/jsapi", "chartkick", 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
 
