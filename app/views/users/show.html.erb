@@ -1,101 +1,215 @@
-<br>
 <p id="notice"><%= notice %></p>
-<% if @user.image %>
-<div class="profile-pic" style="background-image: url(<%= @user.image %>)">
-</div>
-<% else %>
-<div class="profile-pic">
-</div>
-<% end %>
-<h1>
-  <% pos = @user.reputation>=0 %>
-  <span class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= @user.reputation%>)</span>
-  <span><strong><%= @user.userName %></strong></span>
-
-  <% if user_signed_in? && current_user == @user %>
-  -
-  <%= @user.firstName %>
-  <%= @user.lastName %>
-  <% end %>
-
-  <% if @user.role.zero? %>
-  <i style="font-size:20px">(admin)</i>
-  <% end %>
-</h1>
-<% if @user == current_user %>
-  <%= form_tag("/upload/#{@user.id}", multipart: true) do %>
-    <%= file_field_tag :picture, required: true %>
-    <%= submit_tag 'Submit' %>
-  <% end %>
-<% end %>
-
-
-<p>
-<strong>Publications:</strong><br>
-</p>
-<p style="margin-left: 30px">
-  <% @user.publications.each do | publication | %>
-  <%= publication.id %>. <%= link_to publication.title, publication %><br>
-  <% end %>
-  <% if @user.publications.size == 0 %>
-    <em> The user has no publications </em>
-  <% end %>
-</p>
-
-<p>
-<strong>Subscriptions:</strong><br>
-</p>
-<p style="margin-left: 30px">
-  <% @user.subscriptions.each do | subscription | %>
-  <%= subscription.forum.id %>. <%= link_to subscription.forum.title, subscription.forum %><br>
-  <% end %>
-  <% if @user.subscriptions.size == 0 %>
-    <em> The user has no subscriptions </em>
-  <% end %>
-</p>
-
-<p>
-<strong>Moderating Forums:</strong><br>
-</p>
-<p style="margin-left: 30px">
-  <% count = 0 %>
-  <% @user.moderated_forums.each do | forum | %>
-    <% if @user.accepted(forum.id) %>
-      <%= forum.id %>. <%= link_to forum.title, forum %>
-      <% count += 1 %>
+<div class="row top">
+  <div class="col-xs-2">
+    <% if @user.image %>
+    <div class="profile-pic" style="background-image: url(<%= @user.image %>)">
+    </div>
+    <% else %>
+    <div class="profile-pic">
+    </div>
     <% end %>
-  <% end %>
-  <% if count.zero? %>
-    <em> The user doesn't moderate any forums. </em>
-  <% end %>
-</p>
-<p>
-  <strong>Moderating Requests:</strong><br>
-</p>
-<p style="margin-left: 30px">
-  <% count = 0 %>
-  <% @user.moderated_forums.each do | forum | %>
-    <% unless @user.accepted(forum.id) %>
-      <%= forum.id %>. <%= link_to forum.title, forum %>
-      <% count += 1 %>
+    <br>
+    <% if @user == current_user %>
+      <%= form_tag("/upload/#{@user.id}", multipart: true) do %>
+        <%= file_field_tag :picture, required: true %>
+        <%= submit_tag 'Submit' %>
+      <% end %>
     <% end %>
-  <% end %>
-  <% if count.zero? %>
-    <em> The user haven't requested to moderate any forums. </em>
-  <% end %>
-</p>
-<p>
+  </div>
+  <div class="col-xs-8">
+    <h1>
+      <% pos = @user.reputation>=0 %>
+      <span class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= @user.reputation%>)</span>
+      <span><strong><%= @user.userName %></strong></span>
 
-<strong>Starred:</strong><br>
-</p>
-<p style="margin-left: 30px">
-  <% @user.favorite_publications.each do | publication | %>
-  <%= publication.id %>. <%= link_to publication.title, publication %><br>
-  <% end %>
-  <% if @user.favorite_publications.size == 0 %>
-    <em> The user has no starred publications </em>
-  <% end %>
-</p>
+      <% if user_signed_in? && current_user == @user %>
+      -
+      <%= @user.firstName %>
+      <%= @user.lastName %>
+      <% end %>
 
+      <% if @user.role.zero? %>
+      <i style="font-size:20px">(admin)</i>
+      <% end %>
+    </h1>
+    <span style="font-size:20px;color:#888">
+      <strong style="color:#555"><%= @user.publications.count %></strong> Publications &nbsp;&nbsp;
+      <strong style="color:#555"><%= @user.comments.count %></strong> Comments &nbsp;&nbsp;
+      <strong style="color:#555"><%= @user.votes.count + @user.vote_comments.count %></strong> Votes
+    </span>
+  </div>
+  <div class="col-xs-2"></div>
+</div>
+
+<hr>
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Publications')" id="defaultOpen">Publications</button>
+  <button class="tablinks" onclick="openTab(event, 'Subscriptions')">Subscriptions</button>
+  <button class="tablinks" onclick="openTab(event, 'Moderating Forums')">Moderating Forums</button>
+  <button class="tablinks" onclick="openTab(event, 'Moderating Requests')">Moderating Requests</button>
+  <button class="tablinks" onclick="openTab(event, 'Starred')">Starred</button>
+</div>
+
+<div id="Publications" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+
+  <div class="row top">
+    <br>
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+    <% @publications.each do | publication | %>
+      <div class="top-results">
+        <div class="search-result well">
+          <h4><%= publication.id %>. <%= link_to publication.title, publication %></h4>
+          <% if publication.votos.nil? %>
+            <% publication.votos = 0 %>
+          <% end %>
+          <% pos = publication.votos >= 0 %>
+          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= publication.votos%>)</h4>
+          <% if publication.content.present? %>
+          <h4>| <%= publication.content.truncate(50, separator: ' ') %></h4>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+      <% if @user.publications.size == 0 %>
+        <center><em> The user has no publications. </em></center>
+      <% end %>
+    </div>
+
+    <div class="col-xs-2"></div>
+  </div>
+
+</div>
+
+<div id="Subscriptions" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+
+  <div class="row top">
+    <br>
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+    <% @subscriptions.each do | subscription | %>
+      <div class="top-results">
+        <div class="search-result well">
+          <h4><%= subscription.forum.id %>. <%= link_to subscription.forum.title, subscription.forum %></h4>
+          <% pos = subscription.forum.votos>=0 %>
+          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= subscription.forum.votos%>)</h4>
+          <h4>| <%= subscription.forum.description.truncate(50, separator: ' ') %></h4>
+        </div>
+      </div>
+      <% end %>
+      <% if @subscriptions.size == 0 %>
+        <center><em> The user has no subscriptions. </em></center>
+      <% end %>
+    </div>
+
+    <div class="col-xs-2"></div>
+  </div>
+
+</div>
+
+<div id="Moderating Forums" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+
+  <div class="row top">
+    <br>
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+    <% @moderating.each do | forum | %>
+      <div class="top-results">
+        <div class="search-result well">
+          <h4><%= forum.id %>. <%= link_to forum.title, forum %></h4>
+          <% pos = forum.votos>=0 %>
+          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= forum.votos%>)</h4>
+          <h4>| <%= forum.description.truncate(50, separator: ' ') %></h4>
+        </div>
+      </div>
+      <% end %>
+      <% if @moderating.size == 0 %>
+        <center><em> The user doesn't moderate any forums. </em></center>
+      <% end %>
+    </div>
+
+    <div class="col-xs-2"></div>
+  </div>
+
+</div>
+
+<div id="Moderating Requests" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+
+  <div class="row top">
+    <br>
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+    <% @requests.each do | forum | %>
+      <div class="top-results">
+        <div class="search-result well">
+          <h4><%= forum.id %>. <%= link_to forum.title, forum %></h4>
+          <% pos = forum.votos>=0 %>
+          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= forum.votos%>)</h4>
+          <h4>| <%= forum.description.truncate(50, separator: ' ') %></h4>
+        </div>
+      </div>
+      <% end %>
+      <% if @requests.size == 0 %>
+        <center><em> The user haven't requested to moderate any new forums. </em></center>
+      <% end %>
+    </div>
+
+    <div class="col-xs-2"></div>
+  </div>
+</div>
+
+<div id="Starred" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+
+  <div class="row top">
+    <br>
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+    <% @starred.each do | publication | %>
+      <div class="top-results">
+        <div class="search-result well">
+          <h4><%= publication.id %>. <%= link_to publication.title, publication %></h4>
+          <% if publication.votos.nil? %>
+            <% publication.votos = 0 %>
+          <% end %>
+          <% pos = publication.votos >= 0 %>
+          <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= publication.votos%>)</h4>
+          <h4>| <%= publication.content.truncate(50, separator: ' ') %></h4>
+        </div>
+      </div>
+      <% end %>
+      <% if @starred.size == 0 %>
+        <center><em> The user has no starred publications. </em></center>
+      <% end %>
+    </div>
+
+    <div class="col-xs-2"></div>
+  </div>
+
+</div>
 
 <%= link_to 'Back to Home', :home %>
+
+<script>
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>

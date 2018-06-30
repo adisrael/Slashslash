@@ -4,9 +4,51 @@
 .profile-pic{
   border: 2px black solid;
   border-radius: 100px;
-  width: 20%;
-  padding-top: 20%;
+  width: 150px;
+  padding-top: 150px;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url(https://s3-sa-east-1.amazonaws.com/slash-bucket/folder/RackMultipart20180623-1-1v060xv.jpg);
 }
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+    color: #bbb;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    color: #b73131;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    color: #555;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+}
+
+/* Style the close button */
+.topright {
+    float: right;
+    cursor: pointer;
+    font-size: 28px;
+}
+
+.topright:hover {color: #b73131;}

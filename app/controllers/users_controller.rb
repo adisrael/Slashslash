@@ -11,7 +11,25 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  def show; end
+  def show
+    @publications = @user.publications.order(:id)
+    @subscriptions = @user.subscriptions.order(:id)
+    moderating_forums = []
+    @user.moderated_forums.order(:id).each do |forum|
+      if @user.accepted(forum.id)
+        moderating_forums.push(forum)
+      end
+    end
+    @moderating = moderating_forums
+    requests_forums = []
+    @user.moderated_forums.order(:id).each do |forum|
+      unless @user.accepted(forum.id)
+        requests_forums.push(forum)
+      end
+    end
+    @requests = requests_forums
+    @starred = @user.favorite_publications.order(:id)
+  end
 
   # GET /users/new
   def new
