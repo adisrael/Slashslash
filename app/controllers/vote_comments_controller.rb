@@ -1,5 +1,5 @@
 class VoteCommentsController < ApplicationController
-  def create
+  def add_vote
     data = vote_params #  user_id, comment_id
     result = VoteComment.where(user_id: data[:user_id],
                                comment_id: data[:comment_id],
@@ -17,7 +17,9 @@ class VoteCommentsController < ApplicationController
           end
         else
           root = comment
-          root = comment.commentable while root.commentable_type != 'Publication'
+          puts 'start1'
+          root = root.commentable while root.commentable_type != 'Publication'
+          puts 'end1'
           publication = root.commentable
           format.html do
             redirect_to publication, notice: 'Error ocurred'
@@ -25,7 +27,9 @@ class VoteCommentsController < ApplicationController
         end
       else
         root = result[0].comment
-        root = comment.commentable while root.commentable_type != 'Publication'
+        puts 'start2'
+        root = root.commentable while root.commentable_type != 'Publication'
+        puts 'end2'
         publication = root.commentable
         format.html do
           redirect_to publication, notice: 'Max Votes Reached'
@@ -36,11 +40,10 @@ class VoteCommentsController < ApplicationController
 
   private
 
-  def create_vote(comment); end
 
   def balance(comment)
     root = comment
-    root = comment.commentable while root.commentable_type != 'Publication'
+    root = root.commentable while root.commentable_type != 'Publication'
     publication = root.commentable
     inverse = VoteComment.where(user_id: @vote_comment.user_id,
                                 comment_id: @vote_comment.comment_id,

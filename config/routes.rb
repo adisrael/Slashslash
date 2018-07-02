@@ -7,10 +7,11 @@ Rails.application.routes.draw do
   }
 
   # vote comments
-  resources :vote_comments
+  # resources :vote_comments
 
   # vote publications
   post 'votes', to: 'votes#add_vote'
+  post 'vote_comments', to: 'vote_comments#add_vote', as:'add_comment_vote'
 
   # moderators
   post 'moderate/request', to: 'requests#apply'

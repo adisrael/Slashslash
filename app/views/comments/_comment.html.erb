@@ -10,7 +10,7 @@
         <%         else %>
         <%         vote[0] %>
         <%         end %>
-        <%= form_for vote do |f| %>
+        <%= form_for vote, url: add_comment_vote_path, method: :post do |f| %>
         <%= f.hidden_field :user_id, value: current_user.id  %>
         <%= f.hidden_field :comment_id, value: comment.id  %>
         <%= f.hidden_field :positive, value: true  %>
@@ -28,7 +28,7 @@
         </p>
       </div>
       <div class="row arrows">
-        <%= form_for vote do |f| %>
+        <%= form_for vote, url: add_comment_vote_path, method: :post do |f| %>
         <%= f.hidden_field :user_id, value: current_user.id  %>
         <%= f.hidden_field :comment_id, value: comment.id  %>
         <%= f.hidden_field :positive, value: false  %>
