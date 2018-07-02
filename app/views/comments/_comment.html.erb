@@ -3,14 +3,13 @@
   <div class="row">
     <div class="col-xs-1 publication-score">
       <div class="row arrows">
-        <%# vote = VoteComment.where(user_id: current_user.id, comment_id: comment.id).to_a %>
+        <% vote = VoteComment.where(user_id: current_user.id, comment_id: comment.id).to_a %>
 
-        <% vote = VoteComment.new %>
-        <%# vote = if vote.empty? %>
-        <%#         VoteComment.new %>
-        <%#         else %>
-        <%#         vote[0] %>
-        <%#         end %>
+        <% vote = if vote.empty? %>
+        <%         VoteComment.new %>
+        <%         else %>
+        <%         vote[0] %>
+        <%         end %>
         <%= form_for vote do |f| %>
         <%= f.hidden_field :user_id, value: current_user.id  %>
         <%= f.hidden_field :comment_id, value: comment.id  %>
