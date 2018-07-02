@@ -1,11 +1,14 @@
 // Get the modal
-$(document).ready(()=>{
+$(document).on('turbolinks:load',()=>{
   const closeLogIn = document.getElementById("closeLogIn");
-  const closeSignUp = document.getElementById("closeSignUp");
   const logInModal = document.getElementById('logInModal');
   const logInBtn = document.getElementById("logInBtn");
+  const closeSignUp = document.getElementById("closeSignUp");
   const signUpModal = document.getElementById('signUpModal');
   const signUpBtn = document.getElementById("signUpBtn");
+  const closeNewPub = document.getElementById("closeNewPub");
+  const newPubModal = document.getElementById('newPubModal');
+  const newPubBtn = document.getElementById("newPubBtn");
 
 
 
@@ -40,6 +43,23 @@ $(document).ready(()=>{
     window.onclick = function(event) {
       if (event.target == signUpModal) {
         signUpModal.style.display = "none";
+      }
+    }
+  }
+  if (newPubBtn && newPubModal){
+    newPubBtn.onclick = function() {
+      newPubModal.style.display = "block";
+    }
+    // When the user clicks on <span> (x), close the newPubModal
+    closeNewPub.onclick = function() {
+      console.log('clicked')
+      newPubModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the newPubModal, close it
+    window.onclick = function(event) {
+      if (event.target == newPubModal) {
+        newPubModal.style.display = "none";
       }
     }
   }

@@ -7,31 +7,23 @@
     <h2 class="votes-<%= pos ? 'green' : 'red' %> ", style="display:inline;"> (<%= pos ? '+': ''  %> <%= @forum.votos%>)</h2>
     <p></p>
     <p><%= @forum.description %></p>
+    <%= render 'modals/new_publication' %>
     <% if user_signed_in? %>
-    <a id="new-publication" href="/forums/<%=@forum.id%>/new_publication/text">New Publication</a>
-      <select id="publication-type" class="" name="type">
-        <option value="text">Text</option>
-        <option value="link">Link</option>
-        <option value="image">Image</option>
-        <option value="poll">Poll</option>
-      </select>
+    <button id="newPubBtn" class="btn btn-default" type="button">Create Publication</button>
       <% if current_user.forums.include?(@forum) %>
         <%= form_for @subscription, method: :delete do |f| %>
         <%= f.hidden_field :forum_id, value: @forum.id  %>
         <%= f.hidden_field :user_id, value: current_user.id  %>
-        <%= f.submit 'Unsubscribe', class: 'btn btn-default'  %>
+        <%= f.submit 'Unsubscribe', class: 'btn btn-warning'  %>
         <% end %>
       <% else %>
         <%= form_for @subscription do |f| %>
         <%= f.hidden_field :forum_id, value: @forum.id  %>
         <%= f.hidden_field :user_id, value: current_user.id  %>
-        <%= f.submit 'Subscribe', class: 'btn btn-default'  %>
+        <%= f.submit 'Subscribe', class: 'btn btn-warning'  %>
         <% end  %>
       <% end %>
-      <% if current_user.role.zero? %>
-        | <%= link_to 'Edit', edit_forum_path(@forum) %> |
-        <%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> |
-      <% end %>
+
       <% if !current_user.moderated_forums.include? @forum%>
         <%= form_tag '/moderate/request' do %>
           <%= hidden_field_tag :forum_id, @forum.id  %>
@@ -47,6 +39,11 @@
           <%= hidden_field_tag :user_id, current_user.id  %>
           <%= submit_tag 'Resign as Moderator' %>
         <% end %>
+      <% end %>
+      <% if current_user.role.zero? %>
+      <br>
+        <%= link_to 'Edit', edit_forum_path(@forum) %> |
+        <%= link_to '  Destroy', @forum, method: :delete, data: { confirm: 'Are you sure?' } %> 
       <% end %>
     <% else %>
       <p><strong> Sign in to create new publications! </strong></p>
@@ -81,13 +78,3 @@
 <%= will_paginate @publications %>
 </div>
 </center>
-
-
-<script type="text/javascript">
-$(document).ready(()=>{
-  $('#publication-type').change(function(){
-    $('#new-publication').attr('href',  `/forums/<%=@forum.id%>/new_publication/${this.value}`)
-  })
-})
-
-</script>
