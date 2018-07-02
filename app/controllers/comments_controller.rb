@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
     elsif comment_params[:commentable_type] == 'comment'
       comment = Comment.find(comment_params[:commentable_id])
       root = comment
-      root = comment.commentable while root.commentable_type != 'Publication'
+      root = root.commentable while root.commentable_type != 'Publication'
       publication = root.commentable
       redirect_to publication, notice: 'Comment added' if comment.comments.create(comment_params)
     end
@@ -60,7 +60,9 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     root = @comment
-    root = @comment.commentable while root.commentable_type != 'Publication'
+    while root.commentable_type != 'Publication'
+      root = root.commentable
+    end
     publication = root.commentable
     @comment.destroy
     respond_to do |format|
