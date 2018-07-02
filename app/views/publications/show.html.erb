@@ -157,12 +157,14 @@
               <%= form_for subscription, method: :delete do |f| %>
               <%= f.hidden_field :forum_id, value: @publication.forum.id  %>
               <%= f.hidden_field :user_id, value: current_user.id  %>
+              <%= f.hidden_field :publication_id, value: @publication.id  %>
               <%= f.submit 'Unsubscribe', class: 'btn btn-warning' %>
               <% end %>
             <% else %>
               <%= form_for subscription do |f| %>
               <%= f.hidden_field :forum_id, value: @publication.forum.id  %>
               <%= f.hidden_field :user_id, value: current_user.id  %>
+              <%= f.hidden_field :publication_id, value: @publication.id  %>
               <%= f.submit 'Subscribe', class: 'btn btn-warning' %>
               <% end  %>
             <% end %>
