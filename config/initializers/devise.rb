@@ -9,7 +9,7 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '602703010a9afb401a6362cac9200d46c4e04a8cdb832c63003302835690a3d6eb4425d6ab07cc8c2dfa57f2162f3d9eb51f94e5b97fb2e78e6cf7fb562251bd'
-  
+
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -281,7 +281,6 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
-  config.omniauth :facebook, "1813030129005371", "95c498697d8c3e2f7bd0912cb8c93679", callback_url: "https://proyecto-software-grupo29.herokuapp.com/users/auth/facebook/callback", image_size: {width: 400, height: 400}
+  config.omniauth :facebook, '1813030129005371', '95c498697d8c3e2f7bd0912cb8c93679', callback_url: 'https://proyecto-software-grupo29.herokuapp.com/users/auth/facebook/callback', image_size: { width: 400, height: 400 }
   require 'will_paginate/array'
-
 end

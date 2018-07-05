@@ -48,9 +48,11 @@ Documentation:
 
 Style/GuardClause:
   Enabled: false
-  
-Style/FrozenStringLiteralComment:
-  Enabled: false
 
 Style/InverseOf:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+

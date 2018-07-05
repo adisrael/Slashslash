@@ -20,7 +20,6 @@ class ForumsController < ApplicationController
                     end
     @publications = @forum.publications.order(:id).paginate(page: params[:page], per_page: 5)
     @total_subscriptors = Subscription.where(forum: @forum).count
-
   end
 
   # GET /forums/new

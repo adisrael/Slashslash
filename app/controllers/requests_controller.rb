@@ -12,9 +12,7 @@ class RequestsController < ApplicationController
 
   def show
     @requests = Moderator.where(approved: false)
-    if current_user.role.zero?
-      @requests = @requests.paginate(page: params[:page], per_page: 5)
-    end
+    @requests = @requests.paginate(page: params[:page], per_page: 5) if current_user.role.zero?
   end
 
   def resign
