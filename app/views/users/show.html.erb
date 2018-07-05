@@ -68,7 +68,7 @@
           <% pos = publication.votos >= 0 %>
           <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= publication.votos%>)</h4>
           <% if publication.content.present? %>
-          <h4>| <%= publication.content.truncate(50, separator: ' ') %></h4>
+          <h4>| <%= truncate(publication.try(:content), length:50, separator: ' ') %></h4>
           <% end %>
         </div>
       </div>
@@ -96,7 +96,7 @@
           <h4><%= subscription.forum.id %>. <%= link_to subscription.forum.title, subscription.forum %></h4>
           <% pos = subscription.forum.votos>=0 %>
           <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= subscription.forum.votos%>)</h4>
-          <h4>| <%= subscription.forum.description.truncate(50, separator: ' ') %></h4>
+          <h4>| <%= truncate(subscription.forum.try(:description), length:50, separator: ' ') %></h4>
         </div>
       </div>
       <% end %>
@@ -123,7 +123,7 @@
           <h4><%= forum.id %>. <%= link_to forum.title, forum %></h4>
           <% pos = forum.votos>=0 %>
           <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= forum.votos%>)</h4>
-          <h4>| <%= forum.description.truncate(50, separator: ' ') %></h4>
+          <h4>| <%= truncate(forum.try(:description), length:50, separator: ' ') %></h4>
         </div>
       </div>
       <% end %>
@@ -150,7 +150,7 @@
           <h4><%= forum.id %>. <%= link_to forum.title, forum %></h4>
           <% pos = forum.votos>=0 %>
           <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= forum.votos%>)</h4>
-          <h4>| <%= forum.description.truncate(50, separator: ' ') %></h4>
+          <h4>| <%= truncate(forum.try(:description), length:50, separator: ' ') %></h4>
         </div>
       </div>
       <% end %>
@@ -179,7 +179,7 @@
           <% end %>
           <% pos = publication.votos >= 0 %>
           <h4 class="votes-<%= pos ? 'green' : 'red' %> "> (<%= pos ? '+': ''  %> <%= publication.votos%>)</h4>
-          <h4>| <%= publication.content.truncate(50, separator: ' ') %></h4>
+          <h4>| <%= truncate(publication.try(:content), length:50, separator: ' ') %></h4>
         </div>
       </div>
       <% end %>
