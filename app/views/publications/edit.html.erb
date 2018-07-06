@@ -1,10 +1,10 @@
 <% if user_signed_in? %>
+<br>
+<h1>Editing <%=@publication.content_type %>  publication</h1>
 
-<h1>Editing Publication</h1>
-
-<%= render 'form', publication: @publication %>
-
-<%= link_to 'Show', @publication %> |
+	<%= render 'form', publication: @publication %>
+	
+	<%= link_to 'Show', @publication %> |
 
 <% else %>
 
