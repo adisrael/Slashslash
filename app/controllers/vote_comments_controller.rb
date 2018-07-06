@@ -17,9 +17,7 @@ class VoteCommentsController < ApplicationController
           end
         else
           root = comment
-          puts 'start1'
           root = root.commentable while root.commentable_type != 'Publication'
-          puts 'end1'
           publication = root.commentable
           format.html do
             redirect_to publication, notice: 'Error ocurred'
@@ -27,9 +25,7 @@ class VoteCommentsController < ApplicationController
         end
       else
         root = result[0].comment
-        puts 'start2'
         root = root.commentable while root.commentable_type != 'Publication'
-        puts 'end2'
         publication = root.commentable
         format.html do
           redirect_to publication, notice: 'Max Votes Reached'
@@ -39,7 +35,6 @@ class VoteCommentsController < ApplicationController
   end
 
   private
-
 
   def balance(comment)
     root = comment

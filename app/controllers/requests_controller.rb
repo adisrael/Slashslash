@@ -11,7 +11,8 @@ class RequestsController < ApplicationController
   end
 
   def show
-    @requests = Moderator.where(approved: false).paginate(page: params[:page], per_page: 5)
+    @requests = Moderator.where(approved: false)
+    @requests = @requests.paginate(page: params[:page], per_page: 5) if current_user.role.zero?
   end
 
   def resign

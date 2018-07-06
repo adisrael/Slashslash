@@ -24,7 +24,9 @@
 </div>
 
 <center>
+<% if current_user.role.zero? %>
 <div class="digg_pagination">
 <%= will_paginate @requests %>
 </div>
+<% end %>
 </center>
